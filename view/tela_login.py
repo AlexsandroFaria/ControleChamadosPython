@@ -1,11 +1,10 @@
-from PySide6 import QtGui
-from PySide6.QtWidgets import QMainWindow, QMessageBox
-from connection.connection_database import ConexaoDatabase
+from PySide2 import QtGui
+from PySide2.QtWidgets import QMainWindow, QMessageBox
 from dao.usuario_dao import UsuarioDao
 from model.usuario import Usuario
 from view.ui_tela_login import Ui_UiTelaLogin
 from view.tela_principal import TelaPrincipal
-#from connection.create_database import CreateDatabase
+from connection.create_database import CreateDatabase
 
 
 class TelaLogin(QMainWindow, Ui_UiTelaLogin):
@@ -14,11 +13,15 @@ class TelaLogin(QMainWindow, Ui_UiTelaLogin):
     Classe responsável pelo login no sistema e primeira tela a ser exibida para o
     usuário do sistema.
     """
+
     def __init__(self):
         super(TelaLogin, self).__init__()
         self.setupUi(self)
         self.setWindowTitle("Controle Chamados - Login")
         self.setFixedSize(408, 517)
+
+        """Chamada para o método de criação de banco de dados"""
+        self.criacao_banco()
 
         """Chamada do método para efetuar Login"""
         self.bt_entrar.clicked.connect(self.logar)
@@ -50,18 +53,18 @@ class TelaLogin(QMainWindow, Ui_UiTelaLogin):
             msg.exec_()
         else:
             usuario = Usuario()
-            nome = None
+            # usuario.nome = None
             usuario.login = self.txt_login.text()
             usuario.senha = self.txt_senha.text()
 
             resultado = UsuarioDao().checar_usuario(usuario.login, usuario.senha)
 
             if resultado:
-                self.t_principal = TelaPrincipal()
-                self.t_principal.show()
-                self.t_principal.lbl_usuario.setText(str(resultado[0][1]))
+                self.tela_principal = TelaPrincipal()
+                self.tela_principal.show()
+                self.tela_principal.lbl_usuario.setText(str(resultado[0][1]))
                 if str(resultado[0][4]) == 'Usuário':
-                    self.t_principal.menu_usuarios.setEnabled(False)
+                    self.tp.menu_usuarios.setEnabled(False)
                 self.close()
             else:
                 msg = QMessageBox()
@@ -71,6 +74,20 @@ class TelaLogin(QMainWindow, Ui_UiTelaLogin):
                 msg.setText('Login ou senha Incorretos')
                 msg.exec_()
 
+                self.txt_login.setText("")
+                self.txt_senha.setText("")
+
     def sair(self):
         """Método de fechar a tela e finalizar o programa"""
         self.close()
+
+    def criacao_banco(self):
+        """Método para criação de banco de dados
+
+        Este método efetua a criação de banco de dados automaticamente.
+        :return:
+        """
+        creation = CreateDatabase()
+        creation.create_database()
+        creation.create_table_usuarios()
+        creation.inserir_usuario_admin_tb_usuario()

@@ -24,5 +24,12 @@ class UsuarioDao:
             resultado = con.executar_consulta(sql)
             return resultado
         except:
-            return
+            pass
 
+    def cadastrar_usuario_banco(self, nome, login, senha, perfil):
+        conexao = ConexaoDatabase()
+        comando_sql = f"INSERT INTO tb_usuario (nome_usuario, login_usuario, senha_usuario, perfil_usuario) VALUES " \
+                      f"('{nome}', '{login}', '{senha}', '{perfil}')"
+        resultado = conexao.executar_consulta(sql)
+
+        return resultado

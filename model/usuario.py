@@ -45,4 +45,3 @@ class Usuario:
     @perfil.setter
     def perfil(self, valor):
         self._perfil = valor
-

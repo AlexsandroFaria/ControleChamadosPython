@@ -8,16 +8,16 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide6.QtCore import *
-from PySide6.QtGui import *
-from PySide6.QtWidgets import *
+from PySide2.QtCore import *
+from PySide2.QtGui import *
+from PySide2.QtWidgets import *
 
 
 class Ui_TelaPrincipal(object):
     def setupUi(self, TelaPrincipal):
         if not TelaPrincipal.objectName():
             TelaPrincipal.setObjectName(u"TelaPrincipal")
-        TelaPrincipal.resize(1075, 659)
+        TelaPrincipal.resize(1088, 678)
         icon = QIcon()
         icon.addFile(u"_img/logo_janela.ico", QSize(), QIcon.Normal, QIcon.Off)
         TelaPrincipal.setWindowIcon(icon)
@@ -173,7 +173,7 @@ class Ui_TelaPrincipal(object):
         TelaPrincipal.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(TelaPrincipal)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 1075, 21))
+        self.menubar.setGeometry(QRect(0, 0, 1088, 21))
         self.menuArquivo = QMenu(self.menubar)
         self.menuArquivo.setObjectName(u"menuArquivo")
         font1 = QFont()
