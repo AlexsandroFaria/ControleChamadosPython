@@ -30,6 +30,9 @@ class UsuarioDao:
         conexao = ConexaoDatabase()
         comando_sql = f"INSERT INTO tb_usuario (nome_usuario, login_usuario, senha_usuario, perfil_usuario) VALUES " \
                       f"('{nome}', '{login}', '{senha}', '{perfil}')"
-        resultado = conexao.executar_consulta(sql)
+        resultado = conexao.executar_consulta(comando_sql)
 
         return resultado
+
+    def listar_usuario_banco(self):
+        pass

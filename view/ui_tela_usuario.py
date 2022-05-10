@@ -24,7 +24,7 @@ class Ui_Usuarios(object):
         sizePolicy.setHeightForWidth(Usuarios.sizePolicy().hasHeightForWidth())
         Usuarios.setSizePolicy(sizePolicy)
         icon = QIcon()
-        icon.addFile(u"_img/logo_janela.ico", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u"../../ChamadosSimpress/_img/logo_janela.ico", QSize(), QIcon.Normal, QIcon.Off)
         Usuarios.setWindowIcon(icon)
         Usuarios.setStyleSheet(u"background-color: rgb(227, 227, 227);")
         self.centralwidget = QWidget(Usuarios)
@@ -41,7 +41,7 @@ class Ui_Usuarios(object):
         self.label = QLabel(self.frame)
         self.label.setObjectName(u"label")
         self.label.setStyleSheet(u"text-shadow: #000 2px 3px 2px;")
-        self.label.setPixmap(QPixmap(u"_img/banner_usuario.png"))
+        self.label.setPixmap(QPixmap(u"../../../ChamadosSimpress/_img/banner_usuario.png"))
 
         self.verticalLayout_5.addWidget(self.label)
 
@@ -152,15 +152,15 @@ class Ui_Usuarios(object):
 
         self.verticalLayout_2.addWidget(self.txt_nome_completo)
 
-        self.txt_usuario = QLineEdit(self.frame_4)
-        self.txt_usuario.setObjectName(u"txt_usuario")
-        self.txt_usuario.setMinimumSize(QSize(0, 25))
-        self.txt_usuario.setFont(font1)
-        self.txt_usuario.setStyleSheet(u"border-radius: 5px;\n"
+        self.txt_login = QLineEdit(self.frame_4)
+        self.txt_login.setObjectName(u"txt_login")
+        self.txt_login.setMinimumSize(QSize(0, 25))
+        self.txt_login.setFont(font1)
+        self.txt_login.setStyleSheet(u"border-radius: 5px;\n"
 "background-color: rgb(255, 255, 255);\n"
 "border:1px solid")
 
-        self.verticalLayout_2.addWidget(self.txt_usuario)
+        self.verticalLayout_2.addWidget(self.txt_login)
 
         self.txt_senha = QLineEdit(self.frame_4)
         self.txt_senha.setObjectName(u"txt_senha")
@@ -239,7 +239,7 @@ class Ui_Usuarios(object):
 "	border: solid 5p\n"
 "}")
         icon1 = QIcon()
-        icon1.addFile(u"_img/save.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon1.addFile(u"../../ChamadosSimpress/_img/save.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_salvar.setIcon(icon1)
         self.btn_salvar.setIconSize(QSize(24, 24))
 
@@ -262,7 +262,7 @@ class Ui_Usuarios(object):
 "	border: solid 5p\n"
 "}")
         icon2 = QIcon()
-        icon2.addFile(u"_img/alterar.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon2.addFile(u"../../ChamadosSimpress/_img/alterar.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_alterar.setIcon(icon2)
         self.btn_alterar.setIconSize(QSize(24, 24))
 
@@ -285,7 +285,7 @@ class Ui_Usuarios(object):
 "	border: solid 5p\n"
 "}")
         icon3 = QIcon()
-        icon3.addFile(u"_img/limpar.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon3.addFile(u"../../ChamadosSimpress/_img/limpar.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_limpar_tela.setIcon(icon3)
         self.btn_limpar_tela.setIconSize(QSize(24, 24))
 
@@ -372,7 +372,7 @@ class Ui_Usuarios(object):
 "	border: solid 5p\n"
 "}")
         icon4 = QIcon()
-        icon4.addFile(u"_img/carregar.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon4.addFile(u"../../ChamadosSimpress/_img/carregar.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_carregar.setIcon(icon4)
         self.btn_carregar.setIconSize(QSize(24, 24))
 
@@ -395,7 +395,7 @@ class Ui_Usuarios(object):
 "	border: solid 5p\n"
 "}")
         icon5 = QIcon()
-        icon5.addFile(u"_img/excluir.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon5.addFile(u"../../ChamadosSimpress/_img/excluir.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_excluir.setIcon(icon5)
         self.btn_excluir.setIconSize(QSize(24, 24))
 
@@ -420,7 +420,7 @@ class Ui_Usuarios(object):
 "	border: solid 5p\n"
 "}")
         icon6 = QIcon()
-        icon6.addFile(u"_img/sair.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon6.addFile(u"../../ChamadosSimpress/_img/sair.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_sair.setIcon(icon6)
         self.btn_sair.setIconSize(QSize(24, 24))
 
@@ -444,12 +444,12 @@ class Ui_Usuarios(object):
         self.label.setText("")
         self.label_2.setText(QCoreApplication.translate("Usuarios", u"ID:", None))
         self.label_3.setText(QCoreApplication.translate("Usuarios", u"Nome conpleto:", None))
-        self.label_4.setText(QCoreApplication.translate("Usuarios", u"Usu\u00e1rio:", None))
+        self.label_4.setText(QCoreApplication.translate("Usuarios", u"Login:", None))
         self.label_5.setText(QCoreApplication.translate("Usuarios", u"Senha:", None))
         self.label_6.setText(QCoreApplication.translate("Usuarios", u"Confirmar Senha:", None))
         self.label_7.setText(QCoreApplication.translate("Usuarios", u"Perfil:", None))
         self.txt_nome_completo.setPlaceholderText("")
-        self.txt_usuario.setPlaceholderText("")
+        self.txt_login.setPlaceholderText("")
         self.txt_confirmar_senha.setPlaceholderText(QCoreApplication.translate("Usuarios", u"Confirmar Senha", None))
         self.combo_perfil.setItemText(0, QCoreApplication.translate("Usuarios", u"Usu\u00e1rio", None))
         self.combo_perfil.setItemText(1, QCoreApplication.translate("Usuarios", u"Administrador", None))
