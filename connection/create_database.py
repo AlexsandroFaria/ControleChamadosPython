@@ -45,3 +45,15 @@ class CreateDatabase:
         except:
             pass
 
+    def create_table_solucao(self, database="db_controle_chamados"):
+        try:
+            cursor = self.criacao_banco.cursor()
+            cursor.execute(f"""CREATE TABLE IF NOT EXISTS `{database}`.`tb_solucao` (
+                `id_solucao` INT NOT NULL AUTO_INCREMENT,
+                `solucao` VARCHAR(50) UNIQUE NULL,
+                `descricao` VARCHAR(255) NULL,
+                PRIMARY KEY (`id_solucao`));
+            """)
+        except:
+            pass
+

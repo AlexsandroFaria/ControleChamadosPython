@@ -1,4 +1,6 @@
 from PySide2.QtWidgets import QMainWindow
+
+from view.tela_solucao import TelaSolucao
 from view.ui_tela_principal import Ui_TelaPrincipal
 from view.tela_usuario import TelaUsuario
 
@@ -19,8 +21,11 @@ class TelaPrincipal(QMainWindow, Ui_TelaPrincipal):
         self.setWindowTitle('Controle de Chamados - Tela Principal')
         self.showMaximized()
 
-        """Item do menu de usuários que gera a chamada do método de abrir tela."""
+        """Item do menu que gera a chamada do método de abrir tela de usuários."""
         self.menu_usuarios.triggered.connect(self.abrir_tela_usuario)
+
+        """Item do menu que gera a chamada do método de abrir tela de soluções."""
+        self.menu_solucoes.triggered.connect(self.abrir_tela_solucao)
 
     def abrir_tela_usuario(self):
         """Método para chamar a tela de Usuário.
@@ -30,3 +35,7 @@ class TelaPrincipal(QMainWindow, Ui_TelaPrincipal):
         """
         self.tela_usuario = TelaUsuario()
         self.tela_usuario.show()
+
+    def abrir_tela_solucao(self):
+        self.tela_solucao = TelaSolucao()
+        self.tela_solucao.show()

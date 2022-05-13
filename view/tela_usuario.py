@@ -30,6 +30,7 @@ class TelaUsuario(QMainWindow, Ui_Usuarios):
         """Função para a chamada do método de cadastrar um usuário no banco de dados."""
 
         self.btn_carregar.clicked.connect(self.carregar_campos_formulario)
+        """Função para a chamada do método de carregar Usuários"""
 
         self.btn_alterar.clicked.connect(self.alterar_usuario)
         """Função para a chamado do método alterar usuário"""
@@ -41,6 +42,7 @@ class TelaUsuario(QMainWindow, Ui_Usuarios):
         """Função para a chamado do método de limpar os campos do formulário de usuario."""
 
         self.btn_sair.clicked.connect(self.close)
+        """Finaliza e fecha a aplicação."""
 
         """Função para desabilitar o botão de Excluir na inicialização da Janela."""
         self.btn_excluir.setEnabled(False)
@@ -127,6 +129,11 @@ class TelaUsuario(QMainWindow, Ui_Usuarios):
                     print(con_erro)
 
     def alterar_usuario(self):
+        """Método para alterar Usuários
+
+        Método para alterar algum dado de um usuário selecionado.
+        :return: Usuário para alteração.
+        """
         if self.txt_nome_completo.text() == "":
             self.mensagem.mensagem_campo_vazio()
         elif self.txt_login.text() == "":
@@ -215,6 +222,11 @@ class TelaUsuario(QMainWindow, Ui_Usuarios):
             print(con_erro)
 
     def excluir_usuario(self):
+        """Exclusão de Usuários.
+
+        Método para excluir uma solução selecionada.
+        :return: solução para exclusão.
+        """
         msg = QMessageBox()
         msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
         msg.setText("Tem certeza que deseja excluir o Usuário?")
