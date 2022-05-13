@@ -1,5 +1,7 @@
 import mysql.connector
-
+from mysql.connector import IntegrityError
+from PySide2.QtWidgets import QMessageBox
+from PySide2 import QtGui
 
 class ConexaoDatabase:
     """Classe de conexão com o banco de dados Mysql

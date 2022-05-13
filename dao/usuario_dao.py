@@ -28,11 +28,31 @@ class UsuarioDao:
 
     def cadastrar_usuario_banco(self, nome, login, senha, perfil):
         conexao = ConexaoDatabase()
-        comando_sql = f"INSERT INTO tb_usuario (nome_usuario, login_usuario, senha_usuario, perfil_usuario) VALUES " \
+        comando_sql = f"INSERT INTO tb_usuario (nome_usuario, login_usuario, senha_usuario, perfil_usuario) VALUES" \
                       f"('{nome}', '{login}', '{senha}', '{perfil}')"
-        resultado = conexao.executar_consulta(comando_sql)
+        resultado = conexao.executar_query(comando_sql)
 
         return resultado
 
-    def listar_usuario_banco(self):
-        pass
+    def listar_usuario(self):
+        conexao = ConexaoDatabase()
+        comando_sql = "SELECT * FROM tb_usuario"
+        resultado = conexao.executar_consulta(comando_sql)
+        return resultado
+
+    def carregar_campos_formulario_id(self, id):
+        conexao = ConexaoDatabase()
+        comando_sql = f"SELECT * FROM tb_usuario WHERE id_usuario = {id}"
+        resultado = conexao.executar_consulta(comando_sql)
+        return resultado
+
+    def alterar_usuario(self, id, nome, login, senha, perfil):
+        conexao = ConexaoDatabase()
+        comando_sql = f"UPDATE tb_usuario SET nome_usuario='{nome}', login_usuario='{login}'," \
+                      f"senha_usuario='{senha}', perfil_usuario='{perfil}' WHERE id_usuario={id}"
+        conexao.executar_query(comando_sql)
+
+    def excluir_usuario_banco(self, id):
+        conexao = ConexaoDatabase()
+        comando_sql = f"DELETE FROM tb_usuario WHERE id_usuario={id}"
+        conexao.executar_query(comando_sql)

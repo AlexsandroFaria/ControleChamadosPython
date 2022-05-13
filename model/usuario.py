@@ -1,4 +1,8 @@
 class Usuario:
+    """Classe modelo de usuario
+
+    Classe de modelo do usuário para Orientação a objetos
+    """
     def __init__(self, id=None, nome=None, login=None, senha=None, perfil=None):
         self._id = id
         self._nome = nome
@@ -6,6 +10,10 @@ class Usuario:
         self._senha = senha
         self._perfil = perfil
 
+    """Métodod Getter e Setter
+    
+    Métodos de controle para acesso as variáveis com segurança.
+    """
     @property
     def id(self):
         return self._id

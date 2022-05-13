@@ -21,7 +21,7 @@ class TelaLogin(QMainWindow, Ui_UiTelaLogin):
         self.setFixedSize(408, 517)
 
         """Chamada para o método de criação de banco de dados"""
-        self.criacao_banco()
+        # self.criacao_banco()
 
         """Chamada do método para efetuar Login"""
         self.bt_entrar.clicked.connect(self.logar)
@@ -74,7 +74,6 @@ class TelaLogin(QMainWindow, Ui_UiTelaLogin):
                 msg.setText('Login ou senha Incorretos')
                 msg.exec_()
 
-                self.txt_login.setText("")
                 self.txt_senha.setText("")
 
     def sair(self):

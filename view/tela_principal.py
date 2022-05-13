@@ -30,4 +30,3 @@ class TelaPrincipal(QMainWindow, Ui_TelaPrincipal):
         """
         self.tela_usuario = TelaUsuario()
         self.tela_usuario.show()
-
