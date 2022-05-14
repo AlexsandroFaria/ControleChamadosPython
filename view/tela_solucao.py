@@ -38,7 +38,7 @@ class TelaSolucao(QMainWindow, Ui_TelaSolucoes):
         self.btn_cadastrar.clicked.connect(self.cadastrar_solucao)
         """Função que chama o método para cadastrar solução."""
 
-        self.btn_limpar_tela.clicked.connect(self.limpar_tela)
+        self.btn_limpar_tela.clicked.connect(self.limpar_formulario)
         """Função para chamado o método de limpar os campos do formulário."""
 
         self.btn_excluir.clicked.connect(self.excluir_solucao)
@@ -90,7 +90,7 @@ class TelaSolucao(QMainWindow, Ui_TelaSolucoes):
                 msg.setText(f'Solução {solucao.solucao} inserido com sucesso!')
                 msg.exec_()
 
-                self.limpar_tela()
+                self.limpar_formulario()
                 self.listar_solucoes_tabela()
             except ConnectionError:
                 self.mensagem.mensagem_de_erro()
@@ -146,12 +146,12 @@ class TelaSolucao(QMainWindow, Ui_TelaSolucoes):
                 self.mensagem.mensagem_exclusao()
 
                 self.listar_solucoes_tabela()
-                self.limpar_tela()
+                self.limpar_formulario()
             except ConnectionError as con_erro:
                 self.mensagem.mensagem_de_erro()
                 print(con_erro)
 
-    def limpar_tela(self):
+    def limpar_formulario(self):
         """Método para limpar os campos do Formulário.
 
         :return: parametros em branco para apagar as informações dos campos do formulário.

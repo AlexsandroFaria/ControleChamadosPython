@@ -3,7 +3,7 @@ class Parceiro:
 
     Classe modelo de parceiro para orientação a objetos
     """
-    def __init__(self, id, nome, contato, telefone):
+    def __init__(self, id=None, nome=None, contato=None, telefone=None):
         self._id = id
         self._nome = nome
         self._contato = contato
@@ -38,5 +38,5 @@ class Parceiro:
         return self._telefone
 
     @telefone.setter
-    def contato(self, valor):
+    def telefone(self, valor):
         self._telefone = valor

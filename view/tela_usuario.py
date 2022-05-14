@@ -38,7 +38,7 @@ class TelaUsuario(QMainWindow, Ui_Usuarios):
         self.btn_excluir.clicked.connect(self.excluir_usuario)
         """Função para a chamada do método de excluir usuário"""
 
-        self.btn_limpar_tela.clicked.connect(self.limpar_campos)
+        self.btn_limpar_tela.clicked.connect(self.limpar_formulario)
         """Função para a chamado do método de limpar os campos do formulário de usuario."""
 
         self.btn_sair.clicked.connect(self.close)
@@ -122,7 +122,7 @@ class TelaUsuario(QMainWindow, Ui_Usuarios):
                     msg.setText(f'Usuário {usuario.nome} cadastrado com sucesso!')
                     msg.exec_()
 
-                    self.limpar_campos()
+                    self.limpar_formulario()
                     self.listagem_usuarios_tabela()
                 except ConnectionError as con_erro:
                     self.mensagem.mensagem_de_erro()
@@ -187,7 +187,7 @@ class TelaUsuario(QMainWindow, Ui_Usuarios):
                         msg.exec_()
 
                         self.listagem_usuarios_tabela()
-                        self.limpar_campos()
+                        self.limpar_formulario()
                     except ConnectionError as con_erro:
                         self.mensagem.mensagem_de_erro()
                         print(con_erro)
@@ -262,12 +262,12 @@ class TelaUsuario(QMainWindow, Ui_Usuarios):
                     msg.exec_()
 
                     self.listagem_usuarios_tabela()
-                    self.limpar_campos()
+                    self.limpar_formulario()
             except ConnectionError as con_erro:
                 self.mensagem.mensagem_de_erro()
                 print(con_erro)
 
-    def limpar_campos(self):
+    def limpar_formulario(self):
         """Método para limpar os campos do formulário após determinada iteração com o usuário
 
         :return: parametros em branco para apagar as informações dos campos do formulário.

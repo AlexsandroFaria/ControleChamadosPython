@@ -57,3 +57,16 @@ class CreateDatabase:
         except:
             pass
 
+    def create_table_parceiro(self, database="db_controle_chamados"):
+        try:
+            cursor = self.criacao_banco()
+            cursor.execute(f"""CREATE TABLE `db_controle_chamados`.`tb_parceiro` (
+                `id_prceiro` INT NOT NULL AUTO_INCREMENT,
+                `nome_parceiro` VARCHAR(150) UNIQUE NULL,
+                `contato_parceiro` VARCHAR(100) NULL,
+                `telefone_parceiro` VARCHAR(20) NULL,
+                PRIMARY KEY (`id_prceiro`));
+            """)
+        except:
+            pass
+
