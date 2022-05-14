@@ -61,11 +61,27 @@ class CreateDatabase:
         try:
             cursor = self.criacao_banco()
             cursor.execute(f"""CREATE TABLE `db_controle_chamados`.`tb_parceiro` (
-                `id_prceiro` INT NOT NULL AUTO_INCREMENT,
+                `id_parceiro` INT NOT NULL AUTO_INCREMENT,
                 `nome_parceiro` VARCHAR(150) UNIQUE NULL,
                 `contato_parceiro` VARCHAR(100) NULL,
                 `telefone_parceiro` VARCHAR(20) NULL,
                 PRIMARY KEY (`id_prceiro`));
+            """)
+        except:
+            pass
+
+    def create_table_cliente(self, database="db_controle_chamados"):
+        try:
+            cursor = self.criacao_banco()
+            cursor.execute("""CREATE TABLE `db_controle_chamados`.`tb_cliente` (
+                `id_cliente` INT NOT NULL AUTO_INCREMENT,
+                `contrato_cliente` INT NOT NULL,
+                `nome_cliente` VARCHAR(150) NULL,
+                `endereco_cliente` VARCHAR(255) NULL,
+                `contato_cliente` VARCHAR(150) NULL,
+                `telefone_cliente` VARCHAR(100) NULL,
+                `email_cliente` VARCHAR(255) NULL,
+                PRIMARY KEY (`id_cliente`));
             """)
         except:
             pass

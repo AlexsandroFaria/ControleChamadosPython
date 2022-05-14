@@ -13,15 +13,15 @@ from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 
 
-class Ui_TelaSolucoes(object):
-    def setupUi(self, TelaSolucoes):
-        if not TelaSolucoes.objectName():
-            TelaSolucoes.setObjectName(u"TelaSolucoes")
-        TelaSolucoes.resize(612, 522)
+class Ui_TelaSolucao(object):
+    def setupUi(self, TelaSolucao):
+        if not TelaSolucao.objectName():
+            TelaSolucao.setObjectName(u"TelaSolucao")
+        TelaSolucao.resize(612, 522)
         icon = QIcon()
         icon.addFile(u"../../ChamadosSimpress/_img/logo_janela.ico", QSize(), QIcon.Normal, QIcon.Off)
-        TelaSolucoes.setWindowIcon(icon)
-        self.frame = QFrame(TelaSolucoes)
+        TelaSolucao.setWindowIcon(icon)
+        self.frame = QFrame(TelaSolucao)
         self.frame.setObjectName(u"frame")
         self.frame.setGeometry(QRect(10, 10, 591, 91))
         self.frame.setFrameShape(QFrame.StyledPanel)
@@ -29,8 +29,8 @@ class Ui_TelaSolucoes(object):
         self.label = QLabel(self.frame)
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(0, 0, 591, 91))
-        self.label.setPixmap(QPixmap(u"../../../ChamadosSimpress/_img/banner_solucoes.png"))
-        self.label_2 = QLabel(TelaSolucoes)
+        self.label.setPixmap(QPixmap(u"../../ChamadosSimpress/_img/banner_solucoes.png"))
+        self.label_2 = QLabel(TelaSolucao)
         self.label_2.setObjectName(u"label_2")
         self.label_2.setGeometry(QRect(20, 140, 91, 16))
         font = QFont()
@@ -38,15 +38,15 @@ class Ui_TelaSolucoes(object):
         font.setBold(True)
         font.setWeight(75)
         self.label_2.setFont(font)
-        self.label_3 = QLabel(TelaSolucoes)
+        self.label_3 = QLabel(TelaSolucao)
         self.label_3.setObjectName(u"label_3")
         self.label_3.setGeometry(QRect(40, 180, 61, 21))
         self.label_3.setFont(font)
-        self.label_4 = QLabel(TelaSolucoes)
+        self.label_4 = QLabel(TelaSolucao)
         self.label_4.setObjectName(u"label_4")
         self.label_4.setGeometry(QRect(30, 220, 81, 16))
         self.label_4.setFont(font)
-        self.tabela_solucoes = QTableWidget(TelaSolucoes)
+        self.tabela_solucoes = QTableWidget(TelaSolucao)
         if (self.tabela_solucoes.columnCount() < 3):
             self.tabela_solucoes.setColumnCount(3)
         __qtablewidgetitem = QTableWidgetItem()
@@ -60,8 +60,7 @@ class Ui_TelaSolucoes(object):
         self.tabela_solucoes.setHorizontalHeaderItem(2, __qtablewidgetitem2)
         self.tabela_solucoes.setObjectName(u"tabela_solucoes")
         self.tabela_solucoes.setGeometry(QRect(50, 260, 541, 192))
-        self.tabela_solucoes.verticalHeader().setVisible(False)
-        self.txt_id = QLineEdit(TelaSolucoes)
+        self.txt_id = QLineEdit(TelaSolucao)
         self.txt_id.setObjectName(u"txt_id")
         self.txt_id.setEnabled(False)
         self.txt_id.setGeometry(QRect(130, 140, 71, 25))
@@ -69,21 +68,21 @@ class Ui_TelaSolucoes(object):
         self.txt_id.setStyleSheet(u"border-radius: 5px;\n"
 "border: 1px solid gray;\n"
 "background-color: rgb(227, 227, 227);")
-        self.txt_solucao = QLineEdit(TelaSolucoes)
+        self.txt_solucao = QLineEdit(TelaSolucao)
         self.txt_solucao.setObjectName(u"txt_solucao")
         self.txt_solucao.setGeometry(QRect(130, 180, 461, 25))
         self.txt_solucao.setMinimumSize(QSize(0, 25))
         self.txt_solucao.setStyleSheet(u"border-radius: 5px;\n"
 "background-color: rgb(255, 255, 255);\n"
 "border: 1px solid gray")
-        self.txt_descricao = QLineEdit(TelaSolucoes)
+        self.txt_descricao = QLineEdit(TelaSolucao)
         self.txt_descricao.setObjectName(u"txt_descricao")
         self.txt_descricao.setGeometry(QRect(130, 220, 461, 25))
         self.txt_descricao.setMinimumSize(QSize(0, 25))
         self.txt_descricao.setStyleSheet(u"border-radius: 5px;\n"
 "background-color: rgb(255, 255, 255);\n"
 "border: 1px solid gray")
-        self.btn_cadastrar = QPushButton(TelaSolucoes)
+        self.btn_cadastrar = QPushButton(TelaSolucao)
         self.btn_cadastrar.setObjectName(u"btn_cadastrar")
         self.btn_cadastrar.setGeometry(QRect(220, 130, 111, 35))
         self.btn_cadastrar.setMinimumSize(QSize(0, 35))
@@ -103,7 +102,7 @@ class Ui_TelaSolucoes(object):
         icon1 = QIcon()
         icon1.addFile(u"../../ChamadosSimpress/_img/save.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_cadastrar.setIcon(icon1)
-        self.btn_limpar_tela = QPushButton(TelaSolucoes)
+        self.btn_limpar_tela = QPushButton(TelaSolucao)
         self.btn_limpar_tela.setObjectName(u"btn_limpar_tela")
         self.btn_limpar_tela.setGeometry(QRect(350, 130, 111, 35))
         self.btn_limpar_tela.setMinimumSize(QSize(0, 35))
@@ -124,7 +123,7 @@ class Ui_TelaSolucoes(object):
         icon2.addFile(u"../../ChamadosSimpress/_img/limpar.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_limpar_tela.setIcon(icon2)
         self.btn_limpar_tela.setIconSize(QSize(24, 24))
-        self.btn_excluir = QPushButton(TelaSolucoes)
+        self.btn_excluir = QPushButton(TelaSolucao)
         self.btn_excluir.setObjectName(u"btn_excluir")
         self.btn_excluir.setGeometry(QRect(480, 130, 111, 35))
         self.btn_excluir.setMinimumSize(QSize(0, 35))
@@ -144,7 +143,7 @@ class Ui_TelaSolucoes(object):
         icon3 = QIcon()
         icon3.addFile(u"../../ChamadosSimpress/_img/excluir.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_excluir.setIcon(icon3)
-        self.layoutWidget = QWidget(TelaSolucoes)
+        self.layoutWidget = QWidget(TelaSolucao)
         self.layoutWidget.setObjectName(u"layoutWidget")
         self.layoutWidget.setGeometry(QRect(50, 460, 541, 37))
         self.horizontalLayout = QHBoxLayout(self.layoutWidget)
@@ -206,29 +205,29 @@ class Ui_TelaSolucoes(object):
         self.horizontalLayout.addWidget(self.label_6)
 
 
-        self.retranslateUi(TelaSolucoes)
+        self.retranslateUi(TelaSolucao)
 
-        QMetaObject.connectSlotsByName(TelaSolucoes)
+        QMetaObject.connectSlotsByName(TelaSolucao)
     # setupUi
 
-    def retranslateUi(self, TelaSolucoes):
-        TelaSolucoes.setWindowTitle(QCoreApplication.translate("TelaSolucoes", u"Form", None))
+    def retranslateUi(self, TelaSolucao):
+        TelaSolucao.setWindowTitle(QCoreApplication.translate("TelaSolucao", u"Form", None))
         self.label.setText("")
-        self.label_2.setText(QCoreApplication.translate("TelaSolucoes", u"Identificador:", None))
-        self.label_3.setText(QCoreApplication.translate("TelaSolucoes", u"Solu\u00e7\u00e3o:", None))
-        self.label_4.setText(QCoreApplication.translate("TelaSolucoes", u"Descri\u00e7\u00e3o:", None))
+        self.label_2.setText(QCoreApplication.translate("TelaSolucao", u"Identificador:", None))
+        self.label_3.setText(QCoreApplication.translate("TelaSolucao", u"Solu\u00e7\u00e3o:", None))
+        self.label_4.setText(QCoreApplication.translate("TelaSolucao", u"Descri\u00e7\u00e3o:", None))
         ___qtablewidgetitem = self.tabela_solucoes.horizontalHeaderItem(0)
-        ___qtablewidgetitem.setText(QCoreApplication.translate("TelaSolucoes", u"Identificador", None));
+        ___qtablewidgetitem.setText(QCoreApplication.translate("TelaSolucao", u"Identificador", None));
         ___qtablewidgetitem1 = self.tabela_solucoes.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("TelaSolucoes", u"Solu\u00e7\u00e3o", None));
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("TelaSolucao", u"Solu\u00e7\u00e3o", None));
         ___qtablewidgetitem2 = self.tabela_solucoes.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("TelaSolucoes", u"Descri\u00e7\u00e3o", None));
-        self.btn_cadastrar.setText(QCoreApplication.translate("TelaSolucoes", u"Cadastrar", None))
-        self.btn_limpar_tela.setText(QCoreApplication.translate("TelaSolucoes", u"Limpar tela", None))
-        self.btn_excluir.setText(QCoreApplication.translate("TelaSolucoes", u"Excluir", None))
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("TelaSolucao", u"Descri\u00e7\u00e3o", None));
+        self.btn_cadastrar.setText(QCoreApplication.translate("TelaSolucao", u"Cadastrar", None))
+        self.btn_limpar_tela.setText(QCoreApplication.translate("TelaSolucao", u"Limpar tela", None))
+        self.btn_excluir.setText(QCoreApplication.translate("TelaSolucao", u"Excluir", None))
         self.label_5.setText("")
-        self.btn_carregar.setText(QCoreApplication.translate("TelaSolucoes", u"Carregar", None))
-        self.btn_sair.setText(QCoreApplication.translate("TelaSolucoes", u"Sair", None))
+        self.btn_carregar.setText(QCoreApplication.translate("TelaSolucao", u"Carregar", None))
+        self.btn_sair.setText(QCoreApplication.translate("TelaSolucao", u"Sair", None))
         self.label_6.setText("")
     # retranslateUi
 

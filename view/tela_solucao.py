@@ -2,11 +2,11 @@ from PySide2 import QtWidgets, QtGui
 from PySide2.QtWidgets import QMainWindow, QMessageBox
 from components.mensagens import Mensagens
 from model.solucao import Solucao
-from view.ui_tela_solucoes import Ui_TelaSolucoes
+from view.ui_tela_solucao import Ui_TelaSolucao
 from dao.solucao_dao import SolucaoDao
 
 
-class TelaSolucao(QMainWindow, Ui_TelaSolucoes):
+class TelaSolucao(QMainWindow, Ui_TelaSolucao):
     """Classe da Tela de soluções
 
     Esta tela tem por finalidade a interação com o susuário para a solicitação de inserção e exclusão
@@ -32,7 +32,7 @@ class TelaSolucao(QMainWindow, Ui_TelaSolucoes):
         self.btn_sair.clicked.connect(self.close)
         """Função para fechar e finalizar a aplicação."""
 
-        self.btn_carregar.clicked.connect(self.carregar_campos_formulario)
+        self.btn_carregar.clicked.connect(self.carregar_solucao_formulario)
         """Função para chamar o método de carregar informações no formulário."""
 
         self.btn_cadastrar.clicked.connect(self.cadastrar_solucao)
@@ -95,7 +95,7 @@ class TelaSolucao(QMainWindow, Ui_TelaSolucoes):
             except ConnectionError:
                 self.mensagem.mensagem_de_erro()
 
-    def carregar_campos_formulario(self):
+    def carregar_solucao_formulario(self):
         """Método para carregar dados e popular o Formulário
 
         Método que carrega a solução selecionada e exibe suas informações nos campos do formulário para
@@ -138,12 +138,18 @@ class TelaSolucao(QMainWindow, Ui_TelaSolucoes):
         if msg.exec_() == QMessageBox.Yes:
             solucao = Solucao()
             solucao.id = self.txt_id.text()
+            solucao.solucao = self.txt_solucao.text()
 
             try:
                 solucao_dao = SolucaoDao()
                 solucao_dao.excluir_solucao_banco(solucao.id)
 
-                self.mensagem.mensagem_exclusao()
+                msg = QMessageBox()
+                msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
+                msg.setIcon(QMessageBox.Information)
+                msg.setWindowTitle("Exclusão de Solução!")
+                msg.setText(f'Solução {solucao.solucao} Excluído com sucesso!')
+                msg.exec_()
 
                 self.listar_solucoes_tabela()
                 self.limpar_formulario()

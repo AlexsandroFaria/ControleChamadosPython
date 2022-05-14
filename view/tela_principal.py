@@ -1,5 +1,5 @@
 from PySide2.QtWidgets import QMainWindow
-
+from view.tela_cliente import TelaCliente
 from view.tela_parceiro import TelaParceiro
 from view.tela_solucao import TelaSolucao
 from view.ui_tela_principal import Ui_TelaPrincipal
@@ -23,13 +23,19 @@ class TelaPrincipal(QMainWindow, Ui_TelaPrincipal):
         self.showMaximized()
 
         self.menu_usuarios.triggered.connect(self.abrir_tela_usuario)
-        """Item do menu que gera a chamada do método de abrir tela de usuários."""
+        """Item do menu que gera a chamada do método de abrir tela de usuário."""
 
         self.menu_solucoes.triggered.connect(self.abrir_tela_solucao)
-        """Item do menu que gera a chamada do método de abrir tela de soluções."""
+        """Item do menu que gera a chamada do método de abrir tela de soluçõe."""
 
         self.menu_parceiro.triggered.connect(self.abrir_tela_parceiro)
-        """Item do menu que gera a chamada do método de abrir a tela de Parceiros"""
+        """Item do menu que gera a chamada do método de abrir a tela de Parceiro."""
+
+        self.menu_clientes.triggered.connect(self.abrir_tela_cliente)
+        """Item do menu que gera a chamada do método de abrir a tela de Cliente."""
+
+        self.menu_consultar_clientes.triggered.connect(self.abrir_tela_consulta_cliente)
+        """Item do menu que gera a chamada do método de abrir tela de consulta de Clientes"""
 
     def abrir_tela_usuario(self):
         """Método para abrir a tela de Usuário.
@@ -57,3 +63,22 @@ class TelaPrincipal(QMainWindow, Ui_TelaPrincipal):
         """
         self.tela_parceiro = TelaParceiro()
         self.tela_parceiro.show()
+
+    def abrir_tela_cliente(self):
+        """Método para abrir a tela de Cliente.
+
+        Este método abre a tela de Cliente.
+        :return: Tela de Cliente.
+        """
+        self.tela_cliente = TelaCliente()
+        self.tela_cliente.show()
+
+    def abrir_tela_consulta_cliente(self):
+        """Método para abrir a tela de consulta de clientes.
+
+        Este método abre a tela de consulta de Cliente
+        :return: Tela de consulta de clientes.
+        """
+        self.tela_cliente = TelaCliente()
+        self.tela_cliente.tab_widget_cliente.setCurrentWidget(self.tela_cliente.tab_cliente_consulta)
+        self.tela_cliente.show()

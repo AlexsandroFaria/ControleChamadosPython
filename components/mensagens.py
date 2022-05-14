@@ -9,7 +9,7 @@ class Mensagens:
     de mensagens pelo código.
     """
 
-    def mensagem_campo_vazio(self):
+    def mensagem_campo_vazio(self, campo):
         """Mensagem padrão de campo vazio
 
         Mensagem de alerta para o usuário informando que um determinado campo do formulário está em branco.
@@ -18,7 +18,7 @@ class Mensagens:
         msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
         msg.setIcon(QMessageBox.Warning)
         msg.setWindowTitle("Campos em branco!")
-        msg.setText('Existem campos em branco!')
+        msg.setText(f'Campo {campo} em branco!')
         msg.exec_()
 
     def mensagem_de_erro(self):

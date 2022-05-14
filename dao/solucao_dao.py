@@ -5,7 +5,7 @@ class SolucaoDao:
     """Classe Solução dao
 
     Classe que realiza a conexão com o banco de dados, além de consultas sql, inserção,
-    alteração e exclusão de Soluções.
+    alteração e exclusão de Soluções no banco de dados conforme solicitação da tela de Solução.
     """
 
     def listar_solucoes(self):

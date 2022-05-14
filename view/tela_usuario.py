@@ -29,7 +29,7 @@ class TelaUsuario(QMainWindow, Ui_Usuarios):
         self.btn_salvar.clicked.connect(self.cadastrar_usuario)
         """Função para a chamada do método de cadastrar um usuário no banco de dados."""
 
-        self.btn_carregar.clicked.connect(self.carregar_campos_formulario)
+        self.btn_carregar.clicked.connect(self.carregar_usuario_formulario)
         """Função para a chamada do método de carregar Usuários"""
 
         self.btn_alterar.clicked.connect(self.alterar_usuario)
@@ -192,7 +192,7 @@ class TelaUsuario(QMainWindow, Ui_Usuarios):
                         self.mensagem.mensagem_de_erro()
                         print(con_erro)
 
-    def carregar_campos_formulario(self):
+    def carregar_usuario_formulario(self):
         """Carrega dados e popula o formulário
 
         Consulta os dados no banco através do ID e popula o formulário dando a possibilidade de efetuar a

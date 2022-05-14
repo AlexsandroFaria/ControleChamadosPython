@@ -5,7 +5,7 @@ class UsuarioDao:
     """Classe Usuário DAO
 
     Classe que realiza a conexão com o banco de dados, além de consultas sql, inserção de usuários,
-    alteração de usuários e exclusão de usuários.
+    alteração de usuários e exclusão de usuários no banco de dados conforme solicitação da tela de Usuario.
     """
 
     def checar_usuario(self, login, senha):

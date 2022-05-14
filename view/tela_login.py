@@ -75,6 +75,7 @@ class TelaLogin(QMainWindow, Ui_UiTelaLogin):
                 msg.exec_()
 
                 self.txt_senha.setText("")
+                self.txt_senha.setFocus()
 
     def sair(self):
         """Método de fechar a tela e finalizar o programa"""
