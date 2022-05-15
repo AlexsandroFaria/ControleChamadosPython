@@ -11,7 +11,8 @@ class ClienteDao:
     def listar_cliente(self):
         """Método para retornar uma lista de Clientes do banco de dados"""
         conexao = ConexaoDatabase()
-        comando_sql = "SELECT * FROM tb_cliente"
+        comando_sql = "SELECT contrato_cliente, nome_cliente, endereco_cliente, contato_cliente, telefone_cliente, " \
+                      "email_cliente FROM tb_cliente"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado
 
@@ -44,3 +45,16 @@ class ClienteDao:
                       f"telefone_cliente, email_cliente) VALUES ('{contrato}', '{nome}', '{endereco}', '{contato}', " \
                       f"'{telefone}', '{email}')"
         conexao.executar_query(comando_sql)
+
+    def consultar_por_contrato(self, contrato):
+        """Consulta por contrato
+
+        Método efetua consulta no banco de dados por número de contrato passado por parametro pela tela de Cliente
+        :param contrato: int
+        :return: Consulta de cliente por contrato
+        """
+        conexao = ConexaoDatabase()
+        comando_sql = f"SELECT contrato_cliente, nome_cliente, endereco_cliente, contato_cliente, telefone_cliente, " \
+                      f"email_cliente FROM tb_cliente WHERE contrato_cliente={contrato}"
+        resultado = conexao.executar_consulta(comando_sql)
+        return resultado

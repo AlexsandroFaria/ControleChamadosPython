@@ -4,6 +4,7 @@ from dao.usuario_dao import UsuarioDao
 from model.usuario import Usuario
 from view.ui_tela_usuario import Ui_Usuarios
 from components.mensagens import Mensagens
+from mysql.connector import IntegrityError
 
 
 class TelaUsuario(QMainWindow, Ui_Usuarios):
@@ -79,13 +80,17 @@ class TelaUsuario(QMainWindow, Ui_Usuarios):
         :return: inserção de usuários no banco.
         """
         if self.txt_nome_completo.text() == "":
-            self.mensagem.mensagem_campo_vazio()
+            campo = 'NOME'
+            self.mensagem.mensagem_campo_vazio(campo)
         elif self.txt_login.text() == "":
-            self.mensagem.mensagem_campo_vazio()
+            campo = 'LOGIN'
+            self.mensagem.mensagem_campo_vazio(campo)
         elif self.txt_senha.text() == "":
-            self.mensagem.mensagem_campo_vazio()
+            campo = 'SENHA'
+            self.mensagem.mensagem_campo_vazio(campo)
         elif self.txt_confirmar_senha.text() == "":
-            self.mensagem.mensagem_campo_vazio()
+            campo = 'CONFIRMAR SENHA'
+            self.mensagem.mensagem_campo_vazio(campo)
         else:
             usuario = Usuario()
 
@@ -94,9 +99,6 @@ class TelaUsuario(QMainWindow, Ui_Usuarios):
             usuario.senha = self.txt_senha.text()
             usuario.perfil = self.combo_perfil.currentText()
 
-            usuario_dao = UsuarioDao()
-            resultado = usuario_dao.listar_usuario()
-
             if usuario.senha != self.txt_confirmar_senha.text():
                 msg = QMessageBox()
                 msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
@@ -104,15 +106,9 @@ class TelaUsuario(QMainWindow, Ui_Usuarios):
                 msg.setWindowTitle("Senhas não conferem")
                 msg.setText('Senhas digitadas não são iguais')
                 msg.exec_()
-            elif len(resultado) != 0:
-                    msg = QMessageBox()
-                    msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
-                    msg.setIcon(QMessageBox.Information)
-                    msg.setWindowTitle("Alteração de Usuários")
-                    msg.setText('Login já existe no sistema!')
-                    msg.exec_()
             else:
                 try:
+                    usuario_dao = UsuarioDao()
                     usuario_dao.cadastrar_usuario_banco(usuario.nome, usuario.login, usuario.senha, usuario.perfil)
 
                     msg = QMessageBox()
@@ -127,6 +123,17 @@ class TelaUsuario(QMainWindow, Ui_Usuarios):
                 except ConnectionError as con_erro:
                     self.mensagem.mensagem_de_erro()
                     print(con_erro)
+                except IntegrityError as int_erro:
+                    msg = QMessageBox()
+                    msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
+                    msg.setIcon(QMessageBox.Information)
+                    msg.setWindowTitle("Cadastro de Usuários")
+                    msg.setText(f'Usuário {usuario.nome} já existe no sistema!')
+                    msg.exec_()
+
+                    print(int_erro)
+
+                    self.limpar_formulario()
 
     def alterar_usuario(self):
         """Método para alterar Usuários
@@ -135,13 +142,17 @@ class TelaUsuario(QMainWindow, Ui_Usuarios):
         :return: Usuário para alteração.
         """
         if self.txt_nome_completo.text() == "":
-            self.mensagem.mensagem_campo_vazio()
+            campo = 'NOME'
+            self.mensagem.mensagem_campo_vazio(campo)
         elif self.txt_login.text() == "":
-            self.mensagem.mensagem_campo_vazio()
+            campo = 'LOGIN'
+            self.mensagem.mensagem_campo_vazio(campo)
         elif self.txt_senha.text() == "":
-            self.mensagem.mensagem_campo_vazio()
+            campo = 'SENHA'
+            self.mensagem.mensagem_campo_vazio(campo)
         elif self.txt_confirmar_senha.text() == "":
-            self.mensagem.mensagem_campo_vazio()
+            campo = 'CONFIRMAR SENHA'
+            self.mensagem.mensagem_campo_vazio(campo)
         else:
             usuario = Usuario()
 
@@ -150,9 +161,6 @@ class TelaUsuario(QMainWindow, Ui_Usuarios):
             usuario.login = self.txt_login.text()
             usuario.senha = self.txt_senha.text()
             usuario.perfil = self.combo_perfil.currentText()
-
-            usuario_dao = UsuarioDao()
-            resultado = usuario_dao.listar_usuario()
 
             if usuario.senha != self.txt_confirmar_senha.text():
                 msg = QMessageBox()
@@ -169,16 +177,12 @@ class TelaUsuario(QMainWindow, Ui_Usuarios):
                     msg.setWindowTitle("Usuario Admin")
                     msg.setText('Usuário admin não pode ser alterado!')
                     msg.exec_()
-                elif len(resultado) != 0:
-                    msg = QMessageBox()
-                    msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
-                    msg.setIcon(QMessageBox.Information)
-                    msg.setWindowTitle("Alteração de Usuários")
-                    msg.setText('Login já existe no sistema!')
-                    msg.exec_()
                 else:
                     try:
-                        usuario_dao.alterar_usuario(usuario.id, usuario.nome, usuario.login, usuario.senha, usuario.perfil)
+                        usuario_dao = UsuarioDao()
+                        usuario_dao.alterar_usuario(usuario.id, usuario.nome, usuario.login, usuario.senha,
+                                                    usuario.perfil)
+
                         msg = QMessageBox()
                         msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
                         msg.setIcon(QMessageBox.Information)
@@ -191,6 +195,17 @@ class TelaUsuario(QMainWindow, Ui_Usuarios):
                     except ConnectionError as con_erro:
                         self.mensagem.mensagem_de_erro()
                         print(con_erro)
+                    except IntegrityError as int_erro:
+                        msg = QMessageBox()
+                        msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
+                        msg.setIcon(QMessageBox.Information)
+                        msg.setWindowTitle("Alteração de Usuários")
+                        msg.setText(f'Usuário {usuario.nome} já existe no sistema!')
+                        msg.exec_()
+
+                        print(int_erro)
+
+                        self.limpar_formulario()
 
     def carregar_usuario_formulario(self):
         """Carrega dados e popula o formulário

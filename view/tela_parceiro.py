@@ -4,6 +4,7 @@ from dao.parceiro_dao import ParceiroDao
 from model.parceiro import Parceiro
 from view.ui_tela_parceiro import Ui_TelaParceiro
 from components.mensagens import Mensagens
+from mysql.connector import IntegrityError
 
 
 class TelaParceiro(QMainWindow, Ui_TelaParceiro):
@@ -41,6 +42,9 @@ class TelaParceiro(QMainWindow, Ui_TelaParceiro):
         self.btn_sair.clicked.connect(self.close)
         """Sai e encerra a aplicação"""
 
+        self.btn_limpar_tela.clicked.connect(self.limpar_formulario)
+        """Função para limpar os campos do formulário."""
+
     def listar_parceiro_tabela(self):
         """Listar Parceiros
 
@@ -69,11 +73,14 @@ class TelaParceiro(QMainWindow, Ui_TelaParceiro):
         :return: Cadastro de Paceiro no banco de dados.
         """
         if self.txt_nome_parceiro.text() == "":
-            self.mensagem.mensagem_campo_vazio()
+            campo = 'NOME'
+            self.mensagem.mensagem_campo_vazio(campo)
         elif self.txt_contato.text() == "":
-            self.mensagem.mensagem_campo_vazio()
+            campo = 'CONTATO'
+            self.mensagem.mensagem_campo_vazio(campo)
         elif self.txt_telefone.text() == "":
-            self.mensagem.mensagem_campo_vazio()
+            campo = 'TELEFONE'
+            self.mensagem.mensagem_campo_vazio(campo)
         else:
             parceiro = Parceiro()
             parceiro.nome = self.txt_nome_parceiro.text()
@@ -96,6 +103,17 @@ class TelaParceiro(QMainWindow, Ui_TelaParceiro):
             except ConnectionError as con_erro:
                 self.mensagem.mensagem_de_erro()
                 print(con_erro)
+            except IntegrityError as int_erro:
+                msg = QMessageBox()
+                msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
+                msg.setIcon(QMessageBox.Information)
+                msg.setWindowTitle("Inserir Parceiro")
+                msg.setText(f'Parceiro {parceiro.nome} já está cadastrado!')
+                msg.exec_()
+
+                print(int_erro)
+
+                self.limpar_formulario()
 
     def carregar_parceiro_formulario(self):
         """Metodo Carregar Parceiro
@@ -129,11 +147,14 @@ class TelaParceiro(QMainWindow, Ui_TelaParceiro):
         Altera os dados de um parceiro já cadastrado no banco de dados.
         """
         if self.txt_nome_parceiro.text() == "":
-            self.mensagem.mensagem_campo_vazio()
+            campo = 'NOME'
+            self.mensagem.mensagem_campo_vazio(campo)
         elif self.txt_contato.text() == "":
-            self.mensagem.mensagem_campo_vazio()
+            campo = 'CONTATO'
+            self.mensagem.mensagem_campo_vazio(campo)
         elif self.txt_telefone.text() == "":
-            self.mensagem.mensagem_campo_vazio()
+            campo = 'TELEFONE'
+            self.mensagem.mensagem_campo_vazio(campo)
         else:
             parceiro = Parceiro()
             parceiro.id = self.txt_id.text()
@@ -159,6 +180,17 @@ class TelaParceiro(QMainWindow, Ui_TelaParceiro):
             except ConnectionError as con_erro:
                 self.mensagem.mensagem_de_erro()
                 print(con_erro)
+            except IntegrityError as int_erro:
+                msg = QMessageBox()
+                msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
+                msg.setIcon(QMessageBox.Information)
+                msg.setWindowTitle("Inserir Solução")
+                msg.setText(f'Solução {parceiro.nome} já existe no sistema!')
+                msg.exec_()
+
+                print(int_erro)
+
+                self.limpar_formulario()
 
     def excluir_parceiro(self):
         """Método para excluir parceiro

@@ -4,6 +4,7 @@ from components.mensagens import Mensagens
 from model.solucao import Solucao
 from view.ui_tela_solucao import Ui_TelaSolucao
 from dao.solucao_dao import SolucaoDao
+from mysql.connector import IntegrityError
 
 
 class TelaSolucao(QMainWindow, Ui_TelaSolucao):
@@ -70,9 +71,11 @@ class TelaSolucao(QMainWindow, Ui_TelaSolucao):
         :return: Inserção de usuário no banco de dados.
         """
         if self.txt_solucao.text() == "":
-            self.mensagem.mensagem_campo_vazio()
+            campo = 'SOLUÇÂO'
+            self.mensagem.mensagem_campo_vazio(campo)
         elif self.txt_descricao.text() == "":
-            self.mensagem.mensagem_campo_vazio()
+            campo = 'DESCRIÇÂO'
+            self.mensagem.mensagem_campo_vazio(campo)
         else:
             solucao = Solucao()
 
@@ -92,8 +95,20 @@ class TelaSolucao(QMainWindow, Ui_TelaSolucao):
 
                 self.limpar_formulario()
                 self.listar_solucoes_tabela()
-            except ConnectionError:
+            except ConnectionError as con_erro:
                 self.mensagem.mensagem_de_erro()
+                print(con_erro)
+            except IntegrityError as int_erro:
+                msg = QMessageBox()
+                msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
+                msg.setIcon(QMessageBox.Information)
+                msg.setWindowTitle("Inserir Solução")
+                msg.setText(f'Solução {solucao.solucao} já existe no sistema!')
+                msg.exec_()
+
+                print(int_erro)
+
+                self.limpar_formulario()
 
     def carregar_solucao_formulario(self):
         """Método para carregar dados e popular o Formulário
