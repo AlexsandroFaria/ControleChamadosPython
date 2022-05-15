@@ -69,8 +69,8 @@ class TelaUsuario(QMainWindow, Ui_Usuarios):
                 for j in range(0, 5):
                     self.tabela_usuarios.setItem(i, j, QtWidgets.QTableWidgetItem(str(resultado[i][j])))
         except ConnectionError as con_erro:
-            self.mensagem.mensagem_de_erro()
             print(con_erro)
+            self.mensagem.mensagem_de_erro()
 
     def cadastrar_usuario(self):
         """Método para cadastrar Usuários
@@ -124,14 +124,8 @@ class TelaUsuario(QMainWindow, Ui_Usuarios):
                     self.mensagem.mensagem_de_erro()
                     print(con_erro)
                 except IntegrityError as int_erro:
-                    msg = QMessageBox()
-                    msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
-                    msg.setIcon(QMessageBox.Information)
-                    msg.setWindowTitle("Cadastro de Usuários")
-                    msg.setText(f'Usuário {usuario.nome} já existe no sistema!')
-                    msg.exec_()
-
                     print(int_erro)
+                    self.mensagem.mensagem_integrity_error(usuario.nome)
 
                     self.limpar_formulario()
 
@@ -196,14 +190,8 @@ class TelaUsuario(QMainWindow, Ui_Usuarios):
                         self.mensagem.mensagem_de_erro()
                         print(con_erro)
                     except IntegrityError as int_erro:
-                        msg = QMessageBox()
-                        msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
-                        msg.setIcon(QMessageBox.Information)
-                        msg.setWindowTitle("Alteração de Usuários")
-                        msg.setText(f'Usuário {usuario.nome} já existe no sistema!')
-                        msg.exec_()
-
                         print(int_erro)
+                        self.mensagem.mensagem_integrity_error(usuario.nome)
 
                         self.limpar_formulario()
 
@@ -233,8 +221,8 @@ class TelaUsuario(QMainWindow, Ui_Usuarios):
             self.btn_alterar.setEnabled(True)
             self.btn_salvar.setEnabled(False)
         except ConnectionError as con_erro:
-            self.mensagem.mensagem_de_erro()
             print(con_erro)
+            self.mensagem.mensagem_de_erro()
 
     def excluir_usuario(self):
         """Exclusão de Usuários.
@@ -279,8 +267,8 @@ class TelaUsuario(QMainWindow, Ui_Usuarios):
                     self.listagem_usuarios_tabela()
                     self.limpar_formulario()
             except ConnectionError as con_erro:
-                self.mensagem.mensagem_de_erro()
                 print(con_erro)
+                self.mensagem.mensagem_de_erro()
 
     def limpar_formulario(self):
         """Método para limpar os campos do formulário após determinada iteração com o usuário

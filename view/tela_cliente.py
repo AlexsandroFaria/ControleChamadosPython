@@ -4,7 +4,7 @@ from components.mensagens import Mensagens
 from dao.cliente_dao import ClienteDao
 from model.cliente import Cliente
 from view.ui_tela_cliente import Ui_Cliente
-from mysql.connector import IntegrityError
+from mysql.connector import IntegrityError, DatabaseError
 
 
 class TelaCliente(QMainWindow, Ui_Cliente):
@@ -36,6 +36,21 @@ class TelaCliente(QMainWindow, Ui_Cliente):
         self.btn_limpar_tela.clicked.connect(self.limpar_formulario)
         """Função para limpar os campos da tela de Cliente."""
 
+        self.btn_alterar.clicked.connect(self.alterar_cliente)
+        """Função que chama o método de alterar Cliente."""
+
+        self.btn_excluir.clicked.connect(self.excluir_cliente)
+        """Função que chama o método de excluir Cliente."""
+
+        self.btn_consulta_contrato.clicked.connect(self.consultar_cliente_contrato)
+        """Função que chama o método de consultar cliente por contrato."""
+
+        self.btn_carregar_tabela.clicked.connect(self.listar_cliente_tabela)
+        """Função para carregar a tabela de cliente com todos os dados."""
+
+        self.btn_consulta_nome.clicked.connect(self.consultar_cliente_nome)
+        """Função que chama o método de consultar cliente por nome."""
+
         self.btn_alterar.setEnabled(False)
         self.btn_excluir.setEnabled(False)
         self.btn_cadastrar_chamado.setEnabled(False)
@@ -57,8 +72,8 @@ class TelaCliente(QMainWindow, Ui_Cliente):
                 for j in range(0, 6):
                     self.tabela_clientes.setItem(i, j, QtWidgets.QTableWidgetItem(str(resultado[i][j])))
         except ConnectionError as con_erro:
-            self.mensagem.mensagem_de_erro()
             print(con_erro)
+            self.mensagem.mensagem_de_erro()
 
     def cadastrar_cliente(self):
         """Cadastrar Cliente
@@ -83,6 +98,9 @@ class TelaCliente(QMainWindow, Ui_Cliente):
         elif self.txt_email.text() == "":
             campo = 'E-MAIL'
             self.mensagem.mensagem_campo_vazio(campo)
+        elif not self.txt_contrato.text().isdigit():
+            campo = 'CONTRATO'
+            self.mensagem.mensagem_campo_numerico(campo)
         else:
             cliente = Cliente()
             cliente.contrato = self.txt_contrato.text()
@@ -111,16 +129,13 @@ class TelaCliente(QMainWindow, Ui_Cliente):
                 self.mensagem.mensagem_de_erro()
                 print(con_erro)
             except IntegrityError as int_erro:
-                msg = QMessageBox()
-                msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
-                msg.setIcon(QMessageBox.Information)
-                msg.setWindowTitle("Inserir Solução")
-                msg.setText(f'Solução {cliente.contrato} já existe no sistema!')
-                msg.exec_()
-
                 print(int_erro)
+                self.mensagem.mensagem_integrity_error(cliente.contrato)
 
                 self.limpar_formulario()
+            except DatabaseError as db_erro:
+                print(db_erro)
+                self.mensagem.mensagem_campo_numerico('CONTRATO')
 
     def carregar_cliente_formulario(self):
         """Método para carregar dados
@@ -162,10 +177,114 @@ class TelaCliente(QMainWindow, Ui_Cliente):
                     self.btn_alterar.setEnabled(True)
                     self.btn_cadastrar_chamado.setEnabled(True)
                     self.btn_salvar.setEnabled(False)
+                    self.txt_contrato.setEnabled(False)
 
         except ConnectionError as con_erro:
-            self.mensagem.mensagem_de_erro()
             print(con_erro)
+            self.mensagem.mensagem_de_erro()
+        except AttributeError as att_erro:
+            print(att_erro)
+            msg = QMessageBox()
+            msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
+            msg.setIcon(QMessageBox.Information)
+            msg.setWindowTitle("Consultar Clientes")
+            msg.setText('Selecione um item da coluna Contrato')
+            msg.exec_()
+
+    def alterar_cliente(self):
+        """Método alterar CLiente
+
+        Metodo que altera os dados do cliente no banco de dados. O mesmo tb altera o mesmo cliente na tabela de
+        chamados.
+        :return: Alteração de dados do cliente.
+        """
+        if self.txt_contrato.text() == "":
+            campo = 'CONTRATO'
+            self.mensagem.mensagem_campo_vazio(campo)
+        elif self.txt_nome.text() == "":
+            campo = 'NOME CLIENTE'
+            self.mensagem.mensagem_campo_vazio(campo)
+        elif self.txt_endereco.text() == "":
+            campo = 'ENDEREÇO'
+            self.mensagem.mensagem_campo_vazio(campo)
+        elif self.txt_contato.text() == "":
+            campo = 'CONTATO'
+            self.mensagem.mensagem_campo_vazio(campo)
+        elif self.txt_telefone.text() == "":
+            campo = 'TELEFONE'
+            self.mensagem.mensagem_campo_vazio(campo)
+        elif self.txt_email.text() == "":
+            campo = 'E-MAIL'
+            self.mensagem.mensagem_campo_vazio(campo)
+        elif not self.txt_contrato.text().isdigit():
+            campo = 'CONTRATO'
+            self.mensagem.mensagem_campo_numerico(campo)
+        else:
+            cliente = Cliente()
+            cliente.contrato = self.txt_contrato.text()
+            cliente.nome = self.txt_nome.text()
+            cliente.endereco = self.txt_endereco.text()
+            cliente.contato = self.txt_contato.text()
+            cliente.telefone = self.txt_telefone.text()
+            cliente.email = self.txt_email.text()
+
+            try:
+                cliente_dao = ClienteDao()
+                cliente_dao.alterar_cliente_banco(cliente.contrato, cliente.nome, cliente.endereco, cliente.contato,
+                                                  cliente.telefone, cliente.email)
+
+                self.mensagem.mensagem_alteração(cliente.nome)
+
+                self.tab_widget_cliente.setCurrentWidget(self.tab_cliente_consulta)
+
+                self.limpar_formulario()
+                self.listar_cliente_tabela()
+
+                # chamado_dao = ChamadoDao()
+                # chamado_dao.alterar_chamado_cliente(cliente.contrato, cliente.nome, cliente.endereco, cliente.contato,
+                #                                   cliente.telefone, cliente.email)
+
+            except ConnectionError as con_erro:
+                self.mensagem.mensagem_de_erro()
+                print(con_erro)
+            except IntegrityError as int_erro:
+                print(int_erro)
+                self.mensagem.mensagem_integrity_error(cliente.contrato)
+
+                self.limpar_formulario()
+            except DatabaseError as db_erro:
+                print(db_erro)
+                self.mensagem.mensagem_campo_numerico('CONTRATO')
+
+    def excluir_cliente(self):
+        """Eclusão de cliente
+
+        Excluir um cliente do banco de dados passando como parametro o contrato.
+        :return: Exclusão de cliente.
+        """
+        msg = QMessageBox()
+        msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
+        msg.setWindowTitle("Exclusão de Clientes!")
+        msg.setText("Tem certeza que deseja excluir o Cliente?")
+        msg.setStandardButtons(QMessageBox.Yes)
+        msg.addButton(QMessageBox.No)
+        msg.setDefaultButton(QMessageBox.No)
+        if msg.exec_() == QMessageBox.Yes:
+            cliente = Cliente()
+            cliente.contrato = self.txt_contrato.text()
+            cliente.nome = self.txt_nome.text()
+
+            try:
+                cliente_dao = ClienteDao()
+                cliente_dao.excluir_cliente_banco(cliente.contrato)
+
+                self.mensagem.mensagem_exclusao(cliente.nome)
+
+                self.limpar_formulario()
+                self.listar_cliente_tabela()
+            except ConnectionError as con_erro:
+                print(con_erro)
+                self.mensagem.mensagem_de_erro()
 
     def limpar_formulario(self):
         self.txt_contrato.setText("")
@@ -179,4 +298,66 @@ class TelaCliente(QMainWindow, Ui_Cliente):
         self.btn_excluir.setEnabled(False)
         self.btn_cadastrar_chamado.setEnabled(False)
         self.btn_salvar.setEnabled(True)
+        self.txt_contrato.setEnabled(True)
 
+    def consultar_cliente_contrato(self):
+        cliente = Cliente()
+        cliente.contrato = self.txt_consultar_contrato.text()
+
+        try:
+            cliente_dao = ClienteDao()
+            resultado = cliente_dao.consultar_cliente_contrato_banco(cliente.contrato)
+
+            if len(resultado) == 0:
+                msg = QMessageBox()
+                msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
+                msg.setIcon(QMessageBox.Information)
+                msg.setWindowTitle("Consulta Contrato")
+                msg.setText('Numero do Conrato não encontrado!')
+                msg.exec_()
+
+                self.txt_consultar_contrato.setText("")
+                self.listar_cliente_tabela()
+            else:
+                self.tabela_clientes.setRowCount(len(resultado))
+                self.tabela_clientes.setColumnCount(6)
+
+                for i in range(len(resultado)):
+                    for j in range(0, 6):
+                        self.tabela_clientes.setItem(i, j, QtWidgets.QTableWidgetItem(str(resultado[i][j])))
+
+                        self.txt_consultar_contrato.setText("")
+        except ConnectionError as con_erro:
+            print(con_erro)
+            self.mensagem.mensagem_de_erro()
+
+    def consultar_cliente_nome(self):
+        cliente = Cliente()
+        cliente.nome = self.txt_consulta_nome.text()
+
+        try:
+            cliente_dao = ClienteDao()
+            resultado = cliente_dao.consultar_cliente_nome_banco(cliente.nome)
+
+            if len(resultado) == 0:
+                msg = QMessageBox()
+                msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
+                msg.setIcon(QMessageBox.Information)
+                msg.setWindowTitle("Consulta Contrato")
+                msg.setText('Nome Cliene não encontrado!')
+                msg.exec_()
+
+                self.txt_consulta_nome.setText("")
+                self.listar_cliente_tabela()
+            else:
+                self.tabela_clientes.setRowCount(len(resultado))
+                self.tabela_clientes.setColumnCount(6)
+
+                for i in range(len(resultado)):
+                    for j in range(0, 6):
+                        self.tabela_clientes.setItem(i, j, QtWidgets.QTableWidgetItem(str(resultado[i][j])))
+
+                        self.txt_consulta_nome.setText("")
+        except ConnectionError as con_erro:
+            print(con_erro)
+            self.mensagem.mensagem_de_erro()

@@ -99,14 +99,8 @@ class TelaSolucao(QMainWindow, Ui_TelaSolucao):
                 self.mensagem.mensagem_de_erro()
                 print(con_erro)
             except IntegrityError as int_erro:
-                msg = QMessageBox()
-                msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
-                msg.setIcon(QMessageBox.Information)
-                msg.setWindowTitle("Inserir Solução")
-                msg.setText(f'Solução {solucao.solucao} já existe no sistema!')
-                msg.exec_()
-
                 print(int_erro)
+                self.mensagem.mensagem_integrity_error(solucao.solucao)
 
                 self.limpar_formulario()
 
@@ -134,8 +128,8 @@ class TelaSolucao(QMainWindow, Ui_TelaSolucao):
             self.btn_excluir.setEnabled(True)
 
         except ConnectionError as con_erro:
-            self.mensagem.mensagem_de_erro()
             print(con_erro)
+            self.mensagem.mensagem_de_erro()
 
     def excluir_solucao(self):
         """Exclusão de Soluções.
@@ -169,8 +163,8 @@ class TelaSolucao(QMainWindow, Ui_TelaSolucao):
                 self.listar_solucoes_tabela()
                 self.limpar_formulario()
             except ConnectionError as con_erro:
-                self.mensagem.mensagem_de_erro()
                 print(con_erro)
+                self.mensagem.mensagem_de_erro()
 
     def limpar_formulario(self):
         """Método para limpar os campos do Formulário.

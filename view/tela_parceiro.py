@@ -63,8 +63,8 @@ class TelaParceiro(QMainWindow, Ui_TelaParceiro):
                     self.tabela_parceiro.setItem(i, j, QtWidgets.QTableWidgetItem(str(resultado[i][j])))
 
         except ConnectionError as con_erro:
-            self.mensagem.mensagem_de_erro()
             print(con_erro)
+            self.mensagem.mensagem_de_erro()
 
     def cadastrar_parceiro(self):
         """Cadastrar Parceiro no banco de Dados
@@ -104,14 +104,8 @@ class TelaParceiro(QMainWindow, Ui_TelaParceiro):
                 self.mensagem.mensagem_de_erro()
                 print(con_erro)
             except IntegrityError as int_erro:
-                msg = QMessageBox()
-                msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
-                msg.setIcon(QMessageBox.Information)
-                msg.setWindowTitle("Inserir Parceiro")
-                msg.setText(f'Parceiro {parceiro.nome} já está cadastrado!')
-                msg.exec_()
-
                 print(int_erro)
+                self.mensagem.mensagem_integrity_error(parceiro.nome)
 
                 self.limpar_formulario()
 
@@ -138,8 +132,8 @@ class TelaParceiro(QMainWindow, Ui_TelaParceiro):
             self.btn_excluir.setEnabled(True)
             self.btn_cadastrar.setEnabled(False)
         except ConnectionError as con_erro:
-            self.mensagem.mensagem_de_erro()
             print(con_erro)
+            self.mensagem.mensagem_de_erro()
 
     def alterar_parceiro(self):
         """ Método para alterar Parceiro
@@ -178,17 +172,11 @@ class TelaParceiro(QMainWindow, Ui_TelaParceiro):
                 self.btn_alterar.setEnabled(False)
                 self.btn_excluir.setEnabled(False)
             except ConnectionError as con_erro:
-                self.mensagem.mensagem_de_erro()
                 print(con_erro)
+                self.mensagem.mensagem_de_erro()
             except IntegrityError as int_erro:
-                msg = QMessageBox()
-                msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
-                msg.setIcon(QMessageBox.Information)
-                msg.setWindowTitle("Inserir Solução")
-                msg.setText(f'Solução {parceiro.nome} já existe no sistema!')
-                msg.exec_()
-
                 print(int_erro)
+                self.mensagem.mensagem_integrity_error(parceiro.nome)
 
                 self.limpar_formulario()
 
@@ -224,8 +212,8 @@ class TelaParceiro(QMainWindow, Ui_TelaParceiro):
                 self.limpar_formulario()
                 self.listar_parceiro_tabela()
             except ConnectionError as con_erro:
-                self.mensagem.mensagem_de_erro()
                 print(con_erro)
+                self.mensagem.mensagem_de_erro()
 
     def limpar_formulario(self):
         """Limpar campos
@@ -240,4 +228,3 @@ class TelaParceiro(QMainWindow, Ui_TelaParceiro):
         self.btn_alterar.setEnabled(False)
         self.btn_excluir.setEnabled(False)
         self.btn_cadastrar.setEnabled(True)
-

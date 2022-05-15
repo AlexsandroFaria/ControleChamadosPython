@@ -33,7 +33,7 @@ class Mensagens:
         msg.setText('Erro ou falha no banco de dados. Consulte o admin do sistema.')
         msg.exec_()
 
-    def mensagem_exclusao(self):
+    def mensagem_exclusao(self, campo):
         """Mensagem padrão de exclusão
 
         Mensagem padrão informando que algum registro foi apagado do sistema e assim deletado do banco de
@@ -43,10 +43,10 @@ class Mensagens:
         msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
         msg.setIcon(QMessageBox.Information)
         msg.setWindowTitle("Exclusão de Clientes!")
-        msg.setText('Exclusão efetuada com sucesso.')
+        msg.setText(f'Exclusão {campo} efetuada com sucesso.')
         msg.exec_()
 
-    def mensagem_campo_numerico(self):
+    def mensagem_campo_numerico(self, campo):
         """Mensagem padrão de campo númérico
 
         Mensagem dee padrão que alerta o usuário de que o campo informado só permite digitação de números.
@@ -55,10 +55,10 @@ class Mensagens:
         msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
         msg.setIcon(QMessageBox.Information)
         msg.setWindowTitle("Dados incorretos")
-        msg.setText('Informe somente números')
+        msg.setText(f'No campo {campo} informe somente números.')
         msg.exec_()
 
-    def mensagem_alteração(self):
+    def mensagem_alteração(self, campo):
         """Mensagem padrão de alteração
 
         Mensagem padrão que informa quando os dados de um formulário é alterada.
@@ -67,7 +67,7 @@ class Mensagens:
         msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
         msg.setIcon(QMessageBox.Information)
         msg.setWindowTitle("Alteração de Dados")
-        msg.setText('Dados alterados com sucesso')
+        msg.setText(f'Dados {campo} alterados com sucesso')
         msg.exec_()
 
     def mensagem_gerar_relatorio(self):
@@ -80,4 +80,13 @@ class Mensagens:
         msg.setIcon(QMessageBox.Information)
         msg.setWindowTitle("Relatório de Chamados Fechados")
         msg.setText('Relatório gerado com sucesso! Verifique o mesmo na pasta Downloads')
+        msg.exec_()
+
+    def mensagem_integrity_error(self, campo):
+        """Mensagem padrão para erro de Integridade do Banco de dados"""
+        msg = QMessageBox()
+        msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
+        msg.setIcon(QMessageBox.Information)
+        msg.setWindowTitle("Inserir Solução")
+        msg.setText(f'Solução {campo} já existe no sistema!')
         msg.exec_()
