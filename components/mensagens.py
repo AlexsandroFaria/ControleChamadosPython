@@ -90,3 +90,11 @@ class Mensagens:
         msg.setWindowTitle("Inserir Solução")
         msg.setText(f'Solução {campo} já existe no sistema!')
         msg.exec_()
+
+    def mensagem_combo(self, combo):
+        msg = QMessageBox()
+        msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
+        msg.setIcon(QMessageBox.Information)
+        msg.setWindowTitle("Inserir Solução")
+        msg.setText(f'Selecione uma opção em  {combo}!')
+        msg.exec_()
