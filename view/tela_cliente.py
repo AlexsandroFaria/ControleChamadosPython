@@ -3,6 +3,7 @@ from PySide2 import QtWidgets, QtGui
 from components.mensagens import Mensagens
 from dao.cliente_dao import ClienteDao
 from model.cliente import Cliente
+from view.tela_chamado import TelaChamado
 from view.ui_tela_cliente import Ui_Cliente
 from mysql.connector import IntegrityError, DatabaseError
 
@@ -51,6 +52,10 @@ class TelaCliente(QMainWindow, Ui_Cliente):
         self.btn_consulta_nome.clicked.connect(self.consultar_cliente_nome)
         """Função que chama o método de consultar cliente por nome."""
 
+        self.btn_cadastrar_chamado.clicked.connect(self.abrir_tela_cadastrar_chamado)
+        """Função que chama o método de abrir tela de chamado passando alguns parametros conforme descrição 
+        do método."""
+
         self.btn_alterar.setEnabled(False)
         self.btn_excluir.setEnabled(False)
         self.btn_cadastrar_chamado.setEnabled(False)
@@ -81,26 +86,19 @@ class TelaCliente(QMainWindow, Ui_Cliente):
         Método para cadastrar cliente no banco de dados.
         """
         if self.txt_contrato.text() == "":
-            campo = 'CONTRATO'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('CONTRATO')
         elif self.txt_nome.text() == "":
-            campo = 'NOME CLIENTE'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('NOME CLIENTE')
         elif self.txt_endereco.text() == "":
-            campo = 'ENDEREÇO'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('ENDEREÇO')
         elif self.txt_contato.text() == "":
-            campo = 'CONTATO'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('CONTATO')
         elif self.txt_telefone.text() == "":
-            campo = 'TELEFONE'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('TELEFONE')
         elif self.txt_email.text() == "":
-            campo = 'E-MAIL'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('E-MAIL')
         elif not self.txt_contrato.text().isdigit():
-            campo = 'CONTRATO'
-            self.mensagem.mensagem_campo_numerico(campo)
+            self.mensagem.mensagem_campo_numerico('CONTRATO')
         else:
             cliente = Cliente()
             cliente.contrato = self.txt_contrato.text()
@@ -199,26 +197,19 @@ class TelaCliente(QMainWindow, Ui_Cliente):
         :return: Alteração de dados do cliente.
         """
         if self.txt_contrato.text() == "":
-            campo = 'CONTRATO'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('CONTRATO')
         elif self.txt_nome.text() == "":
-            campo = 'NOME CLIENTE'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('NOME CLIENTE')
         elif self.txt_endereco.text() == "":
-            campo = 'ENDEREÇO'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('ENDEREÇO')
         elif self.txt_contato.text() == "":
-            campo = 'CONTATO'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('CONTATO')
         elif self.txt_telefone.text() == "":
-            campo = 'TELEFONE'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('TELEFONE')
         elif self.txt_email.text() == "":
-            campo = 'E-MAIL'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('E-MAI')
         elif not self.txt_contrato.text().isdigit():
-            campo = 'CONTRATO'
-            self.mensagem.mensagem_campo_numerico(campo)
+            self.mensagem.mensagem_campo_numerico('CONTRATO')
         else:
             cliente = Cliente()
             cliente.contrato = self.txt_contrato.text()
@@ -287,6 +278,11 @@ class TelaCliente(QMainWindow, Ui_Cliente):
                 self.mensagem.mensagem_de_erro()
 
     def limpar_formulario(self):
+        """Limpar Formulário
+
+        Limpa o formulário da tela de Cliente.
+        :return: Limpa os campos da tela de cliente
+        """
         self.txt_contrato.setText("")
         self.txt_nome.setText("")
         self.txt_endereco.setText("")
@@ -301,6 +297,12 @@ class TelaCliente(QMainWindow, Ui_Cliente):
         self.txt_contrato.setEnabled(True)
 
     def consultar_cliente_contrato(self):
+        """Consulta cliente por Contrato
+
+        Consulta o cliente pelo número de contrato, exibindo a informação na tabela de clientes passando como
+        parametro o número de contrato.
+        :return: Consulta cliente.
+        """
         cliente = Cliente()
         cliente.contrato = self.txt_consultar_contrato.text()
 
@@ -332,6 +334,12 @@ class TelaCliente(QMainWindow, Ui_Cliente):
             self.mensagem.mensagem_de_erro()
 
     def consultar_cliente_nome(self):
+        """Consulta cluente por Nome
+
+        Consulta o cliente pelo nome do cliente, exibindo a informação na tabela de clientes passando como
+        parametro o nome do cliente.
+        :return: Consulta cliente.
+        """
         cliente = Cliente()
         cliente.nome = self.txt_consulta_nome.text()
 
@@ -361,3 +369,38 @@ class TelaCliente(QMainWindow, Ui_Cliente):
         except ConnectionError as con_erro:
             print(con_erro)
             self.mensagem.mensagem_de_erro()
+
+    def abrir_tela_cadastrar_chamado(self):
+        """Abrir tela de Chamados
+
+        Abre a tela de chamados passando como parâmetro os dados dos seguintes campos:
+            - contrato,
+            - nome,
+            - endereço,
+            - contato,
+            - telefone,
+            - e-mail
+        :return: Abre a tela de chamado passando os parametros listados acima.
+        """
+        if self.txt_contrato.text() == "":
+            self.mensagem.mensagem_campo_vazio('CONTRATO')
+        elif self.txt_nome.text() == "":
+            self.mensagem.mensagem_campo_vazio('NOME')
+        elif self.txt_endereco.text() == "":
+            self.mensagem.mensagem_campo_vazio('ENDEREÇO')
+        elif self.txt_contato.text() == "":
+            self.mensagem.mensagem_campo_vazio('CONTATO')
+        elif self.txt_telefone.text() == "":
+            self.mensagem.mensagem_campo_vazio('TELEFONE')
+        elif self.txt_email.text() == "":
+            self.mensagem.mensagem_campo_vazio('E-MAIL')
+        else:
+            self.tela_chamado = TelaChamado()
+            self.tela_chamado.txt_numero_contrato.setText(self.txt_contrato.text())
+            self.tela_chamado.txt_nome_cliente.setText(self.txt_nome.text())
+            self.tela_chamado.txt_endereco.setText(self.txt_endereco.text())
+            self.tela_chamado.txt_contato.setText(self.txt_contato.text())
+            self.tela_chamado.txt_telefone.setText(self.txt_telefone.text())
+            self.tela_chamado.txt_email.setText(self.txt_email.text())
+            self.tela_chamado.show()
+            self.close()

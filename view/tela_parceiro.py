@@ -73,14 +73,11 @@ class TelaParceiro(QMainWindow, Ui_TelaParceiro):
         :return: Cadastro de Paceiro no banco de dados.
         """
         if self.txt_nome_parceiro.text() == "":
-            campo = 'NOME'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('NOME')
         elif self.txt_contato.text() == "":
-            campo = 'CONTATO'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('CONTATO')
         elif self.txt_telefone.text() == "":
-            campo = 'TELEFONE'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('TELEFONE')
         else:
             parceiro = Parceiro()
             parceiro.nome = self.txt_nome_parceiro.text()
@@ -141,14 +138,11 @@ class TelaParceiro(QMainWindow, Ui_TelaParceiro):
         Altera os dados de um parceiro já cadastrado no banco de dados.
         """
         if self.txt_nome_parceiro.text() == "":
-            campo = 'NOME'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('NOME')
         elif self.txt_contato.text() == "":
-            campo = 'CONTATO'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('campo')
         elif self.txt_telefone.text() == "":
-            campo = 'TELEFONE'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('TELEFONE')
         else:
             parceiro = Parceiro()
             parceiro.id = self.txt_id.text()

@@ -78,7 +78,7 @@ class ClienteDao:
         conexao.executar_query(comando_sql)
 
     def consultar_cliente_contrato_banco(self, contrato):
-        """Consultar CLiente por Contrato
+        """Consultar Cliente por Contrato
 
         Consulta no banco de dados o cliente com o número de contrato passado como parâmetro pela tela de cliente.
         :param contrato: int
@@ -91,6 +91,12 @@ class ClienteDao:
         return resultado
 
     def consultar_cliente_nome_banco(self, nome):
+        """Consultar Cliente por Nome.
+
+        Consulta no banco de dados o cliente com o nome do cliente passado como parâmetro pela tela de cliente.
+        :param nome: str
+        :return: Cliente com o nome passado por parametro.
+        """
         conexao = ConexaoDatabase()
         comando_sql = f"SELECT contrato_cliente, nome_cliente, endereco_cliente, contato_cliente, telefone_cliente," \
                       f"email_cliente FROM tb_cliente WHERE nome_cliente LIKE '%{nome}%'"

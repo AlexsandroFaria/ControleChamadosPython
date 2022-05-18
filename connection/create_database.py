@@ -86,3 +86,28 @@ class CreateDatabase:
         except:
             pass
 
+    def create_table_chamado(self):
+        try:
+            cursor = self.criacao_banco()
+            cursor.execute("""CREATE TABLE `db_controle_chamados`.`tb_chamado` (
+                `id_chamado` INT NOT NULL AUTO_INCREMENT,
+                `numero_chamado` INT NULL,
+                `contrato_chamado` INT NULL,
+                `nome_cliente_chamado` VARCHAR(150) NULL,
+                `endereco_chamado` VARCHAR(255) NULL,
+                `contato_chamado` VARCHAR(150) NULL,
+                `telefone_chamado` VARCHAR(100) NULL,
+                `email_chamado` VARCHAR(255) NULL,
+                `problema_chamado` TEXT NULL,
+                `observacao_chamado` TEXT NULL,
+                `status_chamado` VARCHAR(45) NULL,
+                `tipo_chamado` VARCHAR(45) NULL,
+                `solucao_chamado` VARCHAR(45) NULL,
+                `data_abertura_chamado` VARCHAR(45) NULL,
+                `data_atualizacao_chamado` VARCHAR(45) NULL,
+                PRIMARY KEY (`id_chamado`),
+                UNIQUE INDEX `numero_chamado_UNIQUE` (`numero_chamado` ASC) VISIBLE,
+                UNIQUE INDEX `contrato_chamado_UNIQUE` (`contrato_chamado` ASC) VISIBLE);
+            """)
+        except:
+            pass

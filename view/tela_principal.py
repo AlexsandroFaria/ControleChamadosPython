@@ -1,4 +1,6 @@
 from PySide2.QtWidgets import QMainWindow
+
+from view.tela_chamado import TelaChamado
 from view.tela_cliente import TelaCliente
 from view.tela_parceiro import TelaParceiro
 from view.tela_solucao import TelaSolucao
@@ -35,7 +37,13 @@ class TelaPrincipal(QMainWindow, Ui_TelaPrincipal):
         """Item do menu que gera a chamada do método de abrir a tela de Cliente."""
 
         self.menu_consultar_clientes.triggered.connect(self.abrir_tela_consulta_cliente)
-        """Item do menu que gera a chamada do método de abrir tela de consulta de Clientes"""
+        """Item do menu que gera a chamada do método de abrir tela de consulta de Clientes."""
+
+        self.menu_novo_chamado.triggered.connect(self.abrir_tela_chamado)
+        """Item do menu que gera a chamada do método de abrir tela de Chamados."""
+
+        self.menu_consulta_chamado.triggered.connect(self.abrir_tela_consulta_chamado)
+        """Item do menu que gera a chamada do método de abrir a tela de consulta de chamados."""
 
     def abrir_tela_usuario(self):
         """Método para abrir a tela de Usuário.
@@ -82,3 +90,22 @@ class TelaPrincipal(QMainWindow, Ui_TelaPrincipal):
         self.tela_cliente = TelaCliente()
         self.tela_cliente.tab_widget_cliente.setCurrentWidget(self.tela_cliente.tab_cliente_consulta)
         self.tela_cliente.show()
+
+    def abrir_tela_chamado(self):
+        """Método para abrir a tela de chamados.
+
+        Este método abre a tela de cadastro de chamados.
+        :return: Tela de Chamados
+        """
+        self.tela_chamado = TelaChamado()
+        self.tela_chamado.show()
+
+    def abrir_tela_consulta_chamado(self):
+        """Método para abrir a tela de consulta de chamados.
+
+        Este método abre a tela de consulta de chamados.
+        :return: Tela de consulta de chamados.
+        """
+        self.tela_chamado = TelaChamado()
+        self.tela_chamado.tab_chamado.setCurrentWidget(self.tela_chamado.tab_consulta_chamado)
+        self.tela_chamado.show()

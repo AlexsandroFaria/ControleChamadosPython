@@ -71,11 +71,9 @@ class TelaSolucao(QMainWindow, Ui_TelaSolucao):
         :return: Inserção de usuário no banco de dados.
         """
         if self.txt_solucao.text() == "":
-            campo = 'SOLUÇÂO'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('SOLUÇÂO')
         elif self.txt_descricao.text() == "":
-            campo = 'DESCRIÇÂO'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('DESCRIÇÃO')
         else:
             solucao = Solucao()
 

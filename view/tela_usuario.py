@@ -80,17 +80,13 @@ class TelaUsuario(QMainWindow, Ui_Usuarios):
         :return: inserção de usuários no banco.
         """
         if self.txt_nome_completo.text() == "":
-            campo = 'NOME'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('NOME')
         elif self.txt_login.text() == "":
-            campo = 'LOGIN'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('LOGIN')
         elif self.txt_senha.text() == "":
-            campo = 'SENHA'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('SENHA')
         elif self.txt_confirmar_senha.text() == "":
-            campo = 'CONFIRMAR SENHA'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('CONFIRMAR SENHA')
         else:
             usuario = Usuario()
 
@@ -136,17 +132,13 @@ class TelaUsuario(QMainWindow, Ui_Usuarios):
         :return: Usuário para alteração.
         """
         if self.txt_nome_completo.text() == "":
-            campo = 'NOME'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('NOME')
         elif self.txt_login.text() == "":
-            campo = 'LOGIN'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('LOGIN')
         elif self.txt_senha.text() == "":
-            campo = 'SENHA'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('SENHA')
         elif self.txt_confirmar_senha.text() == "":
-            campo = 'CONFIRMAR SENHA'
-            self.mensagem.mensagem_campo_vazio(campo)
+            self.mensagem.mensagem_campo_vazio('CONFIRMAR SENHA')
         else:
             usuario = Usuario()
 

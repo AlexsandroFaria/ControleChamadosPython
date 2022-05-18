@@ -53,7 +53,6 @@ class TelaLogin(QMainWindow, Ui_UiTelaLogin):
             msg.exec_()
         else:
             usuario = Usuario()
-            # usuario.nome = None
             usuario.login = self.txt_login.text()
             usuario.senha = self.txt_senha.text()
 
