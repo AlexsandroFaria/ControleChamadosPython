@@ -212,7 +212,10 @@ class TelaParceiro(QMainWindow, Ui_TelaParceiro):
     def limpar_formulario(self):
         """Limpar campos
 
-        Limpa os campos do formulário de Parceiro.
+        Limpa os campos do formulário de Parceiro e seta alguns botões para serem desabilitados ou habilitados.
+         - btn_alterar: desabilita
+         - btn_excluir: desabilita
+         - btn_cadastrar: habilita
         """
         self.txt_id.setText("")
         self.txt_nome_parceiro.setText("")

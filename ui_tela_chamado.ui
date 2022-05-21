@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>_img/logo_janela.ico</normaloff>_img/logo_janela.ico</iconset>
+    <normaloff>../../ChamadosSimpress/_img/logo_janela.ico</normaloff>../../ChamadosSimpress/_img/logo_janela.ico</iconset>
   </property>
   <widget class="QFrame" name="frame">
    <property name="geometry">
@@ -45,7 +45,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>_img/banner_chamado.png</pixmap>
+     <pixmap>../../ChamadosSimpress/_img/banner_chamado.png</pixmap>
     </property>
    </widget>
   </widget>
@@ -80,7 +80,7 @@
    <widget class="QWidget" name="tab_cadastro_chamado">
     <attribute name="icon">
      <iconset>
-      <normaloff>_img/cadastro.png</normaloff>_img/cadastro.png</iconset>
+      <normaloff>../../ChamadosSimpress/_img/cadastro.png</normaloff>../../ChamadosSimpress/_img/cadastro.png</iconset>
     </attribute>
     <attribute name="title">
      <string>Cadastro de Chamados</string>
@@ -214,7 +214,7 @@ QPushButton:hover{
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>_img/contrato.png</normaloff>_img/contrato.png</iconset>
+       <normaloff>../../ChamadosSimpress/_img/contrato.png</normaloff>../../ChamadosSimpress/_img/contrato.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -545,7 +545,7 @@ border: 1px solid gray</string>
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
-    <widget class="QComboBox" name="Combo_status_chamado">
+    <widget class="QComboBox" name="combo_status_chamado">
      <property name="geometry">
       <rect>
        <x>160</x>
@@ -578,6 +578,11 @@ border: 1px solid gray</string>
      <item>
       <property name="text">
        <string>Em atendimento</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Cancelado</string>
       </property>
      </item>
     </widget>
@@ -626,7 +631,7 @@ border: 1px solid gray</string>
      </property>
      <item>
       <property name="text">
-       <string>Selecione uma opção</string>
+       <string>Selecione uma Opção</string>
       </property>
      </item>
      <item>
@@ -690,7 +695,7 @@ border: 1px solid gray</string>
      </property>
      <item>
       <property name="text">
-       <string>Selecione uma opção</string>
+       <string>Selecione uma Opção</string>
       </property>
      </item>
     </widget>
@@ -819,7 +824,7 @@ background-color: rgb(227, 227, 227);</string>
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>_img/calendario.png</normaloff>_img/calendario.png</iconset>
+       <normaloff>../../ChamadosSimpress/_img/calendario.png</normaloff>../../ChamadosSimpress/_img/calendario.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -853,7 +858,7 @@ background-color: rgb(227, 227, 227);</string>
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>_img/calendario.png</normaloff>_img/calendario.png</iconset>
+       <normaloff>../../ChamadosSimpress/_img/calendario.png</normaloff>../../ChamadosSimpress/_img/calendario.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -912,7 +917,7 @@ QPushButton:hover{
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>_img/cadastro.png</normaloff>_img/cadastro.png</iconset>
+          <normaloff>../../ChamadosSimpress/_img/cadastro.png</normaloff>../../ChamadosSimpress/_img/cadastro.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -956,7 +961,7 @@ QPushButton:hover{
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>_img/alterar.png</normaloff>_img/alterar.png</iconset>
+          <normaloff>../../ChamadosSimpress/_img/alterar.png</normaloff>../../ChamadosSimpress/_img/alterar.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -1000,7 +1005,7 @@ QPushButton:hover{
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>_img/limpar.png</normaloff>_img/limpar.png</iconset>
+          <normaloff>../../ChamadosSimpress/_img/limpar.png</normaloff>../../ChamadosSimpress/_img/limpar.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -1044,7 +1049,7 @@ QPushButton:hover{
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>_img/excluir.png</normaloff>_img/excluir.png</iconset>
+          <normaloff>../../ChamadosSimpress/_img/excluir.png</normaloff>../../ChamadosSimpress/_img/excluir.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -1098,7 +1103,7 @@ QPushButton:hover{
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>_img/fechar_chamado.png</normaloff>_img/fechar_chamado.png</iconset>
+       <normaloff>../../ChamadosSimpress/_img/fechar_chamado.png</normaloff>../../ChamadosSimpress/_img/fechar_chamado.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -1148,7 +1153,7 @@ QPushButton:hover{
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>_img/sair.png</normaloff>_img/sair.png</iconset>
+       <normaloff>../../ChamadosSimpress/_img/sair.png</normaloff>../../ChamadosSimpress/_img/sair.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -1170,7 +1175,7 @@ QPushButton:hover{
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>_img/img_chamado.png</pixmap>
+      <pixmap>../../ChamadosSimpress/_img/img_chamado.png</pixmap>
      </property>
     </widget>
     <widget class="QTextEdit" name="txt_problema">
@@ -1202,7 +1207,7 @@ border: 1px solid gray</string>
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>_img/carregar_web.png</normaloff>_img/carregar_web.png</iconset>
+       <normaloff>../../ChamadosSimpress/_img/carregar_web.png</normaloff>../../ChamadosSimpress/_img/carregar_web.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -1215,7 +1220,7 @@ border: 1px solid gray</string>
    <widget class="QWidget" name="tab_consulta_chamado">
     <attribute name="icon">
      <iconset>
-      <normaloff>_img/consulta.png</normaloff>_img/consulta.png</iconset>
+      <normaloff>../../ChamadosSimpress/_img/consulta.png</normaloff>../../ChamadosSimpress/_img/consulta.png</iconset>
     </attribute>
     <attribute name="title">
      <string>Consulta de Chamados</string>
@@ -1289,12 +1294,12 @@ border: 1px solid gray</string>
      </column>
      <column>
       <property name="text">
-       <string>Data Abertura</string>
+       <string>Tipo</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Classificação</string>
+       <string>Data Abertura</string>
       </property>
      </column>
      <column>
@@ -1371,7 +1376,7 @@ QPushButton:hover{
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>_img/buscar.png</normaloff>_img/buscar.png</iconset>
+          <normaloff>../../ChamadosSimpress/_img/buscar.png</normaloff>../../ChamadosSimpress/_img/buscar.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -1434,7 +1439,7 @@ QPushButton:hover{
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>_img/buscar.png</normaloff>_img/buscar.png</iconset>
+          <normaloff>../../ChamadosSimpress/_img/buscar.png</normaloff>../../ChamadosSimpress/_img/buscar.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -1497,7 +1502,7 @@ QPushButton:hover{
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>_img/buscar.png</normaloff>_img/buscar.png</iconset>
+          <normaloff>../../ChamadosSimpress/_img/buscar.png</normaloff>../../ChamadosSimpress/_img/buscar.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -1566,7 +1571,7 @@ QPushButton:hover{
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>_img/pesquisa_chamado.png</normaloff>_img/pesquisa_chamado.png</iconset>
+          <normaloff>../../ChamadosSimpress/_img/pesquisa_chamado.png</normaloff>../../ChamadosSimpress/_img/pesquisa_chamado.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -1610,7 +1615,7 @@ QPushButton:hover{
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>_img/carregar.png</normaloff>_img/carregar.png</iconset>
+          <normaloff>../../ChamadosSimpress/_img/carregar.png</normaloff>../../ChamadosSimpress/_img/carregar.png</iconset>
         </property>
         <property name="iconSize">
          <size>

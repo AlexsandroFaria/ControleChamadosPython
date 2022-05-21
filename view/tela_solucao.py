@@ -165,9 +165,10 @@ class TelaSolucao(QMainWindow, Ui_TelaSolucao):
                 self.mensagem.mensagem_de_erro()
 
     def limpar_formulario(self):
-        """Método para limpar os campos do Formulário.
+        """Limpar formulário de Solução
 
-        :return: parametros em branco para apagar as informações dos campos do formulário.
+        Método para limpar os campos do Formulário e seta alguns botões para serem desabilitados ou habilitados.
+        - btn_excluir: desabilita
         """
         self.txt_id.setText("")
         self.txt_solucao.setText("")

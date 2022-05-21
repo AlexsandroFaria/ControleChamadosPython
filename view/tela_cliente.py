@@ -1,6 +1,7 @@
 from PySide2.QtWidgets import QMainWindow, QMessageBox
 from PySide2 import QtWidgets, QtGui
 from components.mensagens import Mensagens
+from dao.chamado_dao import ChamadoDao
 from dao.cliente_dao import ClienteDao
 from model.cliente import Cliente
 from view.tela_chamado import TelaChamado
@@ -231,9 +232,9 @@ class TelaCliente(QMainWindow, Ui_Cliente):
                 self.limpar_formulario()
                 self.listar_cliente_tabela()
 
-                # chamado_dao = ChamadoDao()
-                # chamado_dao.alterar_chamado_cliente(cliente.contrato, cliente.nome, cliente.endereco, cliente.contato,
-                #                                   cliente.telefone, cliente.email)
+                chamado_dao = ChamadoDao()
+                chamado_dao.alterar_chamado_cliente_banco(cliente.contrato, cliente.nome, cliente.endereco, cliente.contato,
+                                                    cliente.telefone, cliente.email)
 
             except ConnectionError as con_erro:
                 self.mensagem.mensagem_de_erro()
@@ -280,8 +281,12 @@ class TelaCliente(QMainWindow, Ui_Cliente):
     def limpar_formulario(self):
         """Limpar Formulário
 
-        Limpa o formulário da tela de Cliente.
-        :return: Limpa os campos da tela de cliente
+        Limpa o formulário da tela de Cliente e seta alguns botões para serem desabilitados ou habilitados.
+        - btn_alterar: desabilita
+        - btn_excluir: desabilita
+        - btn_cadastrar_chamado: desabilita
+        - btn_salvar: habilita
+        - txt_contrato: habilita
         """
         self.txt_contrato.setText("")
         self.txt_nome.setText("")

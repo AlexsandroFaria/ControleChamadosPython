@@ -4,6 +4,7 @@ from components.mensagens import Mensagens
 from dao.chamado_dao import ChamadoDao
 from model.chamado import Chamado
 from view.ui_tela_chamado import Ui_TelaChamado
+from datetime import datetime
 
 
 class TelaChamado(QMainWindow, Ui_TelaChamado):
@@ -21,15 +22,44 @@ class TelaChamado(QMainWindow, Ui_TelaChamado):
         self.mensagem = Mensagens()
 
         self.popula_campo_solucao()
-        """Chama o método para popular a combobox de Solução"""
+        """Chama o método para popular a combobox de Solução."""
+
+        self.pegar_data_atual()
+        """Popula o campo de data atual com a data do dia."""
+
+        self.btn_atualizar_data.clicked.connect(self.atualizar_data)
+        """Atualiza o campo com a data do dia."""
 
         self.listar_chamado_tabela()
         """Função para chamar o método de listar os chamados na tabela da tela de consulta de chamados."""
 
+        self.btn_cadastrar.clicked.connect(self.cadastrar_chamado)
+        """Função que chama o método para cadastrar um chamado e salvar em banco de dados."""
+
         self.btn_buscar_contrato.clicked.connect(self.buscar_contrato_cliente_no_formulario)
+        """Função que chama o método de consulta a clientes e popula o formulário de Chamado com alguns dados."""
+
+        self.btn_carregar.clicked.connect(self.carregar_dados_tabela_para_formulario)
+        """Função que chama o método de popular o formulário com os dados selecionados."""
+
+        self.btn_limpar_tela.clicked.connect(self.limpar_campos_formulario)
+        """Função que chama o método de limpar os campos do formulário."""
+
+        self.btn_atualizar_data_abertura.clicked.connect(self.pegar_data_atual)
+        """Função que chama o método para atualizar a data atual."""
+
+        self.btn_alterar.clicked.connect(self.alterar_chamado)
+        """Função que chama o método para alterar os dados do formulário."""
+
+        self.btn_excluir.clicked.connect(self.excluir_chamado)
+        """Função que chama o métodod e excluir chamado."""
 
         self.btn_fechar_tela.clicked.connect(self.close)
         """Fecha e encerra a janela."""
+
+        self.btn_alterar.setEnabled(False)
+        self.btn_excluir.setEnabled(False)
+        self.btn_fechar_chamado.setEnabled(False)
 
     def popula_campo_solucao(self):
         """Popular Campo de solução
@@ -66,6 +96,22 @@ class TelaChamado(QMainWindow, Ui_TelaChamado):
         except ConnectionError as con_erro:
             print(con_erro)
             self.mensagem.mensagem_de_erro()
+
+    def pegar_data_atual(self):
+        """Pegar Data Atual.
+
+        Método para capturar a data atual.
+        """
+        data = datetime.today().strftime('%d/%m/%Y')
+        self.txt_data_abertura.setText(data)
+
+    def atualizar_data(self):
+        """Atualizar data.
+
+        Método para atualizar a data do chamado.
+        """
+        data = datetime.today().strftime('%d/%m/%Y')
+        self.txt_data_atualizacao.setText(data)
 
     def buscar_contrato_cliente_no_formulario(self):
         """Consultar contrato no Formulário
@@ -108,6 +154,62 @@ class TelaChamado(QMainWindow, Ui_TelaChamado):
             msg.setText('No campo CONTRATO informe somente números!')
             msg.exec_()
 
+    def carregar_dados_tabela_para_formulario(self):
+        """Carregar dados para o formulário.
+
+        Carrega os dados do chamado no formulário com os dados consultados no banco de dados.
+        :return:
+        """
+        try:
+
+            linha = self.tabela_chamado.currentItem().text()
+
+            if not linha.isdigit():
+                msg = QMessageBox()
+                msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
+                msg.setIcon(QMessageBox.Information)
+                msg.setWindowTitle("Consultar Chamados")
+                msg.setText('Selecione somente a coluna Número do chamado')
+                msg.exec_()
+            else:
+                chamado_dao = ChamadoDao()
+                resultado = chamado_dao.consultar_numero_chamado(linha)
+
+                if len(resultado) == 0:
+                    msg = QMessageBox()
+                    msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
+                    msg.setIcon(QMessageBox.Information)
+                    msg.setWindowTitle("Consulta Contrato")
+                    msg.setText('Selecione somente a coluna Número do chamado!')
+                    msg.exec_()
+                else:
+                    self.tab_chamado.setCurrentWidget(self.tab_cadastro_chamado)
+
+                    self.txt_numero_chamado.setText(str(resultado[0][0]))
+                    self.txt_numero_contrato.setText(str(resultado[0][1]))
+                    self.txt_nome_cliente.setText(str(resultado[0][2]))
+                    self.txt_endereco.setText(str(resultado[0][3]))
+                    self.txt_contato.setText(str(resultado[0][4]))
+                    self.txt_telefone.setText(str(resultado[0][5]))
+                    self.txt_email.setText(str(resultado[0][6]))
+                    self.txt_problema.setText(str(resultado[0][7]))
+                    self.txt_observacao.setText(str(resultado[0][8]))
+                    self.combo_status_chamado.setCurrentText(resultado[0][9])
+                    self.combo_solucao.setCurrentText(str(resultado[0][10]))
+                    self.combo_tipo_chamado.setCurrentText(str(resultado[0][11]))
+                    self.txt_data_abertura.setText(str(resultado[0][12]))
+                    self.txt_data_atualizacao.setText(str(resultado[0][13]))
+
+                    self.btn_alterar.setEnabled(True)
+                    self.btn_excluir.setEnabled(True)
+                    self.btn_cadastrar.setEnabled(False)
+                    self.txt_numero_contrato.setEnabled(False)
+                    self.btn_fechar_chamado.setEnabled(True)
+
+        except ConnectionError as con_erro:
+            print(con_erro)
+            self.mensagem.mensagem_de_erro()
+
     def consultar_numero_contrato(self):
         """Consultar Número de contrato
 
@@ -142,12 +244,16 @@ class TelaChamado(QMainWindow, Ui_TelaChamado):
                         for j in range(0, 14):
                             self.tabela_chamado.setItem(i, j, QtWidgets.QTableWidgetItem(str(resultado[i][j])))
                     self.txt_consulta_contrato.setText()
-
             except ConnectionError as con_erro:
                 print(con_erro)
                 self.mensagem.mensagem_de_erro()
 
     def cadastrar_chamado(self):
+        """Cadastrar Chamado.
+
+        Método que cadastra um chamado no banco de dados e exibe o resultado na tabela da tela de chamados.
+        :return: Cadastro de Chamado
+        """
         if self.txt_numero_chamado.text() == "":
             self.mensagem.mensagem_campo_vazio("NÚMERO CHAMADO")
         elif self.txt_numero_contrato.text() == "":
@@ -162,11 +268,11 @@ class TelaChamado(QMainWindow, Ui_TelaChamado):
             self.mensagem.mensagem_campo_vazio("E-MAIL")
         elif self.txt_problema.toPlainText() == "":
             self.mensagem.mensagem_campo_vazio("PROBLEMA")
-        elif self.Combo_status_chamado.currentText() == "Selecione uma Opção":
+        elif self.combo_status_chamado.currentText() == "Selecione uma Opção":
             self.mensagem.mensagem_combo('STATUS DE CHAMADO')
-        elif self.combo_tipo_chamado.setCurrentText() == "Selecione uma Opção":
+        elif self.combo_tipo_chamado.currentText() == "Selecione uma Opção":
             self.mensagem.mensagem_combo('TIPO CHAMADO')
-        elif self.combo_solucao.setCurrentText() == "Selecione uma Opção":
+        elif self.combo_solucao.currentText() == "Selecione uma Opção":
             self.mensagem.mensagem_combo('SOLUÇÃO')
         elif self.txt_data_atualizacao.text() == "":
             self.mensagem.mensagem_campo_vazio('DATA ATUALIZAÇÃO')
@@ -181,7 +287,7 @@ class TelaChamado(QMainWindow, Ui_TelaChamado):
             chamado.email = self.txt_email.text()
             chamado.problema = self.txt_problema.toPlainText()
             chamado.observacao = self.txt_observacao.text()
-            chamado.status = self.Combo_status_chamado.currentText()
+            chamado.status = self.combo_status_chamado.currentText()
             chamado.solucao = self.combo_solucao.currentText()
             chamado.tipo = self.combo_tipo_chamado.currentText()
             chamado.data_abertura = self.txt_data_abertura.text()
@@ -202,7 +308,142 @@ class TelaChamado(QMainWindow, Ui_TelaChamado):
                 msg.setText(f'Chamado {chamado.numero_chamado} cadastrado com sucesso.')
                 msg.exec_()
 
+                self.listar_chamado_tabela()
+                self.limpar_campos_formulario()
             except ConnectionError as con_erro:
                 print(con_erro)
                 self.mensagem.mensagem_de_erro()
 
+    def alterar_chamado(self):
+        """Alterar Chamado.
+
+        Método que altera os dados do chamado caso necessário.
+        :return: Alteração chamado
+        """
+        if self.txt_numero_chamado.text() == "":
+            self.mensagem.mensagem_campo_vazio("NÚMERO CHAMADO")
+        elif self.txt_numero_contrato.text() == "":
+            self.mensagem.mensagem_campo_vazio('NÚMERO CONTRATO')
+        elif self.txt_nome_cliente.text() == "":
+            self.mensagem.mensagem_campo_vazio('NOME CLIENTE')
+        elif self.txt_contato.text() == "":
+            self.mensagem.mensagem_campo_vazio('CONTATO')
+        elif self.txt_telefone.text() == "":
+            self.mensagem.mensagem_campo_vazio('TELEFONE')
+        elif self.txt_email.text() == "":
+            self.mensagem.mensagem_campo_vazio("E-MAIL")
+        elif self.txt_problema.toPlainText() == "":
+            self.mensagem.mensagem_campo_vazio("PROBLEMA")
+        elif self.combo_status_chamado.currentText() == "Selecione uma Opção":
+            self.mensagem.mensagem_combo('STATUS DE CHAMADO')
+        elif self.combo_tipo_chamado.currentText() == "Selecione uma Opção":
+            self.mensagem.mensagem_combo('TIPO CHAMADO')
+        elif self.combo_solucao.currentText() == "Selecione uma Opção":
+            self.mensagem.mensagem_combo('SOLUÇÃO')
+        elif self.txt_data_atualizacao.text() == "":
+            self.mensagem.mensagem_campo_vazio('DATA ATUALIZAÇÃO')
+        else:
+            chamado = Chamado()
+            chamado.numero_chamado = self.txt_numero_chamado.text()
+            chamado.numero_contrato = self.txt_numero_contrato.text()
+            chamado.telefone = self.txt_telefone.text()
+            chamado.email = self.txt_email.text()
+            chamado.problema = self.txt_problema.toPlainText()
+            chamado.observacao = self.txt_observacao.text()
+            chamado.status = self.combo_status_chamado.currentText()
+            chamado.solucao = self.combo_solucao.currentText()
+            chamado.tipo = self.combo_tipo_chamado.currentText()
+            chamado.data_abertura = self.txt_data_abertura.text()
+            chamado.data_atualizacao = self.txt_data_atualizacao.text()
+
+            try:
+                chamado_dao = ChamadoDao()
+                chamado_dao.alterar_chamado_banco(chamado.numero_chamado, chamado.telefone, chamado.email,
+                                                  chamado.problema, chamado.observacao, chamado.status, chamado.solucao,
+                                                  chamado.tipo, chamado.data_abertura, chamado.data_atualizacao)
+
+                chamado_dao.alterar_cliente_telefone_email(chamado.numero_contrato, chamado.telefone, chamado.email)
+
+                msg = QMessageBox()
+                msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
+                msg.setIcon(QMessageBox.Information)
+                msg.setWindowTitle("Alterar Chamado")
+                msg.setText(f'Chamado {chamado.numero_chamado} alterado com sucesso.')
+                msg.exec_()
+
+                self.limpar_campos_formulario()
+                self.listar_chamado_tabela()
+                self.txt_numero_contrato.setEnabled(True)
+            except ConnectionError as con_erro:
+                print(con_erro)
+                self.mensagem.mensagem_de_erro()
+
+    def excluir_chamado(self):
+        """Excluir Chamado
+
+        Método que exclui um chamado passando como referência o número do chamado.
+        :return: Exclusão de chamado.
+        """
+        if self.txt_numero_chamado.text() == "":
+            self.mensagem.mensagem_campo_vazio('NÚMERO CHAMADO')
+        else:
+            msg = QMessageBox()
+            msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
+            msg.setWindowTitle("Exclusão de Chamado!")
+            msg.setText("Tem certeza que deseja excluir o Chamado?")
+            msg.setStandardButtons(QMessageBox.Yes)
+            msg.addButton(QMessageBox.No)
+            msg.setDefaultButton(QMessageBox.No)
+            if msg.exec_() == QMessageBox.Yes:
+                chamado = Chamado()
+                chamado.numero_chamado = self.txt_numero_chamado.text()
+
+                try:
+                    chamado_dao = ChamadoDao()
+                    chamado_dao.excluir_chamado_banco(chamado.numero_chamado)
+
+                    msg = QMessageBox()
+                    msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
+                    msg.setIcon(QMessageBox.Information)
+                    msg.setWindowTitle("Exclusão de Chamado")
+                    msg.setText(f'Chamado {chamado.numero_chamado} excluido com sucesso.')
+                    msg.exec_()
+
+                    self.limpar_campos_formulario()
+                    self.listar_chamado_tabela()
+                except ConnectionError as con_erro:
+                    print(con_erro)
+                    self.mensagem.mensagem_de_erro()
+
+    def limpar_campos_formulario(self):
+        """Limpar campos do Formulário.
+
+        Limpa os campos da tela de chamados e seta alguns botões para serem desabilitados ou habilitados
+        conforme necessidade.
+
+        - btn_cadastrar: Habilita
+        - btn_alterar: desabilita
+        - btn_excluir: desabilita
+        - btn_fechar_chamado: desabilita
+        - txt_numero_contrato: habilita edição
+        """
+        self.txt_numero_chamado.setText("")
+        self.txt_numero_contrato.setText("")
+        self.txt_nome_cliente.setText("")
+        self.txt_endereco.setText("")
+        self.txt_contato.setText("")
+        self.txt_telefone.setText("")
+        self.txt_email.setText("")
+        self.txt_problema.setText("")
+        self.txt_observacao.setText("")
+        self.combo_solucao.setCurrentText("Selecione uma Opção")
+        self.combo_tipo_chamado.setCurrentText("Selecione uma Opção")
+        self.combo_status_chamado.setCurrentText("Selecione uma Opção")
+        self.txt_data_abertura.setText("")
+        self.txt_data_atualizacao.setText("")
+
+        self.btn_cadastrar.setEnabled(True)
+        self.btn_alterar.setEnabled(False)
+        self.btn_excluir.setEnabled(False)
+        self.btn_fechar_chamado.setEnabled(False)
+        self.txt_numero_contrato.setEnabled(True)

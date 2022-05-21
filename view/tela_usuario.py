@@ -263,9 +263,13 @@ class TelaUsuario(QMainWindow, Ui_Usuarios):
                 self.mensagem.mensagem_de_erro()
 
     def limpar_formulario(self):
-        """Método para limpar os campos do formulário após determinada iteração com o usuário
+        """Limpar formulário Usuario.
 
-        :return: parametros em branco para apagar as informações dos campos do formulário.
+        Método para limpar os campos do formulário de usuário e seta alguns botões para serem desabilitados ou
+        habilitados.
+        - btn_excluir: desabilita
+        - btn_alterar: desabilita
+        - btn_salvar: habilita
         """
         self.txt_id.setText("")
         self.txt_nome_completo.setText("")
