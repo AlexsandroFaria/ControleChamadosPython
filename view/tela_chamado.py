@@ -3,6 +3,7 @@ from PySide2 import QtWidgets, QtGui
 from components.mensagens import Mensagens
 from dao.chamado_dao import ChamadoDao
 from model.chamado import Chamado
+from view.tela_fechar_chamado import TelaFecharChamado
 from view.ui_tela_chamado import Ui_TelaChamado
 from datetime import datetime
 
@@ -53,6 +54,9 @@ class TelaChamado(QMainWindow, Ui_TelaChamado):
 
         self.btn_excluir.clicked.connect(self.excluir_chamado)
         """Função que chama o métodod e excluir chamado."""
+
+        self.btn_fechar_chamado.clicked.connect(self.fechar_chamado)
+        """Função que chama o método de fechar chamado."""
 
         self.btn_fechar_tela.clicked.connect(self.close)
         """Fecha e encerra a janela."""
@@ -146,6 +150,8 @@ class TelaChamado(QMainWindow, Ui_TelaChamado):
                 msg.setWindowTitle("Consulta Contrato")
                 msg.setText('Contrato não encontrado!')
                 msg.exec_()
+
+                self.limpar_campos_formulario()
         else:
             msg = QMessageBox()
             msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
@@ -414,6 +420,42 @@ class TelaChamado(QMainWindow, Ui_TelaChamado):
                 except ConnectionError as con_erro:
                     print(con_erro)
                     self.mensagem.mensagem_de_erro()
+
+    def fechar_chamado(self):
+        """Fechar Chamado
+
+        Método que abre a tela de fechamento de chamados passando alguns parâmetros para encerramento do mesmo.
+        :return: Tela fechar chamado
+        """
+        if not self.txt_numero_chamado.text().isnumeric():
+            self.mensagem.mensagem_campo_numerico('NÚMERO CHAMADO')
+        elif not self.txt_numero_contrato.text().isnumeric():
+            self.mensagem.mensagem_campo_numerico('NÚMERO CONTRATO')
+        elif self.txt_nome_cliente.text() == "":
+            self.mensagem.mensagem_campo_vazio('NOME CLIENTE')
+        elif self.txt_contato.text() == "":
+            self.mensagem.mensagem_campo_vazio('CONTATO')
+        elif self.txt_telefone.text() == "":
+            self.mensagem.mensagem_campo_vazio('TELEFONE')
+        elif self.txt_problema.toPlainText() == "":
+            self.mensagem.mensagem_campo_vazio('PROBLEMA')
+        elif self.combo_tipo_chamado.currentText() == 'Selecione uma Opção':
+            self.mensagem.mensagem_combo('TIPO CHAMADO')
+        elif self.combo_solucao.currentText() == 'Selecione uma opção':
+            self.mensagem.mensagem_combo('SOLUÇÃO')
+        elif self.combo_status_chamado.currentText() == 'Selecione uma opção':
+            self.mensagem.mensagem_combo('STATUS DO CHAMADO')
+        else:
+            self.tela_fechar_chamado = TelaFecharChamado()
+            self.tela_fechar_chamado.txt_numero_chamado.setText(self.txt_numero_chamado.text())
+            self.tela_fechar_chamado.txt_contrato.setText(self.txt_numero_contrato.text())
+            self.tela_fechar_chamado.txt_nome_cliente.setText(self.txt_nome_cliente.text())
+            self.tela_fechar_chamado.txt_contato.setText(self.txt_contato.text())
+            self.tela_fechar_chamado.txt_telefone.setText(self.txt_telefone.text())
+            self.tela_fechar_chamado.txt_problema.setText(self.txt_problema.toPlainText())
+            self.tela_fechar_chamado.txt_tipo_chamado.setText(self.combo_tipo_chamado.currentText())
+            self.tela_fechar_chamado.show()
+            self.close()
 
     def limpar_campos_formulario(self):
         """Limpar campos do Formulário.

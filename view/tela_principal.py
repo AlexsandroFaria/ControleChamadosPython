@@ -2,6 +2,7 @@ from PySide2.QtWidgets import QMainWindow
 
 from view.tela_chamado import TelaChamado
 from view.tela_cliente import TelaCliente
+from view.tela_fechar_chamado import TelaFecharChamado
 from view.tela_parceiro import TelaParceiro
 from view.tela_solucao import TelaSolucao
 from view.ui_tela_principal import Ui_TelaPrincipal
@@ -44,6 +45,10 @@ class TelaPrincipal(QMainWindow, Ui_TelaPrincipal):
 
         self.menu_consulta_chamado.triggered.connect(self.abrir_tela_consulta_chamado)
         """Item do menu que gera a chamada do método de abrir a tela de consulta de chamados."""
+
+        self.menu_fechamento_de_Chamados.triggered.connect(self.abrir_tela_fechar_chamado)
+
+        self.menu_Consulta_de_Chamados_Fechados.triggered.connect(self.abrir_tela_consulta_chamados_fechados)
 
     def abrir_tela_usuario(self):
         """Método para abrir a tela de Usuário.
@@ -109,3 +114,22 @@ class TelaPrincipal(QMainWindow, Ui_TelaPrincipal):
         self.tela_chamado = TelaChamado()
         self.tela_chamado.tab_chamado.setCurrentWidget(self.tela_chamado.tab_consulta_chamado)
         self.tela_chamado.show()
+
+    def abrir_tela_fechar_chamado(self):
+        """Método para abrir tela de Fechar Chamados.
+
+        Este método abre a tela de Fechar chamados.
+        :return: Tela de Fechar chamados.
+        """
+        self.tela_fechar_chamado = TelaFecharChamado()
+        self.tela_fechar_chamado.show()
+
+    def abrir_tela_consulta_chamados_fechados(self):
+        """Método para abrir tela de consulta de Chamados fechados.
+
+        Este método abre a tela de consulta de chamados fechados.
+        :return: Tela de Fechar chamados.
+        """
+        self.tela_fechar_chamado = TelaFecharChamado()
+        self.tela_fechar_chamado.tab_fechar_chamado.setCurrentWidget(self.tela_fechar_chamado.tab_consulta)
+        self.tela_fechar_chamado.show()

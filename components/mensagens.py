@@ -91,10 +91,18 @@ class Mensagens:
         msg.setText(f'Solução {campo} já existe no sistema!')
         msg.exec_()
 
-    def mensagem_combo(self, combo):
+    def mensagem_combo(self, campo):
         msg = QMessageBox()
         msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
         msg.setIcon(QMessageBox.Information)
         msg.setWindowTitle("Inserir Solução")
-        msg.setText(f'Selecione uma opção em  {combo}!')
+        msg.setText(f'Selecione uma opção em  {campo}!')
+        msg.exec_()
+
+    def mensagem_registro_não_encontrado(self, campo):
+        msg = QMessageBox()
+        msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
+        msg.setIcon(QMessageBox.Information)
+        msg.setWindowTitle("Inserir Solução")
+        msg.setText(f'Registro {campo} não encontrado!')
         msg.exec_()

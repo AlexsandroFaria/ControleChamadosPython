@@ -111,3 +111,6 @@ class CreateDatabase:
             """)
         except:
             pass
+
+    def create_table_chamado_fechado(self):
+        pass
