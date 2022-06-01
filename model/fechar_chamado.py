@@ -1,4 +1,8 @@
 class FecharChamado():
+    """Classse Fechar chamados
+
+    Classe de modelo de Chamados fechados para orientação a objetos.
+    """
     def __init__(self, id=None, numero=None, contrato=None, nome_cliente=None, contato=None, telefone=None,
                  problema=None, tipo=None, solucao=None, status=None, data_fechamento=None):
         self._id = id

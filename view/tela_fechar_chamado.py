@@ -19,35 +19,54 @@ class TelaFecharChamado(QMainWindow, Ui_FecharChamado):
 
         self.mensagem = Mensagens()
 
+        """Carrega a data atual para a caixa de texto assim que o formulário é aberto."""
         self.pegar_data_atual()
 
+        """Função para chamar o método de listar chamados na tabela."""
         self.listar_chamados_fechados_tabela()
 
+        """Função que fecha a janela atual."""
         self.btn_sair.clicked.connect(self.close)
 
+        """Função que chamado método para pegar a data atual."""
         self.btn_pegar_data.clicked.connect(self.pegar_data_atual)
 
+        """Função que chama o método de pesquisa de chamado."""
         self.btn_pesquisar_chamado.clicked.connect(self.carregar_chamado_formulario)
 
+        """Função que chama o método de fechar chamado."""
         self.btn_fechar_chamado.clicked.connect(self.fechar_chamado)
 
+        """Função que chama a função de limpar os campos do formulário."""
         self.btn_limpar_tela.clicked.connect(self.limpar_campos_formulario)
 
+        """Função que chama o método de exibir o detalhe dos chamados."""
         self.btn_exibir_detalhes.clicked.connect(self.exibir_chamado_detalhes)
 
+        """Função que chama o método de consultar por número do chamado."""
         self.btn_consulta_numero_chamado_tabela.clicked.connect(self.consultar_chamado_fechado_por_numero)
 
+        """Função que chama o método de gerar relatório em excel."""
         self.btn_gerar_relatorio.clicked.connect(self.gerar_relatório_chamados)
 
+        """Função que chama o método de recarregar a tabela de chamados fechados"""
         self.btn_carregar_tabela.clicked.connect(self.listar_chamados_fechados_tabela)
 
+        """Função que chama o método de consultar chamado por número de contrato."""
         self.btn_consulta_contrato_tabela.clicked.connect(self.consultar_chamado_fechado_por_contrato)
 
+        """Função que chama o método de consultar chamado por nome do cliente."""
         self.btn_consultar_nome_cliente_tabela.clicked.connect(self.consultar_chamado_fechado_por_nome_cliente)
 
+        """Função para fechar a janela atual."""
         self.btn_fechar_2.clicked.connect(self.close)
 
     def listar_chamados_fechados_tabela(self):
+        """Listar Chamados
+
+        Método que lista todos os chamados na tabela de chamados fechados.
+        :return: Listagem de Chamados fechados.
+        """
         try:
             fechar_chamado_dao = FecharChamadoDao()
             resultado = fechar_chamado_dao.listar_chamado_fechado_tabela_banco()
@@ -63,10 +82,20 @@ class TelaFecharChamado(QMainWindow, Ui_FecharChamado):
             self.mensagem.mensagem_de_erro()
 
     def pegar_data_atual(self):
+        """Pegar data atual
+
+        Pega a data atual do sistema e retorna no campo de data.
+        :return: Data Atual.
+        """
         data = datetime.today().strftime('%d/%m/%Y')
         self.txt_data_fechamento.setText(data)
 
     def carregar_chamado_formulario(self):
+        """Carregar chamado no formulário.
+
+        Carrega o formulário de fechamento com os dados do chamado a ser fechado.
+        :return: Dados do Chamado em aberto.
+        """
         if not self.txt_consulta_chamado.text().isnumeric():
             self.mensagem.mensagem_campo_numerico('NÚMERO CHAMADO')
         elif self.txt_consulta_chamado.text() == "":
@@ -94,6 +123,10 @@ class TelaFecharChamado(QMainWindow, Ui_FecharChamado):
                 self.txt_consulta_chamado.setText("")
 
     def fechar_chamado(self):
+        """Fechar chamado
+
+        Método que efetua o encerramento do chamado.
+        """
         if self.txt_fechamento.toPlainText() == "":
             self.mensagem.mensagem_campo_vazio('FECHAMENTO')
         elif self.combo_status.currentText() == "Selecione uma opção":
@@ -138,6 +171,10 @@ class TelaFecharChamado(QMainWindow, Ui_FecharChamado):
                 self.mensagem.mensagem_de_erro()
 
     def limpar_campos_formulario(self):
+        """Limpar Campos do Formulário.
+
+        Limpa os campos do formulário caso o mesmo esteja preenchido.
+        """
         self.txt_numero_chamado.setText("")
         self.txt_contrato.setText("")
         self.txt_nome_cliente.setText("")
@@ -150,6 +187,11 @@ class TelaFecharChamado(QMainWindow, Ui_FecharChamado):
         self.txt_data_fechamento.setText("")
 
     def exibir_chamado_detalhes(self):
+        """Exibir detalhes do chamado fechado.
+
+        Exibe em outro formulário os dados do chamado fechado selecionado pelo usuário.
+        :return: Dados do chamado fechado.
+        """
 
         linha = self.tabela_chamados_fechados.currentItem().text()
 
@@ -190,6 +232,11 @@ class TelaFecharChamado(QMainWindow, Ui_FecharChamado):
                 self.mensagem.mensagem_de_erro()
 
     def consultar_chamado_fechado_por_numero(self):
+        """Consultar chamado fechado por número
+
+        Método que efetua a consulta de um chamado por número do mesmo.
+        :return: Chamado conforme número solicitado pelo usuário.
+        """
         if not self.txt_consulta_numero_chamado_tabela.text().isnumeric():
             self.mensagem.mensagem_campo_numerico('CONSULTA NUMERO CHAMADO')
             self.txt_consulta_numero_chamado_tabela.setText("")
@@ -227,6 +274,11 @@ class TelaFecharChamado(QMainWindow, Ui_FecharChamado):
                 self.mensagem.mensagem_de_erro()
 
     def consultar_chamado_fechado_por_contrato(self):
+        """Consultar chamado fechado por número do Contrato
+
+        Método que efetua a consulta de um chamado por número do Contrato.
+        :return: Chamado conforme número do contrato solicitado pelo usuário.
+        """
         if not self.txt_consultar_nome_cliente.text().isnumeric():
             self.mensagem.mensagem_campo_numerico("CONSULTA NÚMERO CONTRATO")
             self.txt_consultar_nome_cliente.setText("")
@@ -263,6 +315,11 @@ class TelaFecharChamado(QMainWindow, Ui_FecharChamado):
                 self.mensagem.mensagem_de_erro()
 
     def consultar_chamado_fechado_por_nome_cliente(self):
+        """Consultar chamado fechado por nome do cliente.
+
+        Método que efetua a consulta de um chamado por nome do Cliente.
+        :return: Chamado conforme nome do cliente solicitado pelo usuário.
+        """
         if self.txt_consulta_nome_cliente.text() == "":
             self.mensagem.mensagem_campo_vazio("CONSULTA NOME CLIENTE")
             self.txt_consulta_nome_cliente.setText("")
@@ -300,6 +357,11 @@ class TelaFecharChamado(QMainWindow, Ui_FecharChamado):
                 self.mensagem.mensagem_de_erro()
 
     def gerar_relatório_chamados(self):
+        """Gerar relatório de Chamados.
+
+        Método que gera um relatório de chamados, converte para o formato .xlsx e salva na pasta download.
+        :return: Geração de relatório.
+        """
         user_windows = getpass.getuser()
 
         try:
@@ -309,7 +371,7 @@ class TelaFecharChamado(QMainWindow, Ui_FecharChamado):
             dados = pd.DataFrame(resultado)
             dados.columns = ['Chamado', 'Contrato', 'Cliente', 'Contato', 'Telefone', 'Problema', 'Tipo',
                              'Solução', 'Status', 'Data']
-            
+
             dados.to_excel(f'c:\\Users\\{user_windows}\\Downloads\\'
                            f'Relatorio de chamados fechados.xlsx', index=False)
 
