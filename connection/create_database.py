@@ -114,3 +114,6 @@ class CreateDatabase:
 
     def create_table_chamado_fechado(self):
         pass
+
+    def create_table_chamado_parceiro(self):
+        pass

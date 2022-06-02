@@ -1,6 +1,7 @@
 from PySide2.QtWidgets import QMainWindow
 
 from view.tela_chamado import TelaChamado
+from view.tela_chamado_parceiro import TelaChamadoParceiro
 from view.tela_cliente import TelaCliente
 from view.tela_fechar_chamado import TelaFecharChamado
 from view.tela_parceiro import TelaParceiro
@@ -47,8 +48,14 @@ class TelaPrincipal(QMainWindow, Ui_TelaPrincipal):
         """Item do menu que gera a chamada do método de abrir a tela de consulta de chamados."""
 
         self.menu_fechamento_de_Chamados.triggered.connect(self.abrir_tela_fechar_chamado)
+        """Item do menu que gera a chamada do método de abrir a tela de fechar chamados."""
 
         self.menu_Consulta_de_Chamados_Fechados.triggered.connect(self.abrir_tela_consulta_chamados_fechados)
+        """Item do menu que gera a chamada do método de abrir a tela de consulta de chamados fechados."""
+
+        self.menuChamado_Parceiro.triggered.connect(self.abrir_tela_chamado_parceiro)
+
+        self.menu_consultar_Chamado_Parceiro.triggered.connect(self.abrir_tela_consulta_chamado_parceiro)
 
     def abrir_tela_usuario(self):
         """Método para abrir a tela de Usuário.
@@ -133,3 +140,12 @@ class TelaPrincipal(QMainWindow, Ui_TelaPrincipal):
         self.tela_fechar_chamado = TelaFecharChamado()
         self.tela_fechar_chamado.tab_fechar_chamado.setCurrentWidget(self.tela_fechar_chamado.tab_consulta)
         self.tela_fechar_chamado.show()
+
+    def abrir_tela_chamado_parceiro(self):
+        self.tela_chamado_parceiro = TelaChamadoParceiro()
+        self.tela_chamado_parceiro.show()
+
+    def abrir_tela_consulta_chamado_parceiro(self):
+        self.tela_chamado_parceiro = TelaChamadoParceiro()
+        self.tela_chamado_parceiro.tab_chamado_parceiro.setCurrentWidget(self.tela_chamado_parceiro.tab_consulta_parceiro)
+        self.tela_chamado_parceiro.show()
