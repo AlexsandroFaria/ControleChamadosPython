@@ -58,6 +58,18 @@ class TelaChamado(QMainWindow, Ui_TelaChamado):
         self.btn_fechar_chamado.clicked.connect(self.fechar_chamado)
         """Função que chama o método de fechar chamado."""
 
+        self.btn_consultar_numero_chamado.clicked.connect(self.listar_chamado_tabela_por_numero_chamado)
+        """Função que chama o método de listar chamados e retornar na tabela de chamados."""
+
+        self.btn_carregar_tabela.clicked.connect(self.listar_chamado_tabela)
+        """Função que chama o método que recarrega a lista de chamados."""
+
+        self.btn_consulta_contrato.clicked.connect(self.listar_chamado_tabela_por_contrato)
+        """Função que chama o método de listar chamados por número de contrato."""
+
+        self.btn_consultar_nome_cliente.clicked.connect(self.listar_chamado_por_nome_cliente)
+        """Função que chamado o método de listar chamado por nome do cliente."""
+
         self.btn_fechar_tela.clicked.connect(self.close)
         """Fecha e encerra a janela."""
 
@@ -215,6 +227,14 @@ class TelaChamado(QMainWindow, Ui_TelaChamado):
         except ConnectionError as con_erro:
             print(con_erro)
             self.mensagem.mensagem_de_erro()
+        except AttributeError as at_erro:
+            print(at_erro)
+            msg = QMessageBox()
+            msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
+            msg.setIcon(QMessageBox.Information)
+            msg.setWindowTitle("Consultar Chamado")
+            msg.setText('Selecione um item da coluna Número do chamado.')
+            msg.exec_()
 
     def consultar_numero_contrato(self):
         """Consultar Número de contrato
@@ -456,6 +476,108 @@ class TelaChamado(QMainWindow, Ui_TelaChamado):
             self.tela_fechar_chamado.txt_tipo_chamado.setText(self.combo_tipo_chamado.currentText())
             self.tela_fechar_chamado.show()
             self.close()
+
+    def listar_chamado_tabela_por_numero_chamado(self):
+        """Listar Chamado tabela
+
+        Método que efetua uma consulta conforme parâmetro informado pelo usuário e retorna o resultado na tabela.
+        :return: lista de chamados conforme parâmetro passado.
+        """
+        if self.txt_consulta_numero_chamado.text() == "":
+            self.mensagem.mensagem_campo_vazio('CONCULTA NÚMERO CHAMADO')
+        elif not self.txt_consulta_numero_chamado.text().isdigit():
+            self.mensagem.mensagem_campo_numerico("CONSULTA NÚMERO CHAMADO")
+            self.txt_consulta_numero_chamado.setText("")
+        else:
+            chamado = Chamado()
+            chamado.numero_chamado = self.txt_consulta_numero_chamado.text()
+
+            try:
+                chamado_dao = ChamadoDao()
+                resultado = chamado_dao.listar_numero_chamado_tabela(chamado.numero_chamado)
+
+                if len(resultado) == 0:
+                    self.mensagem.mensagem_registro_não_encontrado(chamado.numero_chamado)
+                    self.txt_consulta_numero_chamado.setText("")
+                    self.listar_chamado_tabela()
+                else:
+                    self.tabela_chamado.setRowCount(len(resultado))
+                    self.tabela_chamado.setColumnCount(14)
+
+                    for i in range(len(resultado)):
+                        for j in range(0, 14):
+                            self.tabela_chamado.setItem(i, j, QtWidgets.QTableWidgetItem(str(resultado[i][j])))
+                    self.txt_consulta_numero_chamado.setText("")
+
+            except ConnectionError as con_erro:
+                print(con_erro)
+                self.mensagem.mensagem_de_erro()
+
+    def listar_chamado_tabela_por_contrato(self):
+        """Listar chamado por contrato
+
+        Método que lista os chamados conforme número do contrato passado como parâmetro.
+        :return: Lista de chamados conforme parâmetro.
+        """
+        if self.txt_consulta_contrato.text() == "":
+            self.mensagem.mensagem_campo_vazio('NÚMERO DO CONTRATO')
+        elif not self.txt_consulta_contrato.text().isdigit():
+            self.mensagem.mensagem_campo_numerico('NÚMERO DO CONTRATO')
+            self.txt_consulta_contrato.setText("")
+        else:
+            chamado = Chamado()
+            chamado.numero_contrato = self.txt_consulta_contrato.text()
+
+            try:
+                chamado_dao = ChamadoDao()
+                resultado = chamado_dao.listar_chamado_por_contrato(chamado.numero_contrato)
+
+                if len(resultado) == 0:
+                    self.mensagem.mensagem_registro_não_encontrado(chamado.numero_contrato)
+                    self.txt_consulta_contrato.setText("")
+                else:
+                    self.tabela_chamado.setRowCount(len(resultado))
+                    self.tabela_chamado.setColumnCount(14)
+
+                    for i in range(len(resultado)):
+                        for j in range(0, 14):
+                            self.tabela_chamado.setItem(i, j, QtWidgets.QTableWidgetItem(str(resultado[i][j])))
+                    self.txt_consulta_contrato.setText("")
+            except ConnectionError as con_erro:
+                print(con_erro)
+                self.mensagem.mensagem_de_erro()
+
+    def listar_chamado_por_nome_cliente(self):
+        """Listar Chamado por nome do cliente.
+
+        Lista os chamados por nome do cliente passado como parâmetro.
+        :return: Listagem de camados conforme parâmetro.
+        """
+        if self.txt_consulta_nome_cliente.text() == "":
+            self.mensagem.mensagem_campo_vazio('NOME DO CLIENTE')
+        else:
+            chamado = Chamado()
+            chamado.nome_cliente = self.txt_consulta_nome_cliente.text()
+
+            try:
+                chamado_dao = ChamadoDao()
+                resultado = chamado_dao.listar_chamado_por_nome_cliente(chamado.nome_cliente)
+
+                if len(resultado) == 0:
+                    self.mensagem.mensagem_registro_não_encontrado(chamado.nome_cliente)
+                    self.txt_consulta_nome_cliente.setText("")
+                else:
+                    self.tabela_chamado.setRowCount(len(resultado))
+                    self.tabela_chamado.setColumnCount(14)
+
+                    for i in range(len(resultado)):
+                        for j in range(0, 14):
+                            self.tabela_chamado.setItem(i, j, QtWidgets.QTableWidgetItem(str(resultado[i][j])))
+                    self.txt_consulta_nome_cliente.setText("")
+
+            except ConnectionError as con_erro:
+                print(con_erro)
+                self.mensagem.mensagem_de_erro()
 
     def limpar_campos_formulario(self):
         """Limpar campos do Formulário.

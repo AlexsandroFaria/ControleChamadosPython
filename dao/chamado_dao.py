@@ -169,3 +169,36 @@ class ChamadoDao:
         conexao = ConexaoDatabase()
         comando_sql = f"DELETE FROM tb_chamado WHERE numero_chamado={numero_chamado}"
         conexao.executar_query(comando_sql)
+
+    def listar_numero_chamado_tabela(self, numero_chamado):
+        """Consulta Chamado por número do chamado.
+
+        Efetua uma consulta como parâmetro o numero do chamado.
+        :param numero_chamado: int
+        :return: Retorna um chamado cadastrado.
+        """
+        conexao = ConexaoDatabase()
+        comando_sql = f"SELECT numero_chamado, contrato_chamado, nome_cliente_chamado, endereco_chamado," \
+                      f"contato_chamado, telefone_chamado, email_chamado, problema_chamado, observacao_chamado," \
+                      f"status_chamado, tipo_chamado, solucao_chamado, data_abertura_chamado," \
+                      f"data_atualizacao_chamado FROM tb_chamado WHERE numero_chamado LIKE '%{numero_chamado}%'"
+        resultado = conexao.executar_consulta(comando_sql)
+        return resultado
+
+    def listar_chamado_por_contrato(self, numero_contrato):
+        conexao = ConexaoDatabase()
+        comando_sql = f"SELECT numero_chamado, contrato_chamado, nome_cliente_chamado, endereco_chamado," \
+                      f"contato_chamado, telefone_chamado, email_chamado, problema_chamado, observacao_chamado," \
+                      f"status_chamado, tipo_chamado, solucao_chamado, data_abertura_chamado," \
+                      f"data_atualizacao_chamado FROM tb_chamado WHERE contrato_chamado LIKE '%{numero_contrato}%'"
+        resultado = conexao.executar_consulta(comando_sql)
+        return resultado
+
+    def listar_chamado_por_nome_cliente(self, nome_cliente):
+        conexao = ConexaoDatabase()
+        comando_sql = f"SELECT numero_chamado, contrato_chamado, nome_cliente_chamado, endereco_chamado," \
+                      f"contato_chamado, telefone_chamado, email_chamado, problema_chamado, observacao_chamado," \
+                      f"status_chamado, tipo_chamado, solucao_chamado, data_abertura_chamado," \
+                      f"data_atualizacao_chamado FROM tb_chamado WHERE nome_cliente_chamado LIKE '%{nome_cliente}%'"
+        resultado = conexao.executar_consulta(comando_sql)
+        return resultado

@@ -53,7 +53,7 @@ class TelaPrincipal(QMainWindow, Ui_TelaPrincipal):
         self.menu_Consulta_de_Chamados_Fechados.triggered.connect(self.abrir_tela_consulta_chamados_fechados)
         """Item do menu que gera a chamada do método de abrir a tela de consulta de chamados fechados."""
 
-        self.menuChamado_Parceiro.triggered.connect(self.abrir_tela_chamado_parceiro)
+        self.menu_novo_Chamado_Parceiro.triggered.connect(self.abrir_tela_chamado_parceiro)
 
         self.menu_consultar_Chamado_Parceiro.triggered.connect(self.abrir_tela_consulta_chamado_parceiro)
 

@@ -308,35 +308,36 @@ class TelaCliente(QMainWindow, Ui_Cliente):
         parametro o número de contrato.
         :return: Consulta cliente.
         """
-        cliente = Cliente()
-        cliente.contrato = self.txt_consultar_contrato.text()
+        if self.txt_consultar_contrato.text() == "":
+            self.mensagem.mensagem_campo_vazio('CONSULTA NÚMERO CONTRATO')
+        elif not self.txt_consultar_contrato.text().isdigit():
+            self.mensagem.mensagem_campo_numerico("NÚMERO CONTRATO")
+            self.txt_consultar_contrato.setText("")
+        else:
+            cliente = Cliente()
+            cliente.contrato = self.txt_consultar_contrato.text()
 
-        try:
-            cliente_dao = ClienteDao()
-            resultado = cliente_dao.consultar_cliente_contrato_banco(cliente.contrato)
+            try:
+                cliente_dao = ClienteDao()
+                resultado = cliente_dao.consultar_cliente_contrato_banco(cliente.contrato)
 
-            if len(resultado) == 0:
-                msg = QMessageBox()
-                msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
-                msg.setIcon(QMessageBox.Information)
-                msg.setWindowTitle("Consulta Contrato")
-                msg.setText('Numero do Conrato não encontrado!')
-                msg.exec_()
+                if len(resultado) == 0:
+                    self.mensagem.mensagem_registro_não_encontrado(cliente.contrato)
 
-                self.txt_consultar_contrato.setText("")
-                self.listar_cliente_tabela()
-            else:
-                self.tabela_clientes.setRowCount(len(resultado))
-                self.tabela_clientes.setColumnCount(6)
+                    self.txt_consultar_contrato.setText("")
+                    self.listar_cliente_tabela()
+                else:
+                    self.tabela_clientes.setRowCount(len(resultado))
+                    self.tabela_clientes.setColumnCount(6)
 
-                for i in range(len(resultado)):
-                    for j in range(0, 6):
-                        self.tabela_clientes.setItem(i, j, QtWidgets.QTableWidgetItem(str(resultado[i][j])))
+                    for i in range(len(resultado)):
+                        for j in range(0, 6):
+                            self.tabela_clientes.setItem(i, j, QtWidgets.QTableWidgetItem(str(resultado[i][j])))
 
-                        self.txt_consultar_contrato.setText("")
-        except ConnectionError as con_erro:
-            print(con_erro)
-            self.mensagem.mensagem_de_erro()
+                    self.txt_consultar_contrato.setText("")
+            except ConnectionError as con_erro:
+                print(con_erro)
+                self.mensagem.mensagem_de_erro()
 
     def consultar_cliente_nome(self):
         """Consulta cluente por Nome
@@ -345,35 +346,33 @@ class TelaCliente(QMainWindow, Ui_Cliente):
         parametro o nome do cliente.
         :return: Consulta cliente.
         """
-        cliente = Cliente()
-        cliente.nome = self.txt_consulta_nome.text()
+        if self.txt_consulta_nome.text() == "":
+            self.mensagem.mensagem_campo_vazio('CONSULTA NOME DO CLIENTE')
+        else:
+            cliente = Cliente()
+            cliente.nome = self.txt_consulta_nome.text()
 
-        try:
-            cliente_dao = ClienteDao()
-            resultado = cliente_dao.consultar_cliente_nome_banco(cliente.nome)
+            try:
+                cliente_dao = ClienteDao()
+                resultado = cliente_dao.consultar_cliente_nome_banco(cliente.nome)
 
-            if len(resultado) == 0:
-                msg = QMessageBox()
-                msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
-                msg.setIcon(QMessageBox.Information)
-                msg.setWindowTitle("Consulta Contrato")
-                msg.setText('Nome Cliene não encontrado!')
-                msg.exec_()
+                if len(resultado) == 0:
+                    self.mensagem.mensagem_registro_não_encontrado(cliente.nome)
 
-                self.txt_consulta_nome.setText("")
-                self.listar_cliente_tabela()
-            else:
-                self.tabela_clientes.setRowCount(len(resultado))
-                self.tabela_clientes.setColumnCount(6)
+                    self.txt_consulta_nome.setText("")
+                    self.listar_cliente_tabela()
+                else:
+                    self.tabela_clientes.setRowCount(len(resultado))
+                    self.tabela_clientes.setColumnCount(6)
 
-                for i in range(len(resultado)):
-                    for j in range(0, 6):
-                        self.tabela_clientes.setItem(i, j, QtWidgets.QTableWidgetItem(str(resultado[i][j])))
+                    for i in range(len(resultado)):
+                        for j in range(0, 6):
+                            self.tabela_clientes.setItem(i, j, QtWidgets.QTableWidgetItem(str(resultado[i][j])))
 
-                        self.txt_consulta_nome.setText("")
-        except ConnectionError as con_erro:
-            print(con_erro)
-            self.mensagem.mensagem_de_erro()
+                    self.txt_consulta_nome.setText("")
+            except ConnectionError as con_erro:
+                print(con_erro)
+                self.mensagem.mensagem_de_erro()
 
     def abrir_tela_cadastrar_chamado(self):
         """Abrir tela de Chamados

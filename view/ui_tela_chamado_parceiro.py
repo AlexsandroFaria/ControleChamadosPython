@@ -378,6 +378,33 @@ class Ui_TelaChamadoParceiro(object):
         icon9.addFile(u"_img/buscar.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_pesquisar_numero_chamado.setIcon(icon9)
         self.btn_pesquisar_numero_chamado.setIconSize(QSize(24, 24))
+        self.txt_consulta_chamado_simpress = QLineEdit(self.frame_3)
+        self.txt_consulta_chamado_simpress.setObjectName(u"txt_consulta_chamado_simpress")
+        self.txt_consulta_chamado_simpress.setGeometry(QRect(480, 24, 231, 31))
+        self.txt_consulta_chamado_simpress.setMinimumSize(QSize(0, 25))
+        self.txt_consulta_chamado_simpress.setFont(font2)
+        self.txt_consulta_chamado_simpress.setStyleSheet(u"border-radius: 5px;\n"
+"background-color: rgb(255, 255, 255);\n"
+"border:1px solid")
+        self.btn_pesquisar_chamado_simpress = QPushButton(self.frame_3)
+        self.btn_pesquisar_chamado_simpress.setObjectName(u"btn_pesquisar_chamado_simpress")
+        self.btn_pesquisar_chamado_simpress.setGeometry(QRect(720, 20, 121, 35))
+        self.btn_pesquisar_chamado_simpress.setMinimumSize(QSize(0, 35))
+        self.btn_pesquisar_chamado_simpress.setFont(font)
+        self.btn_pesquisar_chamado_simpress.setStyleSheet(u"QPushButton{\n"
+"	background-color: rgb(85, 170, 255);\n"
+"	color: rgb(0, 0, 255);\n"
+"	border-radius: 5px;\n"
+"	border:1px solid\n"
+"}\n"
+"QPushButton:hover{\n"
+"	\n"
+"	color: rgb(85, 170, 255);\n"
+"	background-color: rgb(0, 0, 255);\n"
+"	border: solid 5p\n"
+"}")
+        self.btn_pesquisar_chamado_simpress.setIcon(icon9)
+        self.btn_pesquisar_chamado_simpress.setIconSize(QSize(24, 24))
         self.frame_4 = QFrame(self.tab_consulta_parceiro)
         self.frame_4.setObjectName(u"frame_4")
         self.frame_4.setGeometry(QRect(10, 390, 891, 55))
@@ -525,9 +552,9 @@ class Ui_TelaChamadoParceiro(object):
         ___qtablewidgetitem = self.tabela_chamado_parceiro.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("TelaChamadoParceiro", u"N\u00famero Chamado", None));
         ___qtablewidgetitem1 = self.tabela_chamado_parceiro.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("TelaChamadoParceiro", u"Empresa Parceira", None));
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("TelaChamadoParceiro", u"Chamado Simpress", None));
         ___qtablewidgetitem2 = self.tabela_chamado_parceiro.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("TelaChamadoParceiro", u"Chamado Simpress", None));
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("TelaChamadoParceiro", u"Empresa Parceira", None));
         ___qtablewidgetitem3 = self.tabela_chamado_parceiro.horizontalHeaderItem(3)
         ___qtablewidgetitem3.setText(QCoreApplication.translate("TelaChamadoParceiro", u"Respons\u00e1vel", None));
         ___qtablewidgetitem4 = self.tabela_chamado_parceiro.horizontalHeaderItem(4)
@@ -540,6 +567,8 @@ class Ui_TelaChamadoParceiro(object):
         ___qtablewidgetitem7.setText(QCoreApplication.translate("TelaChamadoParceiro", u"Data abertura", None));
         self.txt_consulta_numero_chamado.setPlaceholderText(QCoreApplication.translate("TelaChamadoParceiro", u"Pesquisar por N\u00famero do Chamado", None))
         self.btn_pesquisar_numero_chamado.setText(QCoreApplication.translate("TelaChamadoParceiro", u"Pesquisar", None))
+        self.txt_consulta_chamado_simpress.setPlaceholderText(QCoreApplication.translate("TelaChamadoParceiro", u"Pesquisar Chamado Simpress", None))
+        self.btn_pesquisar_chamado_simpress.setText(QCoreApplication.translate("TelaChamadoParceiro", u"Pesquisar", None))
         self.label_10.setText("")
         self.btn_carregar_tabela.setText(QCoreApplication.translate("TelaChamadoParceiro", u"Carregar Tabela", None))
         self.btn_carregar.setText(QCoreApplication.translate("TelaChamadoParceiro", u"Carregar", None))
