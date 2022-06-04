@@ -1,3 +1,5 @@
+import getpass
+
 from PySide2.QtWidgets import QMainWindow, QMessageBox
 from PySide2 import QtWidgets, QtGui
 from components.mensagens import Mensagens
@@ -6,6 +8,7 @@ from model.chamado import Chamado
 from view.tela_fechar_chamado import TelaFecharChamado
 from view.ui_tela_chamado import Ui_TelaChamado
 from datetime import datetime
+import pandas as pd
 
 
 class TelaChamado(QMainWindow, Ui_TelaChamado):
@@ -69,6 +72,9 @@ class TelaChamado(QMainWindow, Ui_TelaChamado):
 
         self.btn_consultar_nome_cliente.clicked.connect(self.listar_chamado_por_nome_cliente)
         """Função que chamado o método de listar chamado por nome do cliente."""
+
+        self.btn_gerar_relatrio.clicked.connect(self.gerar_relatorio_chamados)
+        """Função que chamado o método para geração de Relatórios"""
 
         self.btn_fechar_tela.clicked.connect(self.close)
         """Fecha e encerra a janela."""
@@ -578,6 +584,30 @@ class TelaChamado(QMainWindow, Ui_TelaChamado):
             except ConnectionError as con_erro:
                 print(con_erro)
                 self.mensagem.mensagem_de_erro()
+
+    def gerar_relatorio_chamados(self):
+        """Gerar Relatório
+
+        Método que gera um relatório em .xlsx e salva na pasta download do usuário.
+        :return: Geração de relatório.
+        """
+        user_windows = getpass.getuser()
+
+        try:
+            chamado_dao = ChamadoDao()
+            resultado = chamado_dao.listar_chamado_tabela()
+
+            dados = pd.DataFrame(resultado)
+            dados.columns = ['Número do Chamado', 'Número do Contrato', 'Nome do Cliente', 'Endereço', 'Contato',
+                             'Telefone', 'E-mail', 'Problema', 'Observação', 'Status do Chamado', 'Tipo do Chamado',
+                             'Solução do Problema', 'Data de Abertura', 'Data de atualização']
+            dados.to_excel(f'c:\\Users\\{user_windows}\\Downloads\\Controle de Chamados - Relatorio de chamados.xlsx',
+                           index=False)
+
+            self.mensagem.mensagem_gerar_relatorio()
+        except ConnectionError as con_erro:
+            print(con_erro)
+            self.mensagem.mensagem_de_erro()
 
     def limpar_campos_formulario(self):
         """Limpar campos do Formulário.

@@ -19,7 +19,7 @@ class Ui_TelaChamado(object):
             TelaChamado.setObjectName(u"TelaChamado")
         TelaChamado.resize(1245, 658)
         icon = QIcon()
-        icon.addFile(u"../../ChamadosSimpress/_img/logo_janela.ico", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u"_img/logo_janela.ico", QSize(), QIcon.Normal, QIcon.Off)
         TelaChamado.setWindowIcon(icon)
         self.frame = QFrame(TelaChamado)
         self.frame.setObjectName(u"frame")
@@ -29,7 +29,7 @@ class Ui_TelaChamado(object):
         self.label_15 = QLabel(self.frame)
         self.label_15.setObjectName(u"label_15")
         self.label_15.setGeometry(QRect(0, 0, 1221, 101))
-        self.label_15.setPixmap(QPixmap(u"../../ChamadosSimpress/_img/banner_chamado.png"))
+        self.label_15.setPixmap(QPixmap(u"_img/banner_chamado.png"))
         self.tab_chamado = QTabWidget(TelaChamado)
         self.tab_chamado.setObjectName(u"tab_chamado")
         self.tab_chamado.setGeometry(QRect(10, 130, 1211, 521))
@@ -84,7 +84,7 @@ class Ui_TelaChamado(object):
 "	border: solid 5p\n"
 "}")
         icon1 = QIcon()
-        icon1.addFile(u"../../ChamadosSimpress/_img/contrato.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon1.addFile(u"_img/contrato.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_buscar_contrato.setIcon(icon1)
         self.btn_buscar_contrato.setIconSize(QSize(24, 24))
         self.label_3 = QLabel(self.tab_cadastro_chamado)
@@ -247,7 +247,7 @@ class Ui_TelaChamado(object):
 "border: 1px solid gray;\n"
 "background-color: rgb(227, 227, 227);")
         icon2 = QIcon()
-        icon2.addFile(u"../../ChamadosSimpress/_img/calendario.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon2.addFile(u"_img/calendario.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_atualizar_data_abertura.setIcon(icon2)
         self.btn_atualizar_data_abertura.setIconSize(QSize(24, 24))
         self.btn_atualizar_data = QPushButton(self.tab_cadastro_chamado)
@@ -283,7 +283,7 @@ class Ui_TelaChamado(object):
 "	border: solid 5p\n"
 "}")
         icon3 = QIcon()
-        icon3.addFile(u"../../ChamadosSimpress/_img/cadastro.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon3.addFile(u"_img/cadastro.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_cadastrar.setIcon(icon3)
         self.btn_cadastrar.setIconSize(QSize(24, 24))
 
@@ -306,7 +306,7 @@ class Ui_TelaChamado(object):
 "	border: solid 5p\n"
 "}")
         icon4 = QIcon()
-        icon4.addFile(u"../../ChamadosSimpress/_img/alterar.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon4.addFile(u"_img/alterar.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_alterar.setIcon(icon4)
         self.btn_alterar.setIconSize(QSize(24, 24))
 
@@ -329,7 +329,7 @@ class Ui_TelaChamado(object):
 "	border: solid 5p\n"
 "}")
         icon5 = QIcon()
-        icon5.addFile(u"../../ChamadosSimpress/_img/limpar.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon5.addFile(u"_img/limpar.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_limpar_tela.setIcon(icon5)
         self.btn_limpar_tela.setIconSize(QSize(24, 24))
 
@@ -352,7 +352,7 @@ class Ui_TelaChamado(object):
 "	border: solid 5p\n"
 "}")
         icon6 = QIcon()
-        icon6.addFile(u"../../ChamadosSimpress/_img/excluir.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon6.addFile(u"_img/excluir.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_excluir.setIcon(icon6)
         self.btn_excluir.setIconSize(QSize(24, 24))
 
@@ -377,7 +377,7 @@ class Ui_TelaChamado(object):
 "	border: solid 5p\n"
 "}")
         icon7 = QIcon()
-        icon7.addFile(u"../../ChamadosSimpress/_img/fechar_chamado.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon7.addFile(u"_img/fechar_chamado.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_fechar_chamado.setIcon(icon7)
         self.btn_fechar_chamado.setIconSize(QSize(24, 24))
         self.btn_fechar_tela = QPushButton(self.tab_cadastro_chamado)
@@ -398,13 +398,13 @@ class Ui_TelaChamado(object):
 "	border: solid 5p\n"
 "}")
         icon8 = QIcon()
-        icon8.addFile(u"../../ChamadosSimpress/_img/sair.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon8.addFile(u"_img/sair.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_fechar_tela.setIcon(icon8)
         self.btn_fechar_tela.setIconSize(QSize(24, 24))
         self.label_16 = QLabel(self.tab_cadastro_chamado)
         self.label_16.setObjectName(u"label_16")
         self.label_16.setGeometry(QRect(760, 70, 401, 281))
-        self.label_16.setPixmap(QPixmap(u"../../ChamadosSimpress/_img/img_chamado.png"))
+        self.label_16.setPixmap(QPixmap(u"_img/img_chamado.png"))
         self.txt_problema = QTextEdit(self.tab_cadastro_chamado)
         self.txt_problema.setObjectName(u"txt_problema")
         self.txt_problema.setGeometry(QRect(160, 180, 571, 71))
@@ -481,7 +481,7 @@ class Ui_TelaChamado(object):
 "	border: solid 5p\n"
 "}")
         icon9 = QIcon()
-        icon9.addFile(u"../../ChamadosSimpress/_img/buscar.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon9.addFile(u"_img/buscar.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_consultar_numero_chamado.setIcon(icon9)
         self.btn_consultar_numero_chamado.setIconSize(QSize(24, 24))
 
@@ -588,7 +588,7 @@ class Ui_TelaChamado(object):
 "	border: solid 5p\n"
 "}")
         icon10 = QIcon()
-        icon10.addFile(u"../../ChamadosSimpress/_img/pesquisa_chamado.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon10.addFile(u"_img/pesquisa_chamado.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_carregar_tabela.setIcon(icon10)
         self.btn_carregar_tabela.setIconSize(QSize(24, 24))
 
@@ -611,20 +611,43 @@ class Ui_TelaChamado(object):
 "	border: solid 5p\n"
 "}")
         icon11 = QIcon()
-        icon11.addFile(u"../../ChamadosSimpress/_img/carregar.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon11.addFile(u"_img/carregar.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_carregar.setIcon(icon11)
         self.btn_carregar.setIconSize(QSize(24, 24))
 
         self.horizontalLayout_3.addWidget(self.btn_carregar)
+
+        self.btn_gerar_relatrio = QPushButton(self.frame_4)
+        self.btn_gerar_relatrio.setObjectName(u"btn_gerar_relatrio")
+        self.btn_gerar_relatrio.setMinimumSize(QSize(0, 35))
+        self.btn_gerar_relatrio.setFont(font)
+        self.btn_gerar_relatrio.setStyleSheet(u"QPushButton{\n"
+"	background-color: rgb(85, 170, 255);\n"
+"	color: rgb(0, 0, 255);\n"
+"	border-radius: 5px;\n"
+"	border: 1px solid\n"
+"}\n"
+"QPushButton:hover{\n"
+"	\n"
+"	color: rgb(85, 170, 255);\n"
+"	background-color: rgb(0, 0, 255);\n"
+"	border: solid 5p\n"
+"}")
+        icon12 = QIcon()
+        icon12.addFile(u"_img/relatorio.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_gerar_relatrio.setIcon(icon12)
+        self.btn_gerar_relatrio.setIconSize(QSize(24, 24))
+
+        self.horizontalLayout_3.addWidget(self.btn_gerar_relatrio)
 
         self.label_18 = QLabel(self.frame_4)
         self.label_18.setObjectName(u"label_18")
 
         self.horizontalLayout_3.addWidget(self.label_18)
 
-        icon12 = QIcon()
-        icon12.addFile(u"../../ChamadosSimpress/_img/consulta.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.tab_chamado.addTab(self.tab_consulta_chamado, icon12, "")
+        icon13 = QIcon()
+        icon13.addFile(u"_img/consulta.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.tab_chamado.addTab(self.tab_consulta_chamado, icon13, "")
 
         self.retranslateUi(TelaChamado)
 
@@ -713,6 +736,7 @@ class Ui_TelaChamado(object):
         self.label_17.setText("")
         self.btn_carregar_tabela.setText(QCoreApplication.translate("TelaChamado", u"Carregar Tabela", None))
         self.btn_carregar.setText(QCoreApplication.translate("TelaChamado", u"Carregar", None))
+        self.btn_gerar_relatrio.setText(QCoreApplication.translate("TelaChamado", u"Gerar Relat\u00f3rio", None))
         self.label_18.setText("")
         self.tab_chamado.setTabText(self.tab_chamado.indexOf(self.tab_consulta_chamado), QCoreApplication.translate("TelaChamado", u"Consulta de Chamados", None))
     # retranslateUi

@@ -186,6 +186,12 @@ class ChamadoDao:
         return resultado
 
     def listar_chamado_por_contrato(self, numero_contrato):
+        """Listar chamado por Contrato
+
+        Efetua uma consulta como parâmetro o numero do contrato.
+        :param numero_contrato: int
+        :return: Retorna um chamado cadastrado conforme consulta.
+        """
         conexao = ConexaoDatabase()
         comando_sql = f"SELECT numero_chamado, contrato_chamado, nome_cliente_chamado, endereco_chamado," \
                       f"contato_chamado, telefone_chamado, email_chamado, problema_chamado, observacao_chamado," \
@@ -195,6 +201,12 @@ class ChamadoDao:
         return resultado
 
     def listar_chamado_por_nome_cliente(self, nome_cliente):
+        """Listar chamado por nome do cliente.
+
+        Efetua uma consulta como parâmetro o nome do cliente.
+        :param nome_cliente: str
+        :return: Retorna um chamado cadastrado conforme consulta.
+        """
         conexao = ConexaoDatabase()
         comando_sql = f"SELECT numero_chamado, contrato_chamado, nome_cliente_chamado, endereco_chamado," \
                       f"contato_chamado, telefone_chamado, email_chamado, problema_chamado, observacao_chamado," \
