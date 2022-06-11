@@ -74,7 +74,7 @@ class TelaChamado(QMainWindow, Ui_TelaChamado):
         """Função que chamado o método de listar chamado por nome do cliente."""
 
         self.btn_gerar_relatrio.clicked.connect(self.gerar_relatorio_chamados)
-        """Função que chamado o método para geração de Relatórios"""
+        """Função que chama o método para geração de Relatórios"""
 
         self.btn_fechar_tela.clicked.connect(self.close)
         """Fecha e encerra a janela."""

@@ -4,6 +4,7 @@ from view.tela_chamado import TelaChamado
 from view.tela_chamado_parceiro import TelaChamadoParceiro
 from view.tela_cliente import TelaCliente
 from view.tela_fechar_chamado import TelaFecharChamado
+from view.tela_fechar_chamado_parceiro import TelaFecharChamadoParceiro
 from view.tela_parceiro import TelaParceiro
 from view.tela_solucao import TelaSolucao
 from view.ui_tela_principal import Ui_TelaPrincipal
@@ -56,6 +57,8 @@ class TelaPrincipal(QMainWindow, Ui_TelaPrincipal):
         self.menu_novo_Chamado_Parceiro.triggered.connect(self.abrir_tela_chamado_parceiro)
 
         self.menu_consultar_Chamado_Parceiro.triggered.connect(self.abrir_tela_consulta_chamado_parceiro)
+
+        self.menu_fechar_Chamado_Parceiro.triggered.connect(self.abrir_tela_fechar_chamado_parceiro)
 
     def abrir_tela_usuario(self):
         """Método para abrir a tela de Usuário.
@@ -142,10 +145,29 @@ class TelaPrincipal(QMainWindow, Ui_TelaPrincipal):
         self.tela_fechar_chamado.show()
 
     def abrir_tela_chamado_parceiro(self):
+        """Abrir tela chamado Parceiro
+
+        Método que abre a tela de chamados de Parceiro.
+        :return: Tela de chamados de Parceiro.
+        """
         self.tela_chamado_parceiro = TelaChamadoParceiro()
         self.tela_chamado_parceiro.show()
 
     def abrir_tela_consulta_chamado_parceiro(self):
+        """Abrir tela de consultar chamado de Parceiro
+
+        Abre a tela de consultar chamados de Parceiro
+        :return: Abrir tela de consulta de chamado de Parceiro.
+        """
         self.tela_chamado_parceiro = TelaChamadoParceiro()
         self.tela_chamado_parceiro.tab_chamado_parceiro.setCurrentWidget(self.tela_chamado_parceiro.tab_consulta_parceiro)
         self.tela_chamado_parceiro.show()
+
+    def abrir_tela_fechar_chamado_parceiro(self):
+        """Abrir tela de fechamento de chamados de Parceiro.
+
+        Abre a tela de fechamento de chamados de Parceiros.
+        :return: Abrir tela de Chamado de Parceiros.
+        """
+        self.tela_fechar_chamado_parceiro = TelaFecharChamadoParceiro()
+        self.tela_fechar_chamado_parceiro.show()

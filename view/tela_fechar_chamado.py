@@ -359,9 +359,9 @@ class TelaFecharChamado(QMainWindow, Ui_FecharChamado):
     def gerar_relatório_chamados(self):
         """Gerar relatório de Chamados.
 
-        Método que gera um relatório de chamados, converte para o formato .xlsx e salva na pasta download.
-        :return: Geração de relatório.
-        """
+       Método que gera um relatório de chamados, converte para o formato .xlsx e salva na pasta download.
+       :return: Geração de relatório.
+       """
         user_windows = getpass.getuser()
 
         try:
@@ -370,10 +370,10 @@ class TelaFecharChamado(QMainWindow, Ui_FecharChamado):
 
             dados = pd.DataFrame(resultado)
             dados.columns = ['Chamado', 'Contrato', 'Cliente', 'Contato', 'Telefone', 'Problema', 'Tipo',
-                             'Solução', 'Status', 'Data']
+                            'Solução', 'Status', 'Data']
 
             dados.to_excel(f'c:\\Users\\{user_windows}\\Downloads\\'
-                           f'Relatorio de chamados fechados.xlsx', index=False)
+                       f'Relatorio de chamados fechados.xlsx', index=False)
 
             self.mensagem.mensagem_gerar_relatorio()
 

@@ -5,6 +5,7 @@ from datetime import datetime
 from components.mensagens import Mensagens
 from dao.chamado_parceiro_dao import ChamadoParceiroDao
 from model.chamado_parceiro import ChamadoParceiro
+from view.tela_fechar_chamado_parceiro import TelaFecharChamadoParceiro
 from view.ui_tela_chamado_parceiro import Ui_TelaChamadoParceiro
 import pandas as pd
 
@@ -69,6 +70,9 @@ class TelaChamadoParceiro(QMainWindow, Ui_TelaChamadoParceiro):
 
         self.btn_gerar_relatorio.clicked.connect(self.gerar_relatorio_chamado_parceiro)
         """Função que chama o método de gerar relatório de chamados de parceiros."""
+
+        self.btn_fechar_chamado.clicked.connect(self.fechar_chamado_parceiro)
+        """Função que chama o método de abrir a tela de fechar chamados passando parâmetros."""
 
         self.btn_fechar.clicked.connect(self.close)
         """Função para fechar a tela"""
@@ -436,6 +440,28 @@ class TelaChamadoParceiro(QMainWindow, Ui_TelaChamadoParceiro):
         except ConnectionError as con_erro:
             print(con_erro)
             self.mensagem.mensagem_de_erro()
+
+    def fechar_chamado_parceiro(self):
+        """Fechar Chamado Parceiro
+
+        Abre a tela de fechamento de chamados com os campos pré preenchidos para efetuar o fechamento do mesmo.
+        """
+        self.tela_fechar_chamado_parceiro = TelaFecharChamadoParceiro()
+        self.tela_fechar_chamado_parceiro.txt_empresa_parceira.setText(self.combo_empresa_parceira.currentText())
+        self.tela_fechar_chamado_parceiro.txt_numero_chamado.setText(self.txt_numero_chamado.text())
+        self.tela_fechar_chamado_parceiro.txt_chamado_simpress.setText(self.combo_chamado_simpress.currentText())
+        self.tela_fechar_chamado_parceiro.txt_responsavel.setText(self.txt_responsavel.text())
+        self.tela_fechar_chamado_parceiro.txt_cliente.setText(self.combo_cliente.currentText())
+
+        self.tela_fechar_chamado_parceiro.btn_fechar_chamado.setEnabled(True)
+        self.tela_fechar_chamado_parceiro.txt_numero_chamado.setEnabled(False)
+        self.tela_fechar_chamado_parceiro.txt_empresa_parceira.setEnabled(False)
+        self.tela_fechar_chamado_parceiro.txt_chamado_simpress.setEnabled(False)
+        self.tela_fechar_chamado_parceiro.txt_responsavel.setEnabled(False)
+        self.tela_fechar_chamado_parceiro.txt_cliente.setEnabled(False)
+
+        self.tela_fechar_chamado_parceiro.show()
+        self.close()
 
     def limpar_campos_formulario(self):
         """Limpar campos do Formulário.

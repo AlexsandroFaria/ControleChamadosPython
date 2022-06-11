@@ -1,4 +1,8 @@
 class Chamado:
+    """Classe Chamado
+
+    Classe de modelo de Chamado para orientação a objetos.
+    """
     def __init__(self, id=None,
                  numero_chamado=None,
                  numero_contrato=None,
