@@ -6,6 +6,7 @@ from view.tela_cliente import TelaCliente
 from view.tela_fechar_chamado import TelaFecharChamado
 from view.tela_fechar_chamado_parceiro import TelaFecharChamadoParceiro
 from view.tela_parceiro import TelaParceiro
+from view.tela_relatorio_chamado import TelaRelatorioChamado
 from view.tela_solucao import TelaSolucao
 from view.ui_tela_principal import Ui_TelaPrincipal
 from view.tela_usuario import TelaUsuario
@@ -59,6 +60,10 @@ class TelaPrincipal(QMainWindow, Ui_TelaPrincipal):
         self.menu_consultar_Chamado_Parceiro.triggered.connect(self.abrir_tela_consulta_chamado_parceiro)
 
         self.menu_fechar_Chamado_Parceiro.triggered.connect(self.abrir_tela_fechar_chamado_parceiro)
+
+        self.menu_consultar_chamado_parceiro_fechado.triggered.connect(self.abrir_tela_fechar_chamado_parceiro_consulta)
+
+        self.menu_relatorios_chamados.triggered.connect(self.abrir_tela_relatorio_chamados)
 
     def abrir_tela_usuario(self):
         """Método para abrir a tela de Usuário.
@@ -171,3 +176,12 @@ class TelaPrincipal(QMainWindow, Ui_TelaPrincipal):
         """
         self.tela_fechar_chamado_parceiro = TelaFecharChamadoParceiro()
         self.tela_fechar_chamado_parceiro.show()
+
+    def abrir_tela_fechar_chamado_parceiro_consulta(self):
+        self.tela_fechar_chamado_parceiro = TelaFecharChamadoParceiro()
+        self.tela_fechar_chamado_parceiro.tab_fechar_chamados_parceiro.setCurrentWidget(self.tela_fechar_chamado_parceiro.tab_consultar_chamado)
+        self.tela_fechar_chamado_parceiro.show()
+
+    def abrir_tela_relatorio_chamados(self):
+        self.tela_relatorio_chamados = TelaRelatorioChamado()
+        self.tela_relatorio_chamados.show()

@@ -1,3 +1,4 @@
+import getpass
 from PySide2.QtWidgets import QMainWindow
 from PySide2 import QtWidgets, QtGui
 from datetime import datetime
@@ -7,6 +8,7 @@ from dao.chamado_parceiro_dao import ChamadoParceiroDao
 from dao.fechar_chamado_parceiro_dao import FecharChamadoParceiroDao
 from model.fechar_chamado_parceiro import FecharChamadoParceiro
 from view.ui_tela_fechar_chamado_parceiro import Ui_FecharChamadoParceiro
+import pandas as pd
 
 
 class TelaFecharChamadoParceiro(QMainWindow, Ui_FecharChamadoParceiro):
@@ -49,7 +51,13 @@ class TelaFecharChamadoParceiro(QMainWindow, Ui_FecharChamadoParceiro):
         """Função que chama o método de pesquisar chamado por nome do cliente"""
 
         self.btn_consulta_data_tabela.clicked.connect(self.consulta_chamado_data)
-        """Função que chama o método de consultar os chamados por data"""
+        """Função que chama o método de consultar os chamados por data."""
+
+        self.btn_carregar.clicked.connect(self.carregar_dados_tabela_para_formulario)
+        """Função que chama o método de carregar dados da tabela para o formulário."""
+
+        self.btn_gerar_relatorio.clicked.connect(self.gerar_relatorio)
+        """Função que chama o método para gerar relatório."""
 
         self.btn_sair.clicked.connect(self.close)
         """Função que fecha a tela."""
@@ -286,6 +294,79 @@ class TelaFecharChamadoParceiro(QMainWindow, Ui_FecharChamadoParceiro):
                 print(con_erro)
                 self.mensagem.mensagem_de_erro()
 
+    def carregar_dados_tabela_para_formulario(self):
+        linha = self.tabela_chamado_parceiro_fechado.currentItem().text()
+
+        if not linha.isdigit():
+            msg = QMessageBox()
+            msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
+            msg.setIcon(QMessageBox.Information)
+            msg.setWindowTitle("Consultar Chamados")
+            msg.setText('Selecione somente a coluna Número do chamado')
+            msg.exec_()
+        else:
+            try:
+                fcp_dao = FecharChamadoParceiroDao()
+                resultado = fcp_dao.consultar_chamado_por_numero_para_formulario(linha)
+
+                if len(resultado) == 0:
+                    msg = QMessageBox()
+                    msg.setWindowIcon(QtGui.QIcon("_img/logo_janela.ico"))
+                    msg.setIcon(QMessageBox.Information)
+                    msg.setWindowTitle("Consulta Contrato")
+                    msg.setText('Selecione somente a coluna Número do chamado!')
+                    msg.exec_()
+                else:
+                    self.tab_fechar_chamados_parceiro.setCurrentWidget(self.tab_fechar_chamado)
+
+                    self.txt_empresa_parceira.setText(str(resultado[0][0]))
+                    self.txt_numero_chamado.setText(str(resultado[0][1]))
+                    self.txt_chamado_simpress.setText(str(resultado[0][2]))
+                    self.txt_responsavel.setText(str(resultado[0][3]))
+                    self.txt_cliente.setText(str(resultado[0][4]))
+                    self.txt_solucao.setText(str(resultado[0][5]))
+                    self.txt_data_fechamento.setText(str(resultado[0][6]))
+
+                    self.btn_fechar_chamado.setEnabled(False)
+                    self.txt_empresa_parceira.setEnabled(False)
+                    self.txt_numero_chamado.setEnabled(False)
+                    self.txt_chamado_simpress.setEnabled(False)
+                    self.txt_responsavel.setEnabled(False)
+                    self.txt_cliente.setEnabled(False)
+                    self.txt_solucao.setEnabled(False)
+                    self.txt_data_fechamento.setEnabled(False)
+
+            except ConnectionError as con_erro:
+                print(con_erro)
+                self.mensagem.mensagem_de_erro()
+            except AttributeError as at_erro:
+                print(at_erro)
+                self.mensagem.mensagem_registro_não_encontrado('CHAMADO FECHADO')
+
+    def gerar_relatorio(self):
+        """Gerar Relatório
+
+        Método que gera um relatório em .xlsx e salva na pasta download do usuário.
+        :return: Geração de relatório.
+        """
+        user_windows = getpass.getuser()
+
+        try:
+            fcp_dao = FecharChamadoParceiroDao()
+            resultado = fcp_dao.listar_chamado_fechado_parceiro_banco()
+
+            dados = pd.DataFrame(resultado)
+            dados.columns = ['Empresa', 'Número do Chamado', 'Chamado Simpress', 'Responsável', 'Cliente', 'Descrição',
+                             'Data de Fechamento']
+            dados.to_excel(f'c:\\Users\\{user_windows}\\Downloads\\Controle de Chamados - Chamados fechados de '
+                           f'Parceiros.xlsx', index=False)
+
+            self.mensagem.mensagem_gerar_relatorio()
+
+        except ConnectionError as con_erro:
+            print(con_erro)
+            self.mensagem.mensagem_de_erro()
+
     def limpar_campos_formulario(self):
         """Limpar Campos Formulário
 
@@ -304,5 +385,7 @@ class TelaFecharChamadoParceiro(QMainWindow, Ui_FecharChamadoParceiro):
         self.txt_chamado_simpress.setEnabled(True)
         self.txt_responsavel.setEnabled(True)
         self.txt_cliente.setEnabled(True)
+        self.txt_solucao.setEnabled(True)
+        self.txt_data_fechamento.setEnabled(True)
 
         self.btn_fechar_chamado.setEnabled(False)

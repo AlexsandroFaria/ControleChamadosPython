@@ -97,3 +97,18 @@ class FecharChamadoParceiroDao:
                       f"data_fechamento_chamado_parceiro LIKE '%{data}%'"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado
+
+    def consultar_chamado_por_numero_para_formulario(self, numero):
+        """Consuktar chamado por número
+
+        Consulta chamados tendo como parâmetro o número
+        :param numero:
+        :return:
+        """
+        conexao = ConexaoDatabase()
+        comando_sql = f"SELECT empresa_parceira, numero_chamado_parceiro, chamado_simpress, responsavel_parceiro," \
+                      f"nome_cliente, solucao_chamado_parceiro," \
+                      f"data_fechamento_chamado_parceiro FROM tb_fechar_chamado_parceiro WHERE " \
+                      f"numero_chamado_parceiro={numero}"
+        resultado = conexao.executar_consulta(comando_sql)
+        return resultado
