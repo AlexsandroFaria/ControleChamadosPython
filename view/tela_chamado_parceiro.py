@@ -174,7 +174,9 @@ class TelaChamadoParceiro(QMainWindow, Ui_TelaChamadoParceiro):
             chamado_parceiro.cliente = self.combo_cliente.currentText()
             chamado_parceiro.problema = self.txt_problema.toPlainText()
             chamado_parceiro.observacao = self.txt_observacao.text()
-            chamado_parceiro.data_abertura = self.txt_data_abertura.text()
+            data_abertura = self.txt_data_abertura.text()
+
+            chamado_parceiro.data_abertura = datetime.strptime(data_abertura, '%d/%m/%Y').strftime('%Y-%m-%d')
 
             try:
                 chamado_parceiro_dao = ChamadoParceiroDao()
@@ -231,7 +233,9 @@ class TelaChamadoParceiro(QMainWindow, Ui_TelaChamadoParceiro):
             chamado_parceiro.cliente = self.combo_cliente.currentText()
             chamado_parceiro.problema = self.txt_problema.toPlainText()
             chamado_parceiro.observacao = self.txt_observacao.text()
-            chamado_parceiro.data_abertura = self.txt_data_abertura.text()
+            data_abertura = self.txt_data_abertura.text()
+
+            chamado_parceiro.data_abertura = datetime.strptime(data_abertura, '%d/%m/%Y').strftime('%Y-%m-%d')
 
             try:
                 chamado_parceiro_dao = ChamadoParceiroDao()

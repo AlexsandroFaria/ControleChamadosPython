@@ -29,8 +29,8 @@ class ChamadoDao:
         conexao = ConexaoDatabase()
         comando_sql = "SELECT numero_chamado, contrato_chamado, nome_cliente_chamado, endereco_chamado," \
                       "contato_chamado, telefone_chamado, email_chamado, problema_chamado, observacao_chamado," \
-                      "status_chamado, tipo_chamado, solucao_chamado, data_abertura_chamado," \
-                      "data_atualizacao_chamado FROM tb_chamado"
+                      "status_chamado, tipo_chamado, solucao_chamado, date_format(data_abertura_chamado, '%d/%m/%Y')," \
+                      "date_format(data_atualizacao_chamado, '%d/%m/%Y') FROM tb_chamado"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado
 
@@ -98,8 +98,9 @@ class ChamadoDao:
         conexao = ConexaoDatabase()
         comando_sql = f"SELECT numero_chamado, contrato_chamado, nome_cliente_chamado, endereco_chamado," \
                       f"contato_chamado, telefone_chamado, email_chamado, problema_chamado, observacao_chamado," \
-                      f"status_chamado, tipo_chamado, solucao_chamado, data_abertura_chamado," \
-                      f"data_atualizacao_chamado FROM tb_chamado WHERE numero_chamado={numero_chamado}"
+                      f"status_chamado, tipo_chamado, solucao_chamado, date_format(data_abertura_chamado, '%d/%m/%Y')," \
+                      f"date_format(data_atualizacao_chamado, '%d/%m/%Y') FROM tb_chamado WHERE " \
+                      f"numero_chamado={numero_chamado}"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado
 
@@ -180,8 +181,9 @@ class ChamadoDao:
         conexao = ConexaoDatabase()
         comando_sql = f"SELECT numero_chamado, contrato_chamado, nome_cliente_chamado, endereco_chamado," \
                       f"contato_chamado, telefone_chamado, email_chamado, problema_chamado, observacao_chamado," \
-                      f"status_chamado, tipo_chamado, solucao_chamado, data_abertura_chamado," \
-                      f"data_atualizacao_chamado FROM tb_chamado WHERE numero_chamado LIKE '%{numero_chamado}%'"
+                      f"status_chamado, tipo_chamado, solucao_chamado, date_format(data_abertura_chamado, '%d/%m/%Y')," \
+                      f"date_format(data_atualizacao_chamado, '%d/%m/%Y') FROM tb_chamado WHERE " \
+                      f"numero_chamado LIKE '%{numero_chamado}%'"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado
 
@@ -195,8 +197,9 @@ class ChamadoDao:
         conexao = ConexaoDatabase()
         comando_sql = f"SELECT numero_chamado, contrato_chamado, nome_cliente_chamado, endereco_chamado," \
                       f"contato_chamado, telefone_chamado, email_chamado, problema_chamado, observacao_chamado," \
-                      f"status_chamado, tipo_chamado, solucao_chamado, data_abertura_chamado," \
-                      f"data_atualizacao_chamado FROM tb_chamado WHERE contrato_chamado LIKE '%{numero_contrato}%'"
+                      f"status_chamado, tipo_chamado, solucao_chamado, date_format(data_abertura_chamado, '%d/%m/%Y')," \
+                      f"date_format(data_atualizacao_chamado, '%d/%m/%Y') FROM tb_chamado WHERE " \
+                      f"contrato_chamado LIKE '%{numero_contrato}%'"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado
 
@@ -210,7 +213,8 @@ class ChamadoDao:
         conexao = ConexaoDatabase()
         comando_sql = f"SELECT numero_chamado, contrato_chamado, nome_cliente_chamado, endereco_chamado," \
                       f"contato_chamado, telefone_chamado, email_chamado, problema_chamado, observacao_chamado," \
-                      f"status_chamado, tipo_chamado, solucao_chamado, data_abertura_chamado," \
-                      f"data_atualizacao_chamado FROM tb_chamado WHERE nome_cliente_chamado LIKE '%{nome_cliente}%'"
+                      f"status_chamado, tipo_chamado, solucao_chamado, date_format(data_abertura_chamado, '%d/%m/%Y')," \
+                      f"date_format(data_atualizacao_chamado, '%d/%m/%Y') FROM tb_chamado WHERE " \
+                      f"nome_cliente_chamado LIKE '%{nome_cliente}%'"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado

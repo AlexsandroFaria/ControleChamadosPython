@@ -17,7 +17,7 @@ class FecharChamadoDao:
         comando_sql = "SELECT numero_chamado_fechado, contrato_chamado_fechado, nome_cliente_chamado_fechado," \
                       "contato_chamado_fechado, telefone_chamado_fechado, problema_chamado_fechado," \
                       "tipo_chamado_fechado, solucao_chamado_fechado, status_chamado_fechado," \
-                      "data_chamado_fechado FROM tb_chamado_fechado"
+                      "date_format(data_chamado_fechado, '%d/%m/%Y') FROM tb_chamado_fechado"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado
 
@@ -71,7 +71,8 @@ class FecharChamadoDao:
         comando_sql = f"SELECT numero_chamado_fechado, contrato_chamado_fechado, nome_cliente_chamado_fechado," \
                       f"contato_chamado_fechado, telefone_chamado_fechado, problema_chamado_fechado," \
                       f"tipo_chamado_fechado, solucao_chamado_fechado, status_chamado_fechado," \
-                      f"data_chamado_fechado FROM tb_chamado_fechado WHERE numero_chamado_fechado={numero_chamado}"
+                      f"date_format(data_chamado_fechado, '%d/%m/%Y') FROM tb_chamado_fechado WHERE " \
+                      f"numero_chamado_fechado={numero_chamado}"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado
 
@@ -86,7 +87,8 @@ class FecharChamadoDao:
         comando_sql = f"SELECT numero_chamado_fechado, contrato_chamado_fechado, nome_cliente_chamado_fechado," \
                       f"contato_chamado_fechado, telefone_chamado_fechado, problema_chamado_fechado," \
                       f"tipo_chamado_fechado, solucao_chamado_fechado, status_chamado_fechado," \
-                      f"data_chamado_fechado FROM tb_chamado_fechado WHERE numero_chamado_fechado LIKE '%{numero_chamado}%'"
+                      f"date_format(data_chamado_fechado, '%d/%m/%Y') FROM tb_chamado_fechado WHERE " \
+                      f"numero_chamado_fechado LIKE '%{numero_chamado}%'"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado
 
@@ -101,7 +103,8 @@ class FecharChamadoDao:
         comando_sql = f"SELECT numero_chamado_fechado, contrato_chamado_fechado, nome_cliente_chamado_fechado," \
                       f"contato_chamado_fechado, telefone_chamado_fechado, problema_chamado_fechado," \
                       f"tipo_chamado_fechado, solucao_chamado_fechado, status_chamado_fechado," \
-                      f"data_chamado_fechado FROM tb_chamado_fechado WHERE contrato_chamado_fechado LIKE '%{numero_contrato}%'"
+                      f"date_format(data_chamado_fechado, '%d/%m/%Y') FROM tb_chamado_fechado WHERE " \
+                      f"contrato_chamado_fechado LIKE '%{numero_contrato}%'"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado
 
@@ -116,6 +119,7 @@ class FecharChamadoDao:
         comando_sql = f"SELECT numero_chamado_fechado, contrato_chamado_fechado, nome_cliente_chamado_fechado," \
                       f"contato_chamado_fechado, telefone_chamado_fechado, problema_chamado_fechado," \
                       f"tipo_chamado_fechado, solucao_chamado_fechado, status_chamado_fechado," \
-                      f"data_chamado_fechado FROM tb_chamado_fechado WHERE nome_cliente_chamado_fechado LIKE '%{nome_cliente}%'"
+                      f"date_format(data_chamado_fechado, '%d/%m/%Y') FROM tb_chamado_fechado WHERE " \
+                      f"nome_cliente_chamado_fechado LIKE '%{nome_cliente}%'"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado

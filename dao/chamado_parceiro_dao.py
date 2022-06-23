@@ -50,7 +50,7 @@ class ChamadoParceiroDao:
         conexao = ConexaoDatabase()
         comando_sql = "SELECT numero_chamado_parceiro, chamado_simpress, empresa_parceira, responsavel_parceiro," \
                       "nome_cliente, problema_chamado_parceiro, observacao_chamado_parceiro, " \
-                      "data_abertura_chamado_parceiro FROM tb_chamado_parceiro"
+                      "date_format(data_abertura_chamado_parceiro, '%d/%m/%Y') FROM tb_chamado_parceiro"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado
 
@@ -109,8 +109,8 @@ class ChamadoParceiroDao:
         conexao = ConexaoDatabase()
         comando_sql = f"SELECT numero_chamado_parceiro, chamado_simpress, empresa_parceira, responsavel_parceiro," \
                       f"nome_cliente, problema_chamado_parceiro, observacao_chamado_parceiro, " \
-                      f"data_abertura_chamado_parceiro FROM tb_chamado_parceiro WHERE numero_chamado_parceiro=" \
-                      f"{numero_chamado}"
+                      f"date_format(data_abertura_chamado_parceiro, '%d/%m/%Y') FROM tb_chamado_parceiro WHERE " \
+                      f"numero_chamado_parceiro={numero_chamado}"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado
 
@@ -134,7 +134,8 @@ class ChamadoParceiroDao:
         conexao = ConexaoDatabase()
         comando_sql = f"SELECT numero_chamado_parceiro, chamado_simpress, empresa_parceira, responsavel_parceiro," \
                       f"nome_cliente, problema_chamado_parceiro, observacao_chamado_parceiro, " \
-                      f"data_abertura_chamado_parceiro FROM tb_chamado_parceiro WHERE numero_chamado_parceiro LIKE '%{numero_chamado}%'"
+                      f"date_format(data_abertura_chamado_parceiro, '%d/%m/%Y') FROM tb_chamado_parceiro WHERE " \
+                      f"numero_chamado_parceiro LIKE '%{numero_chamado}%'"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado
 
@@ -148,6 +149,7 @@ class ChamadoParceiroDao:
         conexao = ConexaoDatabase()
         comando_sql = f"SELECT numero_chamado_parceiro, chamado_simpress, empresa_parceira, responsavel_parceiro," \
                       f"nome_cliente, problema_chamado_parceiro, observacao_chamado_parceiro, " \
-                      f"data_abertura_chamado_parceiro FROM tb_chamado_parceiro WHERE chamado_simpress LIKE '%{chamado_simpress}%'"
+                      f"date_format(data_abertura_chamado_parceiro, '%d/%m/%Y') FROM tb_chamado_parceiro WHERE " \
+                      f"chamado_simpress LIKE '%{chamado_simpress}%'"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado

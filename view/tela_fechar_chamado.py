@@ -144,7 +144,9 @@ class TelaFecharChamado(QMainWindow, Ui_FecharChamado):
             fechar_chamado.tipo = self.txt_tipo_chamado.text()
             fechar_chamado.solucao = self.txt_fechamento.toPlainText()
             fechar_chamado.status = self.combo_status.currentText()
-            fechar_chamado.data_fechamento = self.txt_data_fechamento.text()
+            data_fechamento = self.txt_data_fechamento.text()
+
+            fechar_chamado.data_fechamento = datetime.strptime(data_fechamento, '%d/%m/%Y').strftime('%Y-%m-%d')
 
             try:
                 fechar_chamado_dao = FecharChamadoDao()
@@ -279,13 +281,13 @@ class TelaFecharChamado(QMainWindow, Ui_FecharChamado):
         Método que efetua a consulta de um chamado por número do Contrato.
         :return: Chamado conforme número do contrato solicitado pelo usuário.
         """
-        if not self.txt_consultar_nome_cliente.text().isnumeric():
+        if not self.txt_consultar_contrato_tabela.text().isdigit():
             self.mensagem.mensagem_campo_numerico("CONSULTA NÚMERO CONTRATO")
-            self.txt_consultar_nome_cliente.setText("")
+            self.txt_consultar_contrato_tabela.setText("")
             self.listar_chamados_fechados_tabela()
         else:
             fechar_chamado = FecharChamado()
-            fechar_chamado.contrato = self.txt_consultar_nome_cliente.text()
+            fechar_chamado.contrato = self.txt_consultar_contrato_tabela.text()
 
             try:
                 fechar_chamado_dao = FecharChamadoDao()
@@ -309,7 +311,7 @@ class TelaFecharChamado(QMainWindow, Ui_FecharChamado):
                         for j in range(0, 10):
                             self.tabela_chamados_fechados.setItem(i, j,
                                                                   QtWidgets.QTableWidgetItem(str(resultado[i][j])))
-                    self.txt_consultar_nome_cliente.setText("")
+                    self.txt_consultar_contrato_tabela.setText("")
             except ConnectionError as con_erro:
                 print(con_erro)
                 self.mensagem.mensagem_de_erro()

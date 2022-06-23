@@ -219,8 +219,8 @@ class TelaChamado(QMainWindow, Ui_TelaChamado):
                     self.txt_problema.setText(str(resultado[0][7]))
                     self.txt_observacao.setText(str(resultado[0][8]))
                     self.combo_status_chamado.setCurrentText(resultado[0][9])
-                    self.combo_solucao.setCurrentText(str(resultado[0][10]))
-                    self.combo_tipo_chamado.setCurrentText(str(resultado[0][11]))
+                    self.combo_tipo_chamado.setCurrentText(str(resultado[0][10]))
+                    self.combo_solucao.setCurrentText(str(resultado[0][11]))
                     self.txt_data_abertura.setText(str(resultado[0][12]))
                     self.txt_data_atualizacao.setText(str(resultado[0][13]))
 
@@ -322,8 +322,11 @@ class TelaChamado(QMainWindow, Ui_TelaChamado):
             chamado.status = self.combo_status_chamado.currentText()
             chamado.tipo = self.combo_tipo_chamado.currentText()
             chamado.solucao = self.combo_solucao.currentText()
-            chamado.data_abertura = self.txt_data_abertura.text()
-            chamado.data_atualizacao = self.txt_data_atualizacao.text()
+            data_abertura = self.txt_data_abertura.text()
+            data_atualizacao = self.txt_data_atualizacao.text()
+
+            chamado.data_abertura = datetime.strptime(data_abertura, '%d/%m/%Y').strftime('%Y-%m-%d')
+            chamado.data_atualizacao = datetime.strptime(data_atualizacao, '%d/%m/%Y').strftime('%Y-%m-%d')
 
             try:
                 chamado_dao = ChamadoDao()
@@ -385,8 +388,11 @@ class TelaChamado(QMainWindow, Ui_TelaChamado):
             chamado.status = self.combo_status_chamado.currentText()
             chamado.solucao = self.combo_solucao.currentText()
             chamado.tipo = self.combo_tipo_chamado.currentText()
-            chamado.data_abertura = self.txt_data_abertura.text()
-            chamado.data_atualizacao = self.txt_data_atualizacao.text()
+            data_abertura = self.txt_data_abertura.text()
+            data_atualizacao = self.txt_data_atualizacao.text()
+
+            chamado.data_abertura = datetime.strptime(data_abertura, '%d/%m/%Y').strftime('%Y-%m-%d')
+            chamado.data_atualizacao = datetime.strptime(data_atualizacao, '%d/%m/%Y').strftime('%Y-%m-%d')
 
             try:
                 chamado_dao = ChamadoDao()

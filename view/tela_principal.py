@@ -63,7 +63,7 @@ class TelaPrincipal(QMainWindow, Ui_TelaPrincipal):
 
         self.menu_consultar_chamado_parceiro_fechado.triggered.connect(self.abrir_tela_fechar_chamado_parceiro_consulta)
 
-        self.menu_relatorios_chamados.triggered.connect(self.abrir_tela_relatorio_chamados)
+        self.menu_relatorios_chamados.triggered.connect(self.abrir_tela_relatorio_chamados )
 
     def abrir_tela_usuario(self):
         """Método para abrir a tela de Usuário.

@@ -28,9 +28,9 @@ class RelatorioDao:
         conexao = ConexaoDatabase()
         comando_sql = f"SELECT numero_chamado, contrato_chamado, nome_cliente_chamado, endereco_chamado," \
                       f"contato_chamado, telefone_chamado, email_chamado, problema_chamado, observacao_chamado," \
-                      f"status_chamado, tipo_chamado, solucao_chamado, data_abertura_chamado," \
-                      f"data_atualizacao_chamado FROM tb_chamado WHERE solucao_chamado='{solucao}' ORDER BY " \
-                      f"numero_chamado"
+                      f"status_chamado, tipo_chamado, solucao_chamado, date_format(data_abertura_chamado,'%d/%m/%Y')," \
+                      f"date_format(data_atualizacao_chamado, '%d/%m/%Y') FROM tb_chamado WHERE " \
+                      f"solucao_chamado='{solucao}' ORDER BY numero_chamado"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado
 
@@ -44,9 +44,9 @@ class RelatorioDao:
         conexao = ConexaoDatabase()
         comando_sql = f"SELECT numero_chamado, contrato_chamado, nome_cliente_chamado, endereco_chamado," \
                       f"contato_chamado, telefone_chamado, email_chamado, problema_chamado, observacao_chamado," \
-                      f"status_chamado, tipo_chamado, solucao_chamado, data_abertura_chamado," \
-                      f"data_atualizacao_chamado FROM tb_chamado WHERE solucao_chamado='{solucao}' ORDER BY " \
-                      f"contrato_chamado"
+                      f"status_chamado, tipo_chamado, solucao_chamado, date_format(data_abertura_chamado,'%d/%m/%Y')," \
+                      f"date_format(data_atualizacao_chamado, '%d/%m/%Y') FROM tb_chamado WHERE" \
+                      f"solucao_chamado='{solucao}' ORDER BY contrato_chamado"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado
 
@@ -60,9 +60,9 @@ class RelatorioDao:
         conexao = ConexaoDatabase()
         comando_sql = f"SELECT numero_chamado, contrato_chamado, nome_cliente_chamado, endereco_chamado," \
                       f"contato_chamado, telefone_chamado, email_chamado, problema_chamado, observacao_chamado," \
-                      f"status_chamado, tipo_chamado, solucao_chamado, data_abertura_chamado," \
-                      f"data_atualizacao_chamado FROM tb_chamado WHERE data_abertura_chamado='{data}' ORDER BY " \
-                      f"numero_chamado"
+                      f"status_chamado, tipo_chamado, solucao_chamado, date_format(data_abertura_chamado,'%d/%m/%Y')," \
+                      f"date_format(data_atualizacao_chamado, '%d/%m/%Y') FROM tb_chamado WHERE " \
+                      f"data_abertura_chamado='{data}' ORDER BY numero_chamado"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado
 
@@ -76,9 +76,9 @@ class RelatorioDao:
         conexao = ConexaoDatabase()
         comando_sql = f"SELECT numero_chamado, contrato_chamado, nome_cliente_chamado, endereco_chamado," \
                       f"contato_chamado, telefone_chamado, email_chamado, problema_chamado, observacao_chamado," \
-                      f"status_chamado, tipo_chamado, solucao_chamado, data_abertura_chamado," \
-                      f"data_atualizacao_chamado FROM tb_chamado WHERE data_abertura_chamado='{data}' ORDER BY " \
-                      f"contrato_chamado"
+                      f"status_chamado, tipo_chamado, solucao_chamado, date_format(data_abertura_chamado,'%d/%m/%Y')," \
+                      f"date_format(data_atualizacao_chamado, '%d/%m/%Y') FROM tb_chamado WHERE " \
+                      f"data_abertura_chamado='{data}' ORDER BY contrato_chamado"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado
 
@@ -92,9 +92,9 @@ class RelatorioDao:
         conexao = ConexaoDatabase()
         comando_sql = f"SELECT numero_chamado, contrato_chamado, nome_cliente_chamado, endereco_chamado," \
                       f"contato_chamado, telefone_chamado, email_chamado, problema_chamado, observacao_chamado," \
-                      f"status_chamado, tipo_chamado, solucao_chamado, data_abertura_chamado," \
-                      f"data_atualizacao_chamado FROM tb_chamado WHERE tipo_chamado='{tipo_chamado}' ORDER BY " \
-                      f"numero_chamado"
+                      f"status_chamado, tipo_chamado, solucao_chamado, date_format(data_abertura_chamado,'%d/%m/%Y')," \
+                      f"date_format(data_atualizacao_chamado, '%d/%m/%Y') FROM tb_chamado WHERE " \
+                      f"tipo_chamado='{tipo_chamado}' ORDER BY numero_chamado"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado
 
@@ -108,9 +108,9 @@ class RelatorioDao:
         conexao = ConexaoDatabase()
         comando_sql = f"SELECT numero_chamado, contrato_chamado, nome_cliente_chamado, endereco_chamado," \
                       f"contato_chamado, telefone_chamado, email_chamado, problema_chamado, observacao_chamado," \
-                      f"status_chamado, tipo_chamado, solucao_chamado, data_abertura_chamado," \
-                      f"data_atualizacao_chamado FROM tb_chamado WHERE tipo_chamado='{tipo_chamado}' ORDER BY " \
-                      f"contrato_chamado"
+                      f"status_chamado, tipo_chamado, solucao_chamado, date_format(data_abertura_chamado,'%d/%m/%Y')," \
+                      f"date_format(data_atualizacao_chamado, '%d/%m/%Y') FROM tb_chamado WHERE " \
+                      f"tipo_chamado='{tipo_chamado}' ORDER BY contrato_chamado"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado
 
@@ -124,9 +124,9 @@ class RelatorioDao:
         conexao = ConexaoDatabase()
         comando_sql = f"SELECT numero_chamado, contrato_chamado, nome_cliente_chamado, endereco_chamado," \
                       f"contato_chamado, telefone_chamado, email_chamado, problema_chamado, observacao_chamado," \
-                      f"status_chamado, tipo_chamado, solucao_chamado, data_abertura_chamado," \
-                      f"data_atualizacao_chamado FROM tb_chamado WHERE status_chamado='{status}' ORDER BY " \
-                      f"numero_chamado"
+                      f"status_chamado, tipo_chamado, solucao_chamado, date_format(data_abertura_chamado,'%d/%m/%Y')," \
+                      f"date_format(data_atualizacao_chamado, '%d/%m/%Y') FROM tb_chamado WHERE " \
+                      f"status_chamado='{status}' ORDER BY numero_chamado"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado
 
@@ -140,9 +140,9 @@ class RelatorioDao:
         conexao = ConexaoDatabase()
         comando_sql = f"SELECT numero_chamado, contrato_chamado, nome_cliente_chamado, endereco_chamado," \
                       f"contato_chamado, telefone_chamado, email_chamado, problema_chamado, observacao_chamado," \
-                      f"status_chamado, tipo_chamado, solucao_chamado, data_abertura_chamado," \
-                      f"data_atualizacao_chamado FROM tb_chamado WHERE status_chamado='{status}' ORDER BY " \
-                      f"contrato_chamado"
+                      f"status_chamado, tipo_chamado, solucao_chamado, date_format(data_abertura_chamado,'%d/%m/%Y')," \
+                      f"date_format(data_atualizacao_chamado, '%d/%m/%Y') FROM tb_chamado WHERE " \
+                      f"status_chamado='{status}' ORDER BY contrato_chamado"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado
 
@@ -156,7 +156,7 @@ class RelatorioDao:
         conexao = ConexaoDatabase()
         comando_sql = "SELECT numero_chamado, contrato_chamado, nome_cliente_chamado, endereco_chamado," \
                       "contato_chamado, telefone_chamado, email_chamado, problema_chamado, observacao_chamado," \
-                      "status_chamado, tipo_chamado, solucao_chamado, data_abertura_chamado," \
-                      "data_atualizacao_chamado FROM tb_chamado"
+                      "status_chamado, tipo_chamado, solucao_chamado, date_format(data_abertura_chamado,'%d/%m/%Y')," \
+                      "date_format(data_atualizacao_chamado, '%d/%m/%Y') FROM tb_chamado"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado

@@ -151,7 +151,10 @@ class TelaFecharChamadoParceiro(QMainWindow, Ui_FecharChamadoParceiro):
             fcp.responsavel_parceiro = self.txt_responsavel.text()
             fcp.nome_cliente = self.txt_cliente.text()
             fcp.solucao_chamado_parceiro = self.txt_solucao.toPlainText()
-            fcp.data_fechamento_chamado_parceiro = self.txt_data_fechamento.text()
+            data_fechamento_chamado_parceiro = self.txt_data_fechamento.text()
+
+            fcp.data_fechamento_chamado_parceiro = datetime.strptime(data_fechamento_chamado_parceiro,
+                                                                     '%d/%m/%Y').strftime('%Y-%m-%d')
 
             try:
                 fechar_cp_dao = FecharChamadoParceiroDao()
