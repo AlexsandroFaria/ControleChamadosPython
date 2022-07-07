@@ -386,8 +386,8 @@ class TelaChamado(QMainWindow, Ui_TelaChamado):
             chamado.problema = self.txt_problema.toPlainText()
             chamado.observacao = self.txt_observacao.text()
             chamado.status = self.combo_status_chamado.currentText()
-            chamado.solucao = self.combo_solucao.currentText()
             chamado.tipo = self.combo_tipo_chamado.currentText()
+            chamado.solucao = self.combo_solucao.currentText()
             data_abertura = self.txt_data_abertura.text()
             data_atualizacao = self.txt_data_atualizacao.text()
 
@@ -397,8 +397,8 @@ class TelaChamado(QMainWindow, Ui_TelaChamado):
             try:
                 chamado_dao = ChamadoDao()
                 chamado_dao.alterar_chamado_banco(chamado.numero_chamado, chamado.telefone, chamado.email,
-                                                  chamado.problema, chamado.observacao, chamado.status, chamado.solucao,
-                                                  chamado.tipo, chamado.data_abertura, chamado.data_atualizacao)
+                                                  chamado.problema, chamado.observacao, chamado.status, chamado.tipo,
+                                                  chamado.solucao, chamado.data_abertura, chamado.data_atualizacao)
 
                 chamado_dao.alterar_cliente_telefone_email(chamado.numero_contrato, chamado.telefone, chamado.email)
 

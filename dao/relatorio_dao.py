@@ -50,7 +50,7 @@ class RelatorioDao:
         resultado = conexao.executar_consulta(comando_sql)
         return resultado
 
-    def relatorio_chamado_data_ordenado_por_numero(self, data):
+    def relatorio_chamado_data_ordenado_por_numero(self, data_inicial, data_final):
         """Relatório de chamados por data ordenada por número do chamado
 
         Efetua uma consulta no banco de dados por data e ordenada por número do chamado.
@@ -62,11 +62,11 @@ class RelatorioDao:
                       f"contato_chamado, telefone_chamado, email_chamado, problema_chamado, observacao_chamado," \
                       f"status_chamado, tipo_chamado, solucao_chamado, date_format(data_abertura_chamado,'%d/%m/%Y')," \
                       f"date_format(data_atualizacao_chamado, '%d/%m/%Y') FROM tb_chamado WHERE " \
-                      f"data_abertura_chamado='{data}' ORDER BY numero_chamado"
+                      f"data_abertura_chamado BETWEEN ('{data_inicial}') AND ('{data_final}') ORDER BY numero_chamado"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado
 
-    def relatorio_chamado_data_ordenado_por_contrato(self, data):
+    def relatorio_chamado_data_ordenado_por_contrato(self, data_inicial, data_final):
         """Relatório de chamados por data ordenada por número do contrato
 
         Efetua uma consulta no banco de dados por data e ordenada por número do contrato.
@@ -78,7 +78,7 @@ class RelatorioDao:
                       f"contato_chamado, telefone_chamado, email_chamado, problema_chamado, observacao_chamado," \
                       f"status_chamado, tipo_chamado, solucao_chamado, date_format(data_abertura_chamado,'%d/%m/%Y')," \
                       f"date_format(data_atualizacao_chamado, '%d/%m/%Y') FROM tb_chamado WHERE " \
-                      f"data_abertura_chamado='{data}' ORDER BY contrato_chamado"
+                      f"data_abertura_chamado BETWEEN ('{data_inicial}') AND ('{data_final}') ORDER BY contrato_chamado"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado
 
@@ -158,5 +158,76 @@ class RelatorioDao:
                       "contato_chamado, telefone_chamado, email_chamado, problema_chamado, observacao_chamado," \
                       "status_chamado, tipo_chamado, solucao_chamado, date_format(data_abertura_chamado,'%d/%m/%Y')," \
                       "date_format(data_atualizacao_chamado, '%d/%m/%Y') FROM tb_chamado"
+        resultado = conexao.executar_consulta(comando_sql)
+        return resultado
+
+    def gerar_relatorio_chamado_fechado_datas_num_chamado(self, data_inicial, data_final):
+        conexao = ConexaoDatabase()
+        comando_sql = f"SELECT numero_chamado_fechado, contrato_chamado_fechado, nome_cliente_chamado_fechado," \
+                      f"contato_chamado_fechado, telefone_chamado_fechado, problema_chamado_fechado," \
+                      f"tipo_chamado_fechado, solucao_chamado_fechado, status_chamado_fechado," \
+                      f"date_format(data_chamado_fechado, '%d/%m/%Y') FROM tb_chamado_fechado WHERE " \
+                      f"data_chamado_fechado BETWEEN ('{data_inicial}') AND ('{data_final}') ORDER BY " \
+                      f"numero_chamado_fechado"
+        resultado = conexao.executar_consulta(comando_sql)
+        return resultado
+
+    def gerar_relatorio_chamado_fechado_datas_num_contrato(self, data_inicial, data_final):
+        conexao = ConexaoDatabase()
+        comando_sql = f"SELECT numero_chamado_fechado, contrato_chamado_fechado, nome_cliente_chamado_fechado," \
+                      f"contato_chamado_fechado, telefone_chamado_fechado, problema_chamado_fechado," \
+                      f"tipo_chamado_fechado, solucao_chamado_fechado, status_chamado_fechado," \
+                      f"date_format(data_chamado_fechado, '%d/%m/%Y') FROM tb_chamado_fechado WHERE " \
+                      f"data_chamado_fechado BETWEEN ('{data_inicial}') AND ('{data_final}') ORDER BY " \
+                      f"contrato_chamado_fechado"
+        resultado = conexao.executar_consulta(comando_sql)
+        return resultado
+
+    def gerar_relatorio_chamado_fechado_tipo_num_chamado(self, tipo):
+        conexao = ConexaoDatabase()
+        comando_sql = f"SELECT numero_chamado_fechado, contrato_chamado_fechado, nome_cliente_chamado_fechado," \
+                      f"contato_chamado_fechado, telefone_chamado_fechado, problema_chamado_fechado," \
+                      f"tipo_chamado_fechado, solucao_chamado_fechado, status_chamado_fechado," \
+                      f"date_format(data_chamado_fechado, '%d/%m/%Y') FROM tb_chamado_fechado WHERE " \
+                      f"tipo_chamado_fechado='{tipo}' ORDER BY numero_chamado_fechado"
+        resultado = conexao.executar_consulta(comando_sql)
+        return resultado
+
+    def gerar_relatorio_chamado_fechado_tipo_num_contrato(self, tipo):
+        conexao = ConexaoDatabase()
+        comando_sql = f"SELECT numero_chamado_fechado, contrato_chamado_fechado, nome_cliente_chamado_fechado," \
+                      f"contato_chamado_fechado, telefone_chamado_fechado, problema_chamado_fechado," \
+                      f"tipo_chamado_fechado, solucao_chamado_fechado, status_chamado_fechado," \
+                      f"date_format(data_chamado_fechado, '%d/%m/%Y') FROM tb_chamado_fechado WHERE " \
+                      f"tipo_chamado_fechado='{tipo}' ORDER BY contrato_chamado_fechado"
+        resultado = conexao.executar_consulta(comando_sql)
+        return resultado
+
+    def gerar_relatorio_chamado_fechado_status_num_chamado(self, status):
+        conexao = ConexaoDatabase()
+        comando_sql = f"SELECT numero_chamado_fechado, contrato_chamado_fechado, nome_cliente_chamado_fechado," \
+                      f"contato_chamado_fechado, telefone_chamado_fechado, problema_chamado_fechado," \
+                      f"tipo_chamado_fechado, solucao_chamado_fechado, status_chamado_fechado," \
+                      f"date_format(data_chamado_fechado, '%d/%m/%Y') FROM tb_chamado_fechado WHERE " \
+                      f"status_chamado_fechado='{status}' ORDER BY numero_chamado_fechado"
+        resultado = conexao.executar_consulta(comando_sql)
+        return resultado
+
+    def gerar_relatorio_chamado_fechado_status_num_contrato(self, status):
+        conexao = ConexaoDatabase()
+        comando_sql = f"SELECT numero_chamado_fechado, contrato_chamado_fechado, nome_cliente_chamado_fechado," \
+                      f"contato_chamado_fechado, telefone_chamado_fechado, problema_chamado_fechado," \
+                      f"tipo_chamado_fechado, solucao_chamado_fechado, status_chamado_fechado," \
+                      f"date_format(data_chamado_fechado, '%d/%m/%Y') FROM tb_chamado_fechado WHERE " \
+                      f"status_chamado_fechado='{status}' ORDER BY contrato_chamado_fechado"
+        resultado = conexao.executar_consulta(comando_sql)
+        return resultado
+
+    def gerar_relatorio_chamado_fechado(self):
+        conexao = ConexaoDatabase()
+        comando_sql = "SELECT numero_chamado_fechado, contrato_chamado_fechado, nome_cliente_chamado_fechado," \
+                      "contato_chamado_fechado, telefone_chamado_fechado, problema_chamado_fechado," \
+                      "tipo_chamado_fechado, solucao_chamado_fechado, status_chamado_fechado," \
+                      "date_format(data_chamado_fechado, '%d/%m/%Y') FROM tb_chamado_fechado"
         resultado = conexao.executar_consulta(comando_sql)
         return resultado

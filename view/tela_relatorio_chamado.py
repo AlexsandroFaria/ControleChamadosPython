@@ -5,6 +5,7 @@ from PySide2.QtWidgets import QMainWindow, QMessageBox
 from components.mensagens import Mensagens
 from dao.relatorio_dao import RelatorioDao
 from view.ui_tela_relatorio_chamados import Ui_RelatorioChamado
+from datetime import datetime
 
 
 class TelaRelatorioChamado(QMainWindow, Ui_RelatorioChamado):
@@ -56,15 +57,21 @@ class TelaRelatorioChamado(QMainWindow, Ui_RelatorioChamado):
         :return: Arquivo .xlsx
         """
         user_windows = getpass.getuser()
-        if self.txt_data.text() == "":
-            self.mensagem.mensagem_campo_vazio('DATA')
+        if self.txt_data_inicial.text() == "//":
+            self.mensagem.mensagem_campo_vazio('DATA INICIAL')
+        elif self.txt_data_final.text() == "//":
+            self.mensagem.mensagem_campo_vazio('DATA FINAL')
         else:
-            data = self.txt_data.text()
+            data_inicial = self.txt_data_inicial.text()
+            data_final =  self.txt_data_final.text()
+            data_inicial_param = datetime.strptime(data_inicial, '%d/%m/%Y').strftime('%Y-%m-%d')
+            data_final_param = datetime.strptime(data_final, '%d/%m/%Y').strftime('%Y-%m-%d')
 
             if self.radio_numero_chamado.isChecked():
                 try:
                     relatorio_dao = RelatorioDao()
-                    resultado = relatorio_dao.relatorio_chamado_data_ordenado_por_numero(data)
+                    resultado = relatorio_dao.relatorio_chamado_data_ordenado_por_numero(data_inicial_param,
+                                                                                         data_final_param)
 
                     if len(resultado) == 0:
                         msg = QMessageBox()
@@ -73,17 +80,20 @@ class TelaRelatorioChamado(QMainWindow, Ui_RelatorioChamado):
                         msg.setWindowTitle("Relatório de Chamados")
                         msg.setText('Não há dados para gerar este relatório.')
                         msg.exec_()
+
+                        self.txt_data_inicial.setText("")
+                        self.txt_data_final.setText("")
                     else:
                         dados = pd.DataFrame(resultado)
                         dados.columns = ['Chamado', 'Contrato', 'Cliente', 'Endereço', 'Contato', 'Telefone', 'E-mail',
                                          'Problema', 'Observação', 'Status', 'Tipo de Chamado', 'Solução',
-                                         'Data Abertura',
-                                         'Data Fechamamento']
+                                         'Data Abertura', 'Data Fechamamento']
 
-                        data_formatada = data.replace('/', '_')
+                        data_formatada_inicial = data_inicial_param.replace('/', '_')
+                        data_formatada_final = data_final_param.replace('/', '_')
 
                         dados.to_excel(f'c:\\Users\\{user_windows}\\Downloads\\'
-                                       f'Relatorio_chamados_{data_formatada}_por_numero_chamado.xlsx', index=False)
+                                       f'Relatorio_chamados_{data_formatada_inicial}_{data_formatada_final}_por_numero_chamado.xlsx', index=False)
 
                         self.mensagem.mensagem_gerar_relatorio()
                 except ConnectionError as con_erro:
@@ -92,7 +102,8 @@ class TelaRelatorioChamado(QMainWindow, Ui_RelatorioChamado):
             else:
                 try:
                     relatorio_dao = RelatorioDao()
-                    resultado = relatorio_dao.relatorio_chamado_data_ordenado_por_contrato(data)
+                    resultado = relatorio_dao.relatorio_chamado_data_ordenado_por_contrato(data_inicial_param,
+                                                                                           data_final_param)
 
                     if len(resultado) == 0:
                         msg = QMessageBox()
@@ -101,16 +112,20 @@ class TelaRelatorioChamado(QMainWindow, Ui_RelatorioChamado):
                         msg.setWindowTitle("Relatório de Chamados")
                         msg.setText('Não há dados para gerar este relatório.')
                         msg.exec_()
+
+                        self.txt_data_inicial.setText("")
+                        self.txt_data_final.setText("")
                     else:
                         dados = pd.DataFrame(resultado)
                         dados.columns = ['Chamado', 'Contrato', 'Cliente', 'Endereço', 'Contato', 'Telefone', 'E-mail',
                                          'Problema', 'Observação', 'Status', 'Tipo de Chamado', 'Solução',
                                          'Data Abertura', 'Data Fechamamento']
 
-                        data_formatada = data.replace('/', '_')
+                        data_formatada_inicial = data_inicial_param.replace('/', '_')
+                        data_formatada_final = data_final_param.replace('/', '_')
 
                         dados.to_excel(f'c:\\Users\\{user_windows}\\Downloads\\'
-                                       f'Relatorio_chamados_{data_formatada}_por_contrato.xlsx', index=False)
+                                       f'Relatorio_chamados_{data_formatada_inicial}_{data_formatada_final}_por_contrato.xlsx', index=False)
                         self.mensagem.mensagem_gerar_relatorio()
                 except ConnectionError as con_erro:
                     print(con_erro)
