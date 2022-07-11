@@ -162,6 +162,14 @@ class RelatorioDao:
         return resultado
 
     def gerar_relatorio_chamado_fechado_datas_num_chamado(self, data_inicial, data_final):
+        """Gerar relatório de chamados fechados por datas ordenado por número
+
+        Efetua uma consulta no banco de dados retornando os chamados fechados por intervalo de datas
+        e ordenados pelo número do chamado
+        :param data_inicial: str
+        :param data_final: str
+        :return: Lista dos chamados da consulta
+        """
         conexao = ConexaoDatabase()
         comando_sql = f"SELECT numero_chamado_fechado, contrato_chamado_fechado, nome_cliente_chamado_fechado," \
                       f"contato_chamado_fechado, telefone_chamado_fechado, problema_chamado_fechado," \
@@ -173,6 +181,14 @@ class RelatorioDao:
         return resultado
 
     def gerar_relatorio_chamado_fechado_datas_num_contrato(self, data_inicial, data_final):
+        """Gerar relatório de chamados fechados por datas ordenado por contrato
+
+        Efetua uma consulta no banco de dados retornando os chamados fechados por intervalo de datas
+        e ordenados pelo número do contrato
+        :param data_inicial: str
+        :param data_final: str
+        :return: Lista dos chamados da consulta
+        """
         conexao = ConexaoDatabase()
         comando_sql = f"SELECT numero_chamado_fechado, contrato_chamado_fechado, nome_cliente_chamado_fechado," \
                       f"contato_chamado_fechado, telefone_chamado_fechado, problema_chamado_fechado," \
@@ -184,6 +200,13 @@ class RelatorioDao:
         return resultado
 
     def gerar_relatorio_chamado_fechado_tipo_num_chamado(self, tipo):
+        """Gerar relatório de chamados fechados por tipo ordenado por número.
+
+        Efetua uma consulta no banco de dados retornando os chamados fechados por tipo e ordenados pelo
+        número do chamado.
+        :param tipo: str
+        :return: Lista dos chamados da consulta
+        """
         conexao = ConexaoDatabase()
         comando_sql = f"SELECT numero_chamado_fechado, contrato_chamado_fechado, nome_cliente_chamado_fechado," \
                       f"contato_chamado_fechado, telefone_chamado_fechado, problema_chamado_fechado," \
@@ -194,6 +217,13 @@ class RelatorioDao:
         return resultado
 
     def gerar_relatorio_chamado_fechado_tipo_num_contrato(self, tipo):
+        """Gerar relatório de chamados fechados por tipo ordenado por contrato
+
+        Efetua uma consulta no banco de dados retornando os chamados fechados por tipo e ordenados pelo
+        número do contrato
+        :param tipo: str
+        :return: Lista dos chamados da consulta
+        """
         conexao = ConexaoDatabase()
         comando_sql = f"SELECT numero_chamado_fechado, contrato_chamado_fechado, nome_cliente_chamado_fechado," \
                       f"contato_chamado_fechado, telefone_chamado_fechado, problema_chamado_fechado," \
@@ -204,6 +234,13 @@ class RelatorioDao:
         return resultado
 
     def gerar_relatorio_chamado_fechado_status_num_chamado(self, status):
+        """Gerar relatório de chamados fechados por status ordenado por número.
+
+        Efetua uma consulta no banco de dados retornando os chamados fechados por número e ordenados pelo
+        número do chamado
+        :param status: str
+        :return: Lista dos chamados da consulta
+        """
         conexao = ConexaoDatabase()
         comando_sql = f"SELECT numero_chamado_fechado, contrato_chamado_fechado, nome_cliente_chamado_fechado," \
                       f"contato_chamado_fechado, telefone_chamado_fechado, problema_chamado_fechado," \
@@ -214,6 +251,13 @@ class RelatorioDao:
         return resultado
 
     def gerar_relatorio_chamado_fechado_status_num_contrato(self, status):
+        """Gerar relatório de chamados fechados por status ordenado por contrato.
+
+        Efetua uma consulta no banco de dados retornando os chamados fechados por número e ordenados pelo
+        número do contrato
+        :param status: str
+        :return: Lista dos chamados da consulta
+        """
         conexao = ConexaoDatabase()
         comando_sql = f"SELECT numero_chamado_fechado, contrato_chamado_fechado, nome_cliente_chamado_fechado," \
                       f"contato_chamado_fechado, telefone_chamado_fechado, problema_chamado_fechado," \
@@ -224,6 +268,11 @@ class RelatorioDao:
         return resultado
 
     def gerar_relatorio_chamado_fechado(self):
+        """Gerar relatório de chamados fechados.
+
+        Efetua uma consulta no banco de dados retornando todos os chamados fechados.
+        :return: Lista dos chamados da consulta
+        """
         conexao = ConexaoDatabase()
         comando_sql = "SELECT numero_chamado_fechado, contrato_chamado_fechado, nome_cliente_chamado_fechado," \
                       "contato_chamado_fechado, telefone_chamado_fechado, problema_chamado_fechado," \

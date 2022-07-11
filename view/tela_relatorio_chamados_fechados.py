@@ -24,12 +24,26 @@ class TelaRelatorioChamadosFechados(QMainWindow, Ui_TelaRelatoriosChamadosFechad
         self.mensagem = Mensagens()
 
         self.btn_cancelar.clicked.connect(self.close)
+        """Função para fechar a tela."""
+
         self.btn_gerar_data.clicked.connect(self.gerar_relatorio_chamados_fechados_data)
+        """Função para chamar o método de gerar relatório po datas"""
+
         self.btn_gerar_tipo.clicked.connect(self.gerar_relatorio_chamados_fechados_tipo)
+        """Função para chamar o método de gerar relatórios por Tipo"""
+
         self.btn_gerar_status.clicked.connect(self.gerar_relatorio_chamados_fechados_status)
+        """Função para chamar o método de gerar relatórios por Status."""
+
         self.btn_gerar_relatorio_padrao.clicked.connect(self.gerar_relatorio_chamados_fechados)
+        """Função que chama o método de gerar relatórios sem filtro."""
 
     def gerar_relatorio_chamados_fechados_data(self):
+        """Gerar Relatório por data.
+
+        Gera um relatório em .xlsx dos chamados fechados pelo intervalo de datas passados por parâmetro.
+        :return: Relatório em .xlsx.
+        """
         user_windows = getpass.getuser()
 
         if self.txt_data_inicial.text() == "//":
@@ -111,6 +125,12 @@ class TelaRelatorioChamadosFechados(QMainWindow, Ui_TelaRelatoriosChamadosFechad
                     self.mensagem.mensagem_de_erro()
 
     def gerar_relatorio_chamados_fechados_tipo(self):
+        """Gerar Relatório por tipo.
+
+        Gera um relatório em .xlsx dos chamados fechados pelo tipo passado por parâmetro.
+        :return: Relatório em .xlsx.
+        """
+
         user_windows = getpass.getuser()
 
         if self.combo_tipo.currentText() == "Selecione uma opção":
@@ -172,6 +192,11 @@ class TelaRelatorioChamadosFechados(QMainWindow, Ui_TelaRelatoriosChamadosFechad
                     self.mensagem.mensagem_de_erro()
 
     def gerar_relatorio_chamados_fechados_status(self):
+        """Gerar Relatório por status.
+
+        Gera um relatório em .xlsx dos chamados fechados pelo status passado por parâmetro.
+        :return: Relatório em .xlsx.
+        """
         user_windows = getpass.getuser()
 
         if self.combo_status.currentText() == "Selecione uma opção":
@@ -233,6 +258,11 @@ class TelaRelatorioChamadosFechados(QMainWindow, Ui_TelaRelatoriosChamadosFechad
                     self.mensagem.mensagem_de_erro()
 
     def gerar_relatorio_chamados_fechados(self):
+        """Gerar Relatório de chamados fechados.
+
+        Gera um relatório em .xlsx dos chamados fechados sem filtro.
+        :return: Relatório em .xlsx.
+        """
         user_windows = getpass.getuser()
 
         try:

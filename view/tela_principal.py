@@ -8,6 +8,7 @@ from view.tela_fechar_chamado_parceiro import TelaFecharChamadoParceiro
 from view.tela_parceiro import TelaParceiro
 from view.tela_relatorio_chamado import TelaRelatorioChamado
 from view.tela_relatorio_chamados_fechados import TelaRelatorioChamadosFechados
+from view.tela_sobre import TelaSobre
 from view.tela_solucao import TelaSolucao
 from view.ui_tela_principal import Ui_TelaPrincipal
 from view.tela_usuario import TelaUsuario
@@ -73,6 +74,9 @@ class TelaPrincipal(QMainWindow, Ui_TelaPrincipal):
 
         self.menu_relatorios_chamados_fechados.triggered.connect(self.abrir_tela_relatorio_chamados_fechados)
         """Item do menu que gera a chamada do método de abrir a tela de relatório de chamados fechados."""
+
+        self.menu_ajuda.triggered.connect(self.abrir_tela_sobre)
+        """Item do menu que gera a chamada para abrir a tela Sobre do sistema."""
 
     def abrir_tela_usuario(self):
         """Método para abrir a tela de Usuário.
@@ -213,3 +217,12 @@ class TelaPrincipal(QMainWindow, Ui_TelaPrincipal):
         """
         self.tela_relatorio_chamados_fechados = TelaRelatorioChamadosFechados()
         self.tela_relatorio_chamados_fechados.show()
+
+    def abrir_tela_sobre(self):
+        """Abrir tela sobre
+
+        Abre a tela sobre do sistema
+        :return: Tela Sobre
+        """
+        self.tela_sobre = TelaSobre()
+        self.tela_sobre.show()

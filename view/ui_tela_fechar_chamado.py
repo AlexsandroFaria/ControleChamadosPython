@@ -19,7 +19,7 @@ class Ui_FecharChamado(object):
             FecharChamado.setObjectName(u"FecharChamado")
         FecharChamado.resize(1140, 594)
         icon = QIcon()
-        icon.addFile(u"../../ChamadosSimpress/_img/logo_janela.ico", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u"_img/logo_janela.ico", QSize(), QIcon.Normal, QIcon.Off)
         FecharChamado.setWindowIcon(icon)
         self.frame = QFrame(FecharChamado)
         self.frame.setObjectName(u"frame")
@@ -29,7 +29,7 @@ class Ui_FecharChamado(object):
         self.label = QLabel(self.frame)
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(0, 0, 1121, 111))
-        self.label.setPixmap(QPixmap(u"../../../ChamadosSimpress/_img/banner_fechar_chamado.png"))
+        self.label.setPixmap(QPixmap(u"_img/banner_fechar_chamado.png"))
         self.tab_fechar_chamado = QTabWidget(FecharChamado)
         self.tab_fechar_chamado.setObjectName(u"tab_fechar_chamado")
         self.tab_fechar_chamado.setEnabled(True)
@@ -115,7 +115,7 @@ class Ui_FecharChamado(object):
 "border: 1px solid gray;\n"
 "background-color: rgb(227, 227, 227);")
         icon1 = QIcon()
-        icon1.addFile(u"../../ChamadosSimpress/_img/calendario.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon1.addFile(u"_img/calendario.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_pegar_data.setIcon(icon1)
         self.btn_pegar_data.setIconSize(QSize(24, 24))
         self.combo_status = QComboBox(self.tab_fechamento)
@@ -196,7 +196,7 @@ class Ui_FecharChamado(object):
 "	border: solid 5p\n"
 "}")
         icon2 = QIcon()
-        icon2.addFile(u"../../ChamadosSimpress/_img/fechar_chamado.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon2.addFile(u"_img/fechar_chamado.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_fechar_chamado.setIcon(icon2)
         self.btn_fechar_chamado.setIconSize(QSize(24, 24))
         self.btn_limpar_tela = QPushButton(self.tab_fechamento)
@@ -217,7 +217,7 @@ class Ui_FecharChamado(object):
 "	border: solid 5p\n"
 "}")
         icon3 = QIcon()
-        icon3.addFile(u"../../ChamadosSimpress/_img/limpar.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon3.addFile(u"_img/limpar.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_limpar_tela.setIcon(icon3)
         self.btn_limpar_tela.setIconSize(QSize(24, 24))
         self.btn_sair = QPushButton(self.tab_fechamento)
@@ -238,7 +238,7 @@ class Ui_FecharChamado(object):
 "	border: solid 5p\n"
 "}")
         icon4 = QIcon()
-        icon4.addFile(u"../../ChamadosSimpress/_img/sair.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon4.addFile(u"_img/sair.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_sair.setIcon(icon4)
         self.btn_sair.setIconSize(QSize(24, 24))
         self.groupBox = QGroupBox(self.tab_fechamento)
@@ -273,7 +273,7 @@ class Ui_FecharChamado(object):
 "	border: solid 5p\n"
 "}")
         icon5 = QIcon()
-        icon5.addFile(u"../../ChamadosSimpress/_img/buscar.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon5.addFile(u"_img/buscar.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_pesquisar_chamado.setIcon(icon5)
         self.btn_pesquisar_chamado.setIconSize(QSize(24, 24))
         self.txt_fechamento = QTextEdit(self.tab_fechamento)
@@ -294,9 +294,9 @@ class Ui_FecharChamado(object):
         self.label_23 = QLabel(self.tab_fechamento)
         self.label_23.setObjectName(u"label_23")
         self.label_23.setGeometry(QRect(570, 230, 451, 131))
-        self.label_23.setPixmap(QPixmap(u"../../../ChamadosSimpress/_img/tela_chamado2.png"))
+        self.label_23.setPixmap(QPixmap(u"_img/tela_chamado2.png"))
         icon6 = QIcon()
-        icon6.addFile(u"../../ChamadosSimpress/_img/fechamento_chamado.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon6.addFile(u"_img/fechamento_chamado.png", QSize(), QIcon.Normal, QIcon.Off)
         self.tab_fechar_chamado.addTab(self.tab_fechamento, icon6, "")
         self.label_23.raise_()
         self.label_3.raise_()
@@ -486,7 +486,7 @@ class Ui_FecharChamado(object):
 "	border: solid 5p\n"
 "}")
         icon7 = QIcon()
-        icon7.addFile(u"../../ChamadosSimpress/_img/consulta.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon7.addFile(u"_img/consulta.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_carregar_tabela.setIcon(icon7)
         self.btn_carregar_tabela.setIconSize(QSize(24, 24))
 
@@ -509,7 +509,7 @@ class Ui_FecharChamado(object):
 "	border: solid 5p\n"
 "}")
         icon8 = QIcon()
-        icon8.addFile(u"../../ChamadosSimpress/_img/pesquisa_chamado.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon8.addFile(u"_img/pesquisa_chamado.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_exibir_detalhes.setIcon(icon8)
         self.btn_exibir_detalhes.setIconSize(QSize(24, 24))
 
@@ -684,7 +684,7 @@ class Ui_FecharChamado(object):
         self.label_22 = QLabel(self.tab_detalhes)
         self.label_22.setObjectName(u"label_22")
         self.label_22.setGeometry(QRect(670, 110, 321, 241))
-        self.label_22.setPixmap(QPixmap(u"../../../ChamadosSimpress/_img/tela_chamado.png"))
+        self.label_22.setPixmap(QPixmap(u"_img/tela_chamado.png"))
         self.btn_fechar_2 = QPushButton(self.tab_detalhes)
         self.btn_fechar_2.setObjectName(u"btn_fechar_2")
         self.btn_fechar_2.setGeometry(QRect(974, 342, 121, 31))
@@ -704,7 +704,7 @@ class Ui_FecharChamado(object):
         self.btn_fechar_2.setIcon(icon4)
         self.btn_fechar_2.setIconSize(QSize(24, 24))
         icon10 = QIcon()
-        icon10.addFile(u"../../ChamadosSimpress/_img/contrato.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon10.addFile(u"_img/contrato.png", QSize(), QIcon.Normal, QIcon.Off)
         self.tab_fechar_chamado.addTab(self.tab_detalhes, icon10, "")
 
         self.retranslateUi(FecharChamado)
